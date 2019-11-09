@@ -1,0 +1,32 @@
+﻿<mui:ModernWindow x:Class="hydrogen.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        Title="Person motion" IsTitleVisible="True"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        ContentSource="/Pages/Home.xaml">
+
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="Əsas">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="İşçilər" Source="/Pages/Home.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="CV">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="CV" Source="/Pages/CV.xaml"/>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="settings" GroupKey="settings">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="software" Source="/Pages/SettingsPage.xaml" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+    </mui:ModernWindow.MenuLinkGroups>
+    
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="ayarlar" Source="/Pages/SettingsPage.xaml"/>
+       
+    </mui:ModernWindow.TitleLinks>
+    
+</mui:ModernWindow>

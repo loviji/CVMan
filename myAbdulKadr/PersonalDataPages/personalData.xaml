@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="hydrogen.PersonalDataPages.PersonalData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" Width="800">
+    <Grid Margin="0,0,0,-49" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140" />
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="120" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Padding="5" Content="Adı:" Width="120"/>
+        <Label Grid.Row="1" Grid.Column="0" Padding="5" Content="Soyadı:" Width="120" />
+        <Label Grid.Row="2" Grid.Column="0" Padding="5" Content="Ata adı" Width="120" />
+        <Label Grid.Row="3" Grid.Column="0" Padding="5" Content="Cinsiyyəti" Width="120" />
+        <Label Grid.Row="4" Grid.Column="0" Padding="5" Content="Doğum tarixi" Width="120" />
+        <Label Grid.Row="5" Grid.Column="0" Padding="5" Content="Doğulduğu yer" Width="120" />
+        <Label Grid.Row="6" Grid.Column="0" Padding="5" Content="Ailə vəziyyəti" Width="120" />
+        <Label Grid.Row="7" Grid.Column="0" Padding="5" Content="Milliyəti" Width="120" />
+        <Label Grid.Row="8" Grid.Column="0" Padding="5" Content="Partiyalılığı" Width="120" />
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="personalName" Margin="0,5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="personalSurname" Margin="0,5"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="personalPatroynmic" Margin="0,5"/>
+        <DatePicker x:Name="personalBirthDate" Grid.Row="4" Grid.Column="1" FirstDayOfWeek="Monday" Margin="0,5"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,5">
+            <RadioButton GroupName="personalSex" x:Name="personalSexMan" Content="Kişi" Checked="RadioButtonChecked"/>
+            <RadioButton GroupName="personalSex" x:Name="personalSexWoman" Content="Qadın" Checked="RadioButtonChecked"/>
+        </StackPanel>
+        <TextBox Grid.Row="5" Grid.Column="1" x:Name="personalBirthPlace" Margin="0,5"/>
+        <StackPanel Grid.Row="6" Grid.Column="1" Margin="0,5">
+            <RadioButton GroupName="personalFamilyStatus" x:Name="single" Content="Subay" Checked="familyStatusRadioButtonChecked"/>
+            <RadioButton GroupName="personalFamilyStatus" x:Name="family" Content="Ailəli" Checked="familyStatusRadioButtonChecked"/>
+            <RadioButton GroupName="personalFamilyStatus" x:Name="widow" Content="Dul" Checked="familyStatusRadioButtonChecked"/>
+            <RadioButton GroupName="personalFamilyStatus" x:Name="divorced" Content="Boşanmış" Checked="familyStatusRadioButtonChecked"/>
+        </StackPanel>
+        <ComboBox Grid.Row="7" Grid.Column="1" x:Name="personalNationality" Margin="0,5">
+
+        </ComboBox>
+        <ComboBox Grid.Row="8" Grid.Column="1" x:Name="personalPoliticalParty" Margin="0,5"/>
+        <Button Grid.Row="10" Grid.Column="3"
+                    FontWeight="Bold"
+                    Content="Yadda saxla"
+                    Click="Button_Click" Width="120" Background="#FF42D43B" />
+        <Image x:Name="personalPhoto" Grid.Column="2" HorizontalAlignment="Left" Height="174" Margin="56,10,-65,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="135" OpacityMask="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" MouseDown="Image_MouseDown"/>
+        <Button x:Name="imgCommit" Content="Button" Grid.Column="2" HorizontalAlignment="Right" Margin="0,6,-82,3" Grid.Row="5" Width="75" d:LayoutOverrides="Height" Click="ImgCommit_Click"/>
+        <Button x:Name="imgBrowse" Content="Button" Grid.Column="2" Margin="44,10,2,5" Grid.Row="5" d:LayoutOverrides="Height" Click="ImgBrowse_Click" />
+        <!--<Button Content="Button" Grid.Column="2" Margin="41,34,5,19" Grid.Row="6" d:LayoutOverrides="Height" Click="Button_Click_1"/>-->
+        <TextBox x:Name="txtIDSaver" Grid.Column="2" Margin="41,34,5,19" Grid.Row="6" d:LayoutOverrides="Height" Background="Azure"/>
+
+
+
+    </Grid>
+</UserControl>
