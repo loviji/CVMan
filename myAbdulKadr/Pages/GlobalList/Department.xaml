@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:myAbdulKadr.Pages.GlobalList"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -29,8 +30,8 @@
                   CommandManager.PreviewExecuted="DgDept_PreviewExecuted"
                   CanUserAddRows="True" CanUserDeleteRows="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ID, NotifyOnTargetUpdated=True,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" Header="ID" IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding departmentName, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" Header="Alt strukturun adı"/>
+                <mui:DataGridTextColumn Binding="{Binding ID, NotifyOnTargetUpdated=True,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" Header="ID" IsReadOnly="True" />
+                <mui:DataGridTextColumn Binding="{Binding departmentName, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" Header="Alt strukturun adı"/>
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock Grid.Row="2" x:Name="txtStatus" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="8,0,0,0"

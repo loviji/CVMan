@@ -32,7 +32,7 @@ namespace hydrogen.PersonalDataPages
         void IContent.OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             selectedID = e.Fragment;
-            txtIDSaver.Text = selectedID;
+            //txtIDSaver.Text = selectedID;
          
         }
 

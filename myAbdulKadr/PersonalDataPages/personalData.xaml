@@ -6,7 +6,9 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="600" Width="800">
+
     <Grid Margin="0,0,0,-49" >
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -51,10 +53,22 @@
         <ComboBox Grid.Row="7" Grid.Column="1" x:Name="personalNationality" Margin="0,5">
         </ComboBox>
         <ComboBox Grid.Row="8" Grid.Column="1" x:Name="personalPoliticalParty" Margin="0,5"/>
-        <Button Grid.Row="10" Grid.Column="3"
+        <StackPanel Grid.Row="10" Grid.Column="3" HorizontalAlignment="Left" Orientation="Horizontal" >
+
+            <StackPanel.Resources>
+                <PathGeometry x:Key="HomeIconData">F1 M 53.2929,21.2929L 54.7071,22.7071C 56.4645,24.4645 56.4645,27.3137 54.7071,29.0711L 52.2323,31.5459L 44.4541,23.7677L 46.9289,21.2929C 48.6863,19.5355 51.5355,19.5355 53.2929,21.2929 Z M 31.7262,52.052L 23.948,44.2738L 43.0399,25.182L 50.818,32.9601L 31.7262,52.052 Z M 23.2409,47.1023L 28.8977,52.7591L 21.0463,54.9537L 23.2409,47.1023 Z M 17,28L 17,23L 23,23L 23,17L 28,17L 28,23L 34,23L 34,28L 28,28L 28,34L 23,34L 23,28L 17,28 Z</PathGeometry>
+                <Style TargetType="mui:ModernButton">
+                    <Setter Property="IconData" Value="{StaticResource HomeIconData}" />
+                    <Setter Property="Margin" Value="0,0,8,0" />
+                    <Setter Property="BorderThickness" Value="2" />
+                </Style>
+            </StackPanel.Resources>
+            <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="Button_Click" />
+            <!--<mui:ModernButton Grid.Row="10" Grid.Column="3"
                     FontWeight="Bold"
                     Content="Yadda saxla"
-                    Click="Button_Click" Width="120" Background="#FF42D43B" />
+                     Width="120" Background="#FF42D43B" />-->
+        </StackPanel>
         <Image x:Name="personalPhoto" Grid.Column="2" HorizontalAlignment="Left" Height="174" Margin="56,10,-65,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="135" OpacityMask="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" MouseDown="Image_MouseDown"/>
         <Button x:Name="imgCommit" Content="Button" Grid.Column="2" HorizontalAlignment="Right" Margin="0,6,-82,3" Grid.Row="5" Width="75" d:LayoutOverrides="Height" Click="ImgCommit_Click"/>
         <Button x:Name="imgBrowse" Content="Button" Grid.Column="2" Margin="44,10,2,5" Grid.Row="5" d:LayoutOverrides="Height" Click="ImgBrowse_Click" />

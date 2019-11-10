@@ -29,8 +29,11 @@ namespace myAbdulKadr.Model
         public virtual DbSet<employee> employee { get; set; }
         public virtual DbSet<files> files { get; set; }
         public virtual DbSet<metaData> metaData { get; set; }
-        public virtual DbSet<Organization> Organization { get; set; }
         public virtual DbSet<section> section { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<address> address { get; set; }
+        public virtual DbSet<familia> familia { get; set; }
+        public virtual DbSet<position> position { get; set; }
+        public virtual DbSet<workhistory> workhistory { get; set; }
+        public virtual DbSet<organization> organization { get; set; }
     }
 }

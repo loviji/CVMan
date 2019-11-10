@@ -14,10 +14,18 @@ namespace myAbdulKadr.Model
     
     public partial class section
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public section()
+        {
+            this.position = new HashSet<position>();
+        }
+    
         public int ID { get; set; }
         public int departmentID { get; set; }
         public string sectionName { get; set; }
     
         public virtual department department { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<position> position { get; set; }
     }
 }

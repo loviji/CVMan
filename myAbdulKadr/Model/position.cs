@@ -12,18 +12,19 @@ namespace myAbdulKadr.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class organization
+    public partial class position
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public organization()
-        {
-            this.department = new HashSet<department>();
-        }
-    
         public int ID { get; set; }
-        public string organizationName { get; set; }
+        public int empID { get; set; }
+        public Nullable<int> orgID { get; set; }
+        public Nullable<int> deptID { get; set; }
+        public Nullable<int> sectID { get; set; }
+        public bool isMain { get; set; }
+        public string positionName { get; set; }
+        public System.DateTime beginDate { get; set; }
+        public Nullable<System.DateTime> endDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<department> department { get; set; }
+        public virtual employee employee { get; set; }
+        public virtual section section { get; set; }
     }
 }

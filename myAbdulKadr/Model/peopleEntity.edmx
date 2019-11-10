@@ -4,7 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="peopleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="peopleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="empID" Type="int" Nullable="false" />
+          <Property Name="countryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="cityName" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="250" />
+          <Property Name="type" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="department">
           <Key>
             <PropertyRef Name="ID" />
@@ -31,8 +42,16 @@
           <Property Name="nationalityID" Type="int" />
           <Property Name="partyID" Type="int" />
           <Property Name="photoID" Type="int" />
-          <Property Name="departmentID" Type="int" />
-          <Property Name="sectionID" Type="int" />
+        </EntityType>
+        <EntityType Name="familia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="empID" Type="int" Nullable="false" />
+          <Property Name="familyTypeName" Type="nvarchar" MaxLength="20" />
+          <Property Name="familyname" Type="nvarchar" MaxLength="500" />
+          <Property Name="birthDate" Type="date" />
         </EntityType>
         <EntityType Name="files">
           <Key>
@@ -50,12 +69,26 @@
           <Property Name="code" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="value" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Organization">
+        <EntityType Name="organization">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="organizationName" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empID" Type="int" Nullable="false" />
+          <Property Name="orgID" Type="int" />
+          <Property Name="deptID" Type="int" />
+          <Property Name="sectID" Type="int" />
+          <Property Name="isMain" Type="bit" Nullable="false" />
+          <Property Name="positionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="beginDate" Type="date" Nullable="false" />
+          <Property Name="endDate" Type="date" />
         </EntityType>
         <EntityType Name="section">
           <Key>
@@ -65,27 +98,76 @@
           <Property Name="departmentID" Type="int" Nullable="false" />
           <Property Name="sectionName" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
+        <EntityType Name="workhistory">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empID" Type="int" Nullable="false" />
+          <Property Name="structureName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="positionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="beginDate" Type="date" Nullable="false" />
+          <Property Name="endDate" Type="date" />
         </EntityType>
+        <Association Name="FK_address_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="address" Type="Self.address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_department_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="1">
+          <End Role="organization" Type="Self.organization" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="department" Type="Self.department" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Organization">
+            <Principal Role="organization">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="department">
               <PropertyRef Name="organizationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_familia_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="familia" Type="Self.familia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="familia">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="position" Type="Self.position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="position">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position_section">
+          <End Role="section" Type="Self.section" Multiplicity="0..1" />
+          <End Role="position" Type="Self.position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="position">
+              <PropertyRef Name="sectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -103,25 +185,59 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_workhistory_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="workhistory" Type="Self.workhistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="workhistory">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="peopleModelStoreContainer">
+          <EntitySet Name="address" EntityType="Self.address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="familia" EntityType="Self.familia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="files" EntityType="Self.files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="metaData" EntityType="Self.metaData" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="organization" EntityType="Self.organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="position" EntityType="Self.position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="section" EntityType="Self.section" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="workhistory" EntityType="Self.workhistory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_address_employee" Association="Self.FK_address_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="address" EntitySet="address" />
+          </AssociationSet>
           <AssociationSet Name="FK_department_Organization" Association="Self.FK_department_Organization">
-            <End Role="Organization" EntitySet="Organization" />
+            <End Role="organization" EntitySet="organization" />
             <End Role="department" EntitySet="department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_familia_employee" Association="Self.FK_familia_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="familia" EntitySet="familia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position_employee" Association="Self.FK_position_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="position" EntitySet="position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position_section" Association="Self.FK_position_section">
+            <End Role="section" EntitySet="section" />
+            <End Role="position" EntitySet="position" />
           </AssociationSet>
           <AssociationSet Name="FK_section_department" Association="Self.FK_section_department">
             <End Role="department" EntitySet="department" />
             <End Role="section" EntitySet="section" />
           </AssociationSet>
+          <AssociationSet Name="FK_workhistory_employee" Association="Self.FK_workhistory_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="workhistory" EntitySet="workhistory" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="peopleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -132,8 +248,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="organizationID" Type="Int32" Nullable="false" />
           <Property Name="departmentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Organization" Relationship="Self.FK_department_Organization" FromRole="department" ToRole="Organization" />
           <NavigationProperty Name="section" Relationship="Self.FK_section_department" FromRole="department" ToRole="section" />
+          <NavigationProperty Name="organization" Relationship="peopleModel.FK_department_Organization" FromRole="department" ToRole="organization" />
         </EntityType>
         <EntityType Name="employee">
           <Key>
@@ -153,8 +269,10 @@
           <Property Name="nationalityID" Type="Int32" />
           <Property Name="partyID" Type="Int32" />
           <Property Name="photoID" Type="Int32" />
-          <Property Name="departmentID" Type="Int32" />
-          <Property Name="sectionID" Type="Int32" />
+          <NavigationProperty Name="address" Relationship="peopleModel.FK_address_employee" FromRole="employee" ToRole="address" />
+          <NavigationProperty Name="familia" Relationship="peopleModel.FK_familia_employee" FromRole="employee" ToRole="familia" />
+          <NavigationProperty Name="position" Relationship="peopleModel.FK_position_employee" FromRole="employee" ToRole="position" />
+          <NavigationProperty Name="workhistory" Relationship="peopleModel.FK_workhistory_employee" FromRole="employee" ToRole="workhistory" />
         </EntityType>
         <EntityType Name="files">
           <Key>
@@ -172,14 +290,6 @@
           <Property Name="code" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="Organization">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="organizationName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="department" Relationship="Self.FK_department_Organization" FromRole="Organization" ToRole="department" />
-        </EntityType>
         <EntityType Name="section">
           <Key>
             <PropertyRef Name="ID" />
@@ -188,31 +298,8 @@
           <Property Name="departmentID" Type="Int32" Nullable="false" />
           <Property Name="sectionName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="department" Relationship="Self.FK_section_department" FromRole="section" ToRole="department" />
+          <NavigationProperty Name="position" Relationship="peopleModel.FK_position_section" FromRole="section" ToRole="position" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_department_Organization">
-          <End Role="Organization" Type="Self.Organization" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="department" Type="Self.department" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="department">
-              <PropertyRef Name="organizationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_section_department">
           <End Role="department" Type="Self.department" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -232,18 +319,174 @@
           <EntitySet Name="employee" EntityType="Self.employee" />
           <EntitySet Name="files" EntityType="Self.files" />
           <EntitySet Name="metaData" EntityType="Self.metaData" />
-          <EntitySet Name="Organization" EntityType="Self.Organization" />
           <EntitySet Name="section" EntityType="Self.section" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_department_Organization" Association="Self.FK_department_Organization">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="department" EntitySet="department" />
-          </AssociationSet>
           <AssociationSet Name="FK_section_department" Association="Self.FK_section_department">
             <End Role="department" EntitySet="department" />
             <End Role="section" EntitySet="section" />
           </AssociationSet>
+          <EntitySet Name="address" EntityType="peopleModel.address" />
+          <EntitySet Name="familia" EntityType="peopleModel.familia" />
+          <EntitySet Name="position" EntityType="peopleModel.position" />
+          <EntitySet Name="workhistory" EntityType="peopleModel.workhistory" />
+          <AssociationSet Name="FK_address_employee" Association="peopleModel.FK_address_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="address" EntitySet="address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_familia_employee" Association="peopleModel.FK_familia_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="familia" EntitySet="familia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position_employee" Association="peopleModel.FK_position_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="position" EntitySet="position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_workhistory_employee" Association="peopleModel.FK_workhistory_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="workhistory" EntitySet="workhistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position_section" Association="peopleModel.FK_position_section">
+            <End Role="section" EntitySet="section" />
+            <End Role="position" EntitySet="position" />
+          </AssociationSet>
+          <EntitySet Name="organization" EntityType="peopleModel.organization" />
+          <AssociationSet Name="FK_department_Organization" Association="peopleModel.FK_department_Organization">
+            <End Role="organization" EntitySet="organization" />
+            <End Role="department" EntitySet="department" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="empID" Type="Int32" Nullable="false" />
+          <Property Name="countryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_address_employee" FromRole="address" ToRole="employee" />
+        </EntityType>
+        <EntityType Name="familia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="empID" Type="Int32" Nullable="false" />
+          <Property Name="familyTypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="familyname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="birthDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_familia_employee" FromRole="familia" ToRole="employee" />
+        </EntityType>
+        <EntityType Name="position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empID" Type="Int32" Nullable="false" />
+          <Property Name="orgID" Type="Int32" />
+          <Property Name="deptID" Type="Int32" />
+          <Property Name="sectID" Type="Int32" />
+          <Property Name="isMain" Type="Boolean" Nullable="false" />
+          <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="beginDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_position_employee" FromRole="position" ToRole="employee" />
+          <NavigationProperty Name="section" Relationship="peopleModel.FK_position_section" FromRole="position" ToRole="section" />
+        </EntityType>
+        <EntityType Name="workhistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empID" Type="Int32" Nullable="false" />
+          <Property Name="structureName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="beginDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_workhistory_employee" FromRole="workhistory" ToRole="employee" />
+        </EntityType>
+        <Association Name="FK_address_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.address" Role="address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_familia_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.familia" Role="familia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="familia">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.position" Role="position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="position">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_workhistory_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.workhistory" Role="workhistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="workhistory">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position_section">
+          <End Type="peopleModel.section" Role="section" Multiplicity="0..1" />
+          <End Type="peopleModel.position" Role="position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="position">
+              <PropertyRef Name="sectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="organization">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="organizationName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="department" Relationship="peopleModel.FK_department_Organization" FromRole="organization" ToRole="department" />
+        </EntityType>
+        <Association Name="FK_department_Organization">
+          <End Type="peopleModel.organization" Role="organization" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="peopleModel.department" Role="department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="organization">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="department">
+              <PropertyRef Name="organizationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -276,9 +519,7 @@
                 <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
                 <ScalarProperty Name="partyID" ColumnName="partyID" />
                 <ScalarProperty Name="photoID" ColumnName="photoID" />
-                <ScalarProperty Name="departmentID" ColumnName="departmentID" />
-                <ScalarProperty Name="sectionID" ColumnName="sectionID" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="files">
@@ -299,14 +540,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Organization">
-            <EntityTypeMapping TypeName="peopleModel.Organization">
-              <MappingFragment StoreEntitySet="Organization">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="organizationName" ColumnName="organizationName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="section">
             <EntityTypeMapping TypeName="peopleModel.section">
               <MappingFragment StoreEntitySet="section">
@@ -316,14 +549,61 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="peopleModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+          <EntitySetMapping Name="address">
+            <EntityTypeMapping TypeName="peopleModel.address">
+              <MappingFragment StoreEntitySet="address">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="address1" ColumnName="address" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+                <ScalarProperty Name="countryName" ColumnName="countryName" />
+                <ScalarProperty Name="empID" ColumnName="empID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="familia">
+            <EntityTypeMapping TypeName="peopleModel.familia">
+              <MappingFragment StoreEntitySet="familia">
+                <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+                <ScalarProperty Name="familyname" ColumnName="familyname" />
+                <ScalarProperty Name="familyTypeName" ColumnName="familyTypeName" />
+                <ScalarProperty Name="empID" ColumnName="empID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="position">
+            <EntityTypeMapping TypeName="peopleModel.position">
+              <MappingFragment StoreEntitySet="position">
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="beginDate" ColumnName="beginDate" />
+                <ScalarProperty Name="positionName" ColumnName="positionName" />
+                <ScalarProperty Name="isMain" ColumnName="isMain" />
+                <ScalarProperty Name="sectID" ColumnName="sectID" />
+                <ScalarProperty Name="deptID" ColumnName="deptID" />
+                <ScalarProperty Name="orgID" ColumnName="orgID" />
+                <ScalarProperty Name="empID" ColumnName="empID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="workhistory">
+            <EntityTypeMapping TypeName="peopleModel.workhistory">
+              <MappingFragment StoreEntitySet="workhistory">
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="beginDate" ColumnName="beginDate" />
+                <ScalarProperty Name="positionName" ColumnName="positionName" />
+                <ScalarProperty Name="structureName" ColumnName="structureName" />
+                <ScalarProperty Name="empID" ColumnName="empID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="organization">
+            <EntityTypeMapping TypeName="peopleModel.organization">
+              <MappingFragment StoreEntitySet="organization">
+                <ScalarProperty Name="organizationName" ColumnName="organizationName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

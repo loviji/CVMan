@@ -12,12 +12,15 @@ namespace myAbdulKadr.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class workhistory
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int ID { get; set; }
+        public int empID { get; set; }
+        public string structureName { get; set; }
+        public string positionName { get; set; }
+        public System.DateTime beginDate { get; set; }
+        public Nullable<System.DateTime> endDate { get; set; }
+    
+        public virtual employee employee { get; set; }
     }
 }

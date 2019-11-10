@@ -14,6 +14,15 @@ namespace myAbdulKadr.Model
     
     public partial class employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public employee()
+        {
+            this.address = new HashSet<address>();
+            this.familia = new HashSet<familia>();
+            this.position = new HashSet<position>();
+            this.workhistory = new HashSet<workhistory>();
+        }
+    
         public int ID { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
@@ -28,7 +37,14 @@ namespace myAbdulKadr.Model
         public Nullable<int> nationalityID { get; set; }
         public Nullable<int> partyID { get; set; }
         public Nullable<int> photoID { get; set; }
-        public Nullable<int> departmentID { get; set; }
-        public Nullable<int> sectionID { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<address> address { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<familia> familia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<position> position { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<workhistory> workhistory { get; set; }
     }
 }

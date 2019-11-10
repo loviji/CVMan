@@ -32,11 +32,11 @@ namespace myAbdulKadr.Pages.GlobalList
 
         }
 
-        private ObservableCollection<Organization> GetOrganizationList()
+        private ObservableCollection<organization> GetOrganizationList()
         {
-            var list = from e in dbContext.Organization select e;
+            var list = from e in dbContext.organization select e;
             
-            return new ObservableCollection<Organization>(list);
+            return new ObservableCollection<organization>(list);
         }
 
 

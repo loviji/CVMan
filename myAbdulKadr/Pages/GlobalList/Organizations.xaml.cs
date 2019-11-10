@@ -25,10 +25,10 @@ namespace myAbdulKadr.Pages.GlobalList
             dgOrg.ItemsSource = GetOrganizationList();
 
         }
-        private ObservableCollection<Organization> GetOrganizationList()
+        private ObservableCollection<organization> GetOrganizationList()
         {
-            var list = from e in dbContext.Organization select e;
-            return new ObservableCollection<Organization>(list);
+            var list = from e in dbContext.organization select e;
+            return new ObservableCollection<organization>(list);
         }
 
 
@@ -37,16 +37,16 @@ namespace myAbdulKadr.Pages.GlobalList
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                Organization org = e.Row.DataContext as Organization;
+                organization org = e.Row.DataContext as organization;
 
-                var matchedData = (from o in dbContext.Organization
+                var matchedData = (from o in dbContext.organization
                                    where o.ID == org.ID
                                    select o).SingleOrDefault();
                 if (matchedData == null)
                 {
-                    Organization rOrganization = new Organization();
+                    organization rOrganization = new organization();
                     rOrganization.organizationName = org.organizationName;
-                    dbContext.Organization.Add(rOrganization);
+                    dbContext.organization.Add(rOrganization);
                     dbContext.SaveChanges();
                     dgOrg.ItemsSource = GetOrganizationList();
                     txtStatus.Text = rOrganization.organizationName + " has being added!";
@@ -65,11 +65,11 @@ namespace myAbdulKadr.Pages.GlobalList
 
         private void DgOrg_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Organization dOrg = dgOrg.SelectedItem as Organization;
+           organization dOrg = dgOrg.SelectedItem as organization;
 
             if (dOrg != null)
             {
-                var matchedOrganization = (from o in dbContext.Organization
+                var matchedOrganization = (from o in dbContext.organization
                                            where o.ID == dOrg.ID
                                            select o).SingleOrDefault();
                 if (e.Command == DataGrid.DeleteCommand)

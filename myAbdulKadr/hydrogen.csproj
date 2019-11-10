@@ -113,10 +113,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Model\address.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\department.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\employee.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\familia.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\files.cs">
@@ -125,7 +131,7 @@
     <Compile Include="Model\metaData.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Organization.cs">
+    <Compile Include="Model\organization.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\peopleEntity.Context.cs">
@@ -143,10 +149,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>peopleEntity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\position.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\section.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\sysdiagrams.cs">
+    <Compile Include="Model\workhistory.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Pages\CV.xaml.cs">

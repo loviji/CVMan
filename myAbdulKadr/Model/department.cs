@@ -24,8 +24,8 @@ namespace myAbdulKadr.Model
         public int organizationID { get; set; }
         public string departmentName { get; set; }
     
-        public virtual Organization Organization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<section> section { get; set; }
+        public virtual organization organization { get; set; }
     }
 }
