@@ -21,6 +21,26 @@
                     <mui:DataGridTextColumn Header="Doğulduğu yer" Binding="{Binding birthplace}" />
                 </DataGrid.Columns>
             </DataGrid>
+            <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Height="40" Width="40" VerticalAlignment="Bottom" >
+
+                <StackPanel.Resources>
+                    <PathGeometry x:Key="HomeIconData">F1 M 35,19L 41,19L 41,35L 57,35L 57,41L 41,41L 41,57L 35,57L 35,41L 19,41L 19,35L 35,35L 35,19 Z</PathGeometry>
+                    <Style TargetType="mui:ModernButton">
+                        <Setter Property="IconData" Value="{StaticResource HomeIconData}" />
+                        <Setter Property="Margin" Value="0,0,8,0" />
+                        <Setter Property="BorderThickness" Value="2" />
+                    </Style>
+                </StackPanel.Resources>
+                <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="AddNewPersonal_Click" Foreground="#FF373BA0" />
+                <!--<mui:ModernButton Grid.Row="10" Grid.Column="3"
+                    FontWeight="Bold"
+                    Content="Yadda saxla"
+                     Width="120" Background="#FF42D43B" />-->
+            </StackPanel>
+
+
+            
+     
         </DockPanel>
     </Grid>
 </UserControl>

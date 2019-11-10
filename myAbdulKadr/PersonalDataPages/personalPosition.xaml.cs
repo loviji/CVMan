@@ -50,5 +50,10 @@ namespace hydrogen.PersonalDataPages
         {
            // throw new NotImplementedException();
         }
+
+        private void PositionList_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+
+        }
     }
 }

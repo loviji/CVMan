@@ -16,29 +16,31 @@ namespace hydrogen
 
         public LinkCollection IPList { get; private set; }
 
-
-
-
-        public void testMethod(LinkCollection IPList)
+        public void FillList(LinkCollection IPList)
         {
             //burda elə etmək lazımdır ki, hər dəfə təzə userə click olunanda yenilənsin
             if (IPList.Count() == 0)
             {
-                IPList.Add(new Link() { DisplayName = "Şəxsi məlumatlar", Source = new Uri("/PersonalDataPages/personalData.xaml#" + selectedID, UriKind.Relative) });
-                IPList.Add(new Link() { DisplayName = "Vəzifə", Source = new Uri("/PersonalDataPages/personalPosition.xaml#" + selectedID, UriKind.Relative) });
-                IPList.Add(new Link() { DisplayName = "Təhsil", Source = new Uri("/PersonalDataPages/personalEducation.xaml#" + selectedID, UriKind.Relative) });
-               
-            }else
+                papulateList(IPList);
+
+            }
+            else
             {
                 IPList.Clear();
-                IPList.Add(new Link() { DisplayName = "Şəxsi məlumatlar", Source = new Uri("/PersonalDataPages/personalData.xaml#" + selectedID, UriKind.Relative) } );
-                IPList.Add(new Link() { DisplayName = "Vəzifə", Source = new Uri("/PersonalDataPages/personalPosition.xaml#" + selectedID, UriKind.Relative) });
-                IPList.Add(new Link() { DisplayName = "Təhsil", Source = new Uri("/PersonalDataPages/personalEducation.xaml#" + selectedID, UriKind.Relative) });
+                papulateList(IPList);
             }
 
         }
 
-
+        private void papulateList(LinkCollection IPList)
+        {
+            IPList.Add(new Link() { DisplayName = "Şəxsi məlumatlar", Source = new Uri("/PersonalDataPages/personalData.xaml#" + selectedID, UriKind.Relative) });
+            IPList.Add(new Link() { DisplayName = "Vəzifə", Source = new Uri("/PersonalDataPages/personalPosition.xaml#" + selectedID, UriKind.Relative) });
+            IPList.Add(new Link() { DisplayName = "Təhsil", Source = new Uri("/PersonalDataPages/personalEducation.xaml#" + selectedID, UriKind.Relative) });
+            IPList.Add(new Link() { DisplayName = "Əmək fəaliyyəti", Source = new Uri("/PersonalDataPages/personalWorkHistory.xaml#" + selectedID, UriKind.Relative) });
+            IPList.Add(new Link() { DisplayName = "Qeydiyyat məlumatları", Source = new Uri("/PersonalDataPages/personalRegData.xaml#" + selectedID, UriKind.Relative) });
+            IPList.Add(new Link() { DisplayName = "Ailə tərkibi", Source = new Uri("/PersonalDataPages/personalFamily.xaml#" + selectedID, UriKind.Relative) });
+        }
 
         public PersonDataEditor()
         {
@@ -117,7 +119,7 @@ namespace hydrogen
         {
             selectedID = e.Fragment;
             MyTextBox.Text = selectedID;
-            testMethod(IPList);
+            FillList(IPList);
 
             // personID = Convert.ToInt32(selectedID);
 
