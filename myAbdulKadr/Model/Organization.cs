@@ -12,10 +12,18 @@ namespace myAbdulKadr.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class metaData
+    public partial class Organization
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Organization()
+        {
+            this.department = new HashSet<department>();
+        }
+    
         public int ID { get; set; }
-        public string code { get; set; }
-        public string value { get; set; }
+        public string organizationName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<department> department { get; set; }
     }
 }

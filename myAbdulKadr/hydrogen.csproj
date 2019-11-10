@@ -82,36 +82,62 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\GlobalList\Department.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GlobalList\Organizations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Settings\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Model\department.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\employee.cs">
-      <DependentUpon>peopleHIT.tt</DependentUpon>
+      <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\files.cs">
-      <DependentUpon>peopleHIT.tt</DependentUpon>
+      <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\metaData.cs">
-      <DependentUpon>peopleHIT.tt</DependentUpon>
+      <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\peopleHIT.Context.cs">
+    <Compile Include="Model\Organization.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\peopleEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>peopleHIT.Context.tt</DependentUpon>
+      <DependentUpon>peopleEntity.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\peopleHIT.cs">
+    <Compile Include="Model\peopleEntity.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>peopleHIT.tt</DependentUpon>
+      <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\peopleHIT.Designer.cs">
+    <Compile Include="Model\peopleEntity.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>peopleHIT.edmx</DependentUpon>
+      <DependentUpon>peopleEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\section.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Pages\CV.xaml.cs">
       <DependentUpon>CV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GlobalList\Department.xaml.cs">
+      <DependentUpon>Department.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GlobalList\Organizations.xaml.cs">
+      <DependentUpon>Organizations.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -211,30 +237,30 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Model\peopleHIT.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>peopleHIT.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="App.Config" />
-    <None Include="Model\peopleHIT.edmx.diagram">
-      <DependentUpon>peopleHIT.edmx</DependentUpon>
+    <EntityDeploy Include="Model\peopleEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>peopleEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\peopleEntity.edmx.diagram">
+      <DependentUpon>peopleEntity.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\peopleHIT.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>peopleHIT.Context.cs</LastGenOutput>
-      <DependentUpon>peopleHIT.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model\peopleHIT.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>peopleHIT.edmx</DependentUpon>
-      <LastGenOutput>peopleHIT.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Model\peopleEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>peopleEntity.edmx</DependentUpon>
+      <LastGenOutput>peopleEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\peopleEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>peopleEntity.edmx</DependentUpon>
+      <LastGenOutput>peopleEntity.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

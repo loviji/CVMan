@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace hydrogen.Model
+namespace myAbdulKadr.Model
 {
     using System;
     using System.Collections.Generic;
@@ -28,5 +28,7 @@ namespace hydrogen.Model
         public Nullable<int> nationalityID { get; set; }
         public Nullable<int> partyID { get; set; }
         public Nullable<int> photoID { get; set; }
+        public Nullable<int> departmentID { get; set; }
+        public Nullable<int> sectionID { get; set; }
     }
 }

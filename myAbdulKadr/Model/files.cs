@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace hydrogen.Model
+namespace myAbdulKadr.Model
 {
     using System;
     using System.Collections.Generic;

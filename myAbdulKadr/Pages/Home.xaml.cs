@@ -1,21 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using myAbdulKadr.Model;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using FirstFloor.ModernUI.Windows.Controls;
-using FirstFloor.ModernUI.Windows.Navigation;
-using hydrogen.Model;
-using hydrogen.PersonalDataPages;
 
 namespace hydrogen.Pages
 {
@@ -32,7 +19,7 @@ namespace hydrogen.Pages
             InitializeComponent();
 
             perList.ItemsSource = (from m in dbContext.employee
-                                   select new { m.ID, m.name, m.surname, m.secondname, m.birthdate }).ToList();
+                                   select new { m.ID, m.name, m.surname, m.secondname, m.birthdate, m.birthplace }).ToList();
         }
 
         private void AddNewPersonal_Click(object sender, RoutedEventArgs e)

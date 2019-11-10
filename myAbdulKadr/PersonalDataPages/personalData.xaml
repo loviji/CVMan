@@ -18,14 +18,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140" />
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="120" />
         </Grid.ColumnDefinitions>
-
         <Label Grid.Row="0" Grid.Column="0" Padding="5" Content="Adı:" Width="120"/>
         <Label Grid.Row="1" Grid.Column="0" Padding="5" Content="Soyadı:" Width="120" />
         <Label Grid.Row="2" Grid.Column="0" Padding="5" Content="Ata adı" Width="120" />
@@ -51,7 +49,6 @@
             <RadioButton GroupName="personalFamilyStatus" x:Name="divorced" Content="Boşanmış" Checked="familyStatusRadioButtonChecked"/>
         </StackPanel>
         <ComboBox Grid.Row="7" Grid.Column="1" x:Name="personalNationality" Margin="0,5">
-
         </ComboBox>
         <ComboBox Grid.Row="8" Grid.Column="1" x:Name="personalPoliticalParty" Margin="0,5"/>
         <Button Grid.Row="10" Grid.Column="3"
@@ -63,8 +60,5 @@
         <Button x:Name="imgBrowse" Content="Button" Grid.Column="2" Margin="44,10,2,5" Grid.Row="5" d:LayoutOverrides="Height" Click="ImgBrowse_Click" />
         <!--<Button Content="Button" Grid.Column="2" Margin="41,34,5,19" Grid.Row="6" d:LayoutOverrides="Height" Click="Button_Click_1"/>-->
         <TextBox x:Name="txtIDSaver" Grid.Column="2" Margin="41,34,5,19" Grid.Row="6" d:LayoutOverrides="Height" Background="Azure"/>
-
-
-
     </Grid>
 </UserControl>

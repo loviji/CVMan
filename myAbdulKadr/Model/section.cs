@@ -12,10 +12,12 @@ namespace myAbdulKadr.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class metaData
+    public partial class section
     {
         public int ID { get; set; }
-        public string code { get; set; }
-        public string value { get; set; }
+        public int departmentID { get; set; }
+        public string sectionName { get; set; }
+    
+        public virtual department department { get; set; }
     }
 }

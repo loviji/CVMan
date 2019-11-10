@@ -12,10 +12,12 @@ namespace myAbdulKadr.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class metaData
+    public partial class sysdiagrams
     {
-        public int ID { get; set; }
-        public string code { get; set; }
-        public string value { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

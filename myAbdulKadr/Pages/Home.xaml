@@ -6,14 +6,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel >
-        <ListView HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="500" Name="perList" MouseDoubleClick="PerList_MouseDoubleClick" SelectionChanged="PerList_SelectionChanged">
+        <ListView HorizontalAlignment="Left" Height="500" Margin="10,10,0,0" VerticalAlignment="Top" Width="900" Name="perList" MouseDoubleClick="PerList_MouseDoubleClick" SelectionChanged="PerList_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"  />
                     <GridViewColumn Header="Adı" DisplayMemberBinding="{Binding name}" Width="100"/>
                     <GridViewColumn Header="Soyadı" DisplayMemberBinding="{Binding surname}" Width="100"/>
                     <GridViewColumn Header="Ata adı" DisplayMemberBinding="{Binding secondname}" Width="100"/>
-                    <GridViewColumn Header="Təvəllüdü" DisplayMemberBinding="{Binding birthdate}" Width="100"/>
+                    <GridViewColumn Header="Təvəllüdü" DisplayMemberBinding="{Binding birthdate , StringFormat='dd-MM-yyyy'}" Width="100"/>
+                    <GridViewColumn Header="Doğulduğu yer" DisplayMemberBinding="{Binding birthplace}" Width="200"/>
                 </GridView>
             </ListView.View>
         </ListView>

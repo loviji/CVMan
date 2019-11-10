@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace hydrogen.Model
+namespace myAbdulKadr.Model
 {
     using System;
     using System.Data.Entity;
@@ -25,8 +25,12 @@ namespace hydrogen.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<department> department { get; set; }
         public virtual DbSet<employee> employee { get; set; }
         public virtual DbSet<files> files { get; set; }
         public virtual DbSet<metaData> metaData { get; set; }
+        public virtual DbSet<Organization> Organization { get; set; }
+        public virtual DbSet<section> section { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }
