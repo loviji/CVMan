@@ -7,95 +7,80 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="900">
 
+
+
+
     <Grid>
-        <DockPanel>
-            <DataGrid Name="positionList" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" SelectedCellsChanged="PositionList_SelectedCellsChanged" >
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+
+
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>-->
+        <DockPanel VerticalAlignment="Top" Height="300" Width="900">
+            <DataGrid Name="positionList" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" SelectedCellsChanged="PositionList_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"  />
                     <mui:DataGridTextColumn Header="Təşkilat" Binding="{Binding name}" />
                     <mui:DataGridTextColumn Header="Vəzifəsi" Binding="{Binding surname}" />
                     <mui:DataGridTextColumn Header="Əsas vəzifəsi" Binding="{Binding secondname}"/>
                     <mui:DataGridTextColumn Header="Təyinat tarixi" Binding="{Binding birthdate , StringFormat='dd-MM-yyyy'}" />
-                
+
                 </DataGrid.Columns>
             </DataGrid>
-            <ScrollViewer>
-                <StackPanel MinWidth="200">
-
-
-
-
-                    <!-- actual form starts here -->
-                    <StackPanel x:Name="Form" Orientation="Vertical">
-
-                        <!-- create viewmodel -->
-
-
-                        <StackPanel.Resources>
-                            <Style TargetType="StackPanel">
-                                <Setter Property="Orientation" Value="Horizontal" />
-                                <Setter Property="Margin" Value="0,0,0,4" />
-                            </Style>
-                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                                <Setter Property="Width" Value="100" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                            </Style>
-                            <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-                                <Setter Property="Padding" Value="0,3" />
-                            </Style>
-                            <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
-                                <Setter Property="Padding" Value="0,3" />
-                            </Style>
-                        </StackPanel.Resources>
-
-                        <StackPanel>
-                            <Label Content="Təşkilat" Target="{Binding ElementName=cmbOrganization}"/>
-                            <ComboBox x:Name="cmbOrganization" Width="150"/>
-
-                        </StackPanel>
-                        <StackPanel>
-                            <Label Content="Alt təşkilat" Target="{Binding ElementName=cmbDepartment}"/>
-                            <ComboBox x:Name="cmbDepartment" Width="150"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <Label Content="Seksiya, sahə" Target="{Binding ElementName=cmbSection}"/>
-                            <ComboBox x:Name="cmbSection" Width="150"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <Label Content="Vəzifəsi" Target="{Binding ElementName=TextLastName}"/>
-                            <TextBox x:Name="txtPosition" Width="150" Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <Label Content="Təyinat tarixi" Target="{Binding ElementName=dtBeginDate}" />
-                            <DatePicker x:Name="dtBeginDate" />
-                        </StackPanel>
-                  
-                      
-                      
-                        
-                        <StackPanel >
-                            <Label />
-                            <CheckBox>
-                                <TextBlock FontWeight="Bold">Əsas vəzifəsi</TextBlock>
-                            </CheckBox>
-                        </StackPanel>
-
-                        <Button Content="Yadda saxla" Margin="100,16,0,0" HorizontalAlignment="Left" />
-                    </StackPanel>
-                </StackPanel>
-            </ScrollViewer>
-            <StackPanel>
-                <!--<Label Grid.Row="0" Grid.Column="0" Content="Təşkilat" ></Label>
-                <Label Grid.Row="0" Grid.Column="1" Content="Alt təşkilat" ></Label>
-                <Label Grid.Row="0" Grid.Column="2" Content="Seksiya, sahə" ></Label>
-                <Label Grid.Row="0" Grid.Column="3" Content="Vəzifəsi" ></Label>
-                <ComboBox Grid.Row="1" Grid.Column="0" x:Name="cmbOrganization"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cmbDepartment"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" x:Name="cmbSection"/>-->
-                <!--<TextBox Grid.Row="1" Grid.Column="3" x:Name="txtPosition" MaxLength="100"/>-->
-                <mui:ModernButton />
-            </StackPanel>
         </DockPanel>
+        <ScrollViewer Margin="0,0,0,0" Height="300" Width="900" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <StackPanel MinWidth="200">
+                <!-- actual form starts here -->
+                <StackPanel x:Name="Form" Orientation="Vertical">
+                    <!-- create viewmodel -->
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal" />
+                            <Setter Property="Margin" Value="0,0,0,4" />
+                        </Style>
+                        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                            <Setter Property="Width" Value="100" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                            <Setter Property="Padding" Value="0,3" />
+                        </Style>
+                        <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+                            <Setter Property="Padding" Value="0,3" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <StackPanel>
+                        <Label Content="Təşkilat" Target="{Binding ElementName=cmbOrganization}"/>
+                        <ComboBox x:Name="cmbOrganization" Width="300" SelectionChanged="CmbOrganization_SelectionChanged"/>
 
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Alt təşkilat" Target="{Binding ElementName=cmbDepartment}"/>
+                        <ComboBox x:Name="cmbDepartment" Width="300" SelectionChanged="CmbDepartment_SelectionChanged"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Seksiya, sahə" Target="{Binding ElementName=cmbSection}"/>
+                        <ComboBox x:Name="cmbSection" Width="300" SelectionChanged="CmbSection_SelectionChanged"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Vəzifəsi" Target="{Binding ElementName=TextLastName}"/>
+                        <TextBox x:Name="txtPosition" Width="300" Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Təyinat tarixi" Target="{Binding ElementName=dtBeginDate}" />
+                        <DatePicker x:Name="dtBeginDate" />
+                    </StackPanel>
+                    <StackPanel >
+                        <Label />
+                        <CheckBox>
+                            <TextBlock FontWeight="Bold">Əsas vəzifəsi</TextBlock>
+                        </CheckBox>
+                    </StackPanel>
+                    <Button Content="Yadda saxla" Margin="100,16,0,0" HorizontalAlignment="Left" />
+                    <mui:ModernButton />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

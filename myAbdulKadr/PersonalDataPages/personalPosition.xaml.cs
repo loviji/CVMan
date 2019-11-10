@@ -55,5 +55,20 @@ namespace hydrogen.PersonalDataPages
         {
 
         }
+
+        private void CmbOrganization_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void CmbDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void CmbSection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
