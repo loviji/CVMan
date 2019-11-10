@@ -24,11 +24,11 @@ namespace myAbdulKadr.Pages.GlobalList
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            int orgID = 0;
+            
             cmbOrganization.ItemsSource = GetOrganizationList();
             cmbOrganization.DisplayMemberPath = "organizationName";
             cmbOrganization.SelectedValuePath = "ID";
-            dgDept.ItemsSource = GetDepartmentList(orgID);
+            dgDept.ItemsSource = GetDepartmentList(selectedOrgID);
 
         }
 
@@ -82,12 +82,12 @@ namespace myAbdulKadr.Pages.GlobalList
    
         private void DgDept_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Department dDept = dgDept.SelectedItem as Department;
+            department dDept = dgDept.SelectedItem as department;
 
             if (dDept != null)
             {
                 var matchedDepartment= (from o in dbContext.department
-                                          // where o.ID == dDept.
+                                           where o.ID ==dDept.ID 
                                            select o).SingleOrDefault();
                 if (e.Command == DataGrid.DeleteCommand)
                 {
