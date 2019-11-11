@@ -34,5 +34,14 @@ namespace myAbdulKadr.Common
                        select sc;
             return new ObservableCollection<section>(list);
         }
+
+
+        public ObservableCollection<metaData> GetMetaDataByType(string metaType)
+        {
+            var list = from sc in dbContext.metaData
+                       where sc.code == metaType
+                       select sc;
+            return new ObservableCollection<metaData>(list);
+        }
     }
 }

@@ -23,6 +23,8 @@
         <EntityTypeShape EntityType="peopleModel.organization" Width="1.5" PointX="0.75" PointY="1.125" />
         <AssociationConnector Association="peopleModel.FK_department_Organization" />
         <EntityTypeShape EntityType="peopleModel.VW_Position" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="peopleModel.education" Width="1.5" PointX="3" PointY="19.625" />
+        <AssociationConnector Association="peopleModel.FK_education_employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

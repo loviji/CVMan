@@ -24,6 +24,20 @@
           <Property Name="organizationID" Type="int" Nullable="false" />
           <Property Name="departmentName" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
+        <EntityType Name="education">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empID" Type="int" Nullable="false" />
+          <Property Name="educationType" Type="int" />
+          <Property Name="grade" Type="int" />
+          <Property Name="educationCentreName" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="faculty" Type="nvarchar" MaxLength="120" />
+          <Property Name="speciality" Type="nvarchar" MaxLength="120" />
+          <Property Name="endYear" Type="int" />
+          <Property Name="diplomNumber" Type="nvarchar" MaxLength="15" />
+        </EntityType>
         <EntityType Name="employee">
           <Key>
             <PropertyRef Name="ID" />
@@ -152,6 +166,18 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_education_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="education" Type="Self.education" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="education">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_familia_employee">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
           <End Role="familia" Type="Self.familia" Multiplicity="*" />
@@ -217,6 +243,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
         <EntityContainer Name="peopleModelStoreContainer">
           <EntitySet Name="address" EntityType="Self.address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="education" EntityType="Self.education" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="familia" EntityType="Self.familia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="files" EntityType="Self.files" Schema="dbo" store:Type="Tables" />
@@ -242,6 +269,10 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <AssociationSet Name="FK_department_Organization" Association="Self.FK_department_Organization">
             <End Role="organization" EntitySet="organization" />
             <End Role="department" EntitySet="department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_education_employee" Association="Self.FK_education_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="education" EntitySet="education" />
           </AssociationSet>
           <AssociationSet Name="FK_familia_employee" Association="Self.FK_familia_employee">
             <End Role="employee" EntitySet="employee" />
@@ -300,6 +331,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <NavigationProperty Name="familia" Relationship="peopleModel.FK_familia_employee" FromRole="employee" ToRole="familia" />
           <NavigationProperty Name="position" Relationship="peopleModel.FK_position_employee" FromRole="employee" ToRole="position" />
           <NavigationProperty Name="workhistory" Relationship="peopleModel.FK_workhistory_employee" FromRole="employee" ToRole="workhistory" />
+          <NavigationProperty Name="education" Relationship="peopleModel.FK_education_employee" FromRole="employee" ToRole="education" />
         </EntityType>
         <EntityType Name="files">
           <Key>
@@ -381,6 +413,11 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             <End Role="department" EntitySet="department" />
           </AssociationSet>
           <EntitySet Name="VW_Position" EntityType="peopleModel.VW_Position" />
+          <EntitySet Name="education" EntityType="peopleModel.education" />
+          <AssociationSet Name="FK_education_employee" Association="peopleModel.FK_education_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="education" EntitySet="education" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="address">
           <Key>
@@ -530,6 +567,33 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="begindate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="empID" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="education">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empID" Type="Int32" Nullable="false" />
+          <Property Name="educationType" Type="Int32" />
+          <Property Name="grade" Type="Int32" />
+          <Property Name="educationCentreName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="faculty" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="speciality" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="endYear" Type="Int32" />
+          <Property Name="diplomNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_education_employee" FromRole="education" ToRole="employee" />
+        </EntityType>
+        <Association Name="FK_education_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.education" Role="education" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="education">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -658,6 +722,21 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
                 <ScalarProperty Name="ismain" ColumnName="ismain" />
                 <ScalarProperty Name="positionName" ColumnName="positionName" />
                 <ScalarProperty Name="structName" ColumnName="structName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="education">
+            <EntityTypeMapping TypeName="peopleModel.education">
+              <MappingFragment StoreEntitySet="education">
+                <ScalarProperty Name="diplomNumber" ColumnName="diplomNumber" />
+                <ScalarProperty Name="endYear" ColumnName="endYear" />
+                <ScalarProperty Name="speciality" ColumnName="speciality" />
+                <ScalarProperty Name="faculty" ColumnName="faculty" />
+                <ScalarProperty Name="educationCentreName" ColumnName="educationCentreName" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="educationType" ColumnName="educationType" />
+                <ScalarProperty Name="empID" ColumnName="empID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

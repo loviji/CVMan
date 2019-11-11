@@ -120,6 +120,9 @@
     <Compile Include="Model\department.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\education.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\employee.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
