@@ -70,9 +70,7 @@
                      Width="120" Background="#FF42D43B" />-->
         </StackPanel>
         <Image x:Name="personalPhoto" Grid.Column="2" HorizontalAlignment="Left" Height="174" Margin="56,10,-65,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="135" OpacityMask="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" MouseDown="Image_MouseDown"/>
-        <Button x:Name="imgCommit" Content="Button" Grid.Column="2" HorizontalAlignment="Right" Margin="0,6,-82,3" Grid.Row="5" Width="75" d:LayoutOverrides="Height" Click="ImgCommit_Click"/>
-        <Button x:Name="imgBrowse" Content="Button" Grid.Column="2" Margin="44,10,2,5" Grid.Row="5" d:LayoutOverrides="Height" Click="ImgBrowse_Click" />
         <!--<Button Content="Button" Grid.Column="2" Margin="41,34,5,19" Grid.Row="6" d:LayoutOverrides="Height" Click="Button_Click_1"/>-->
-        <TextBox x:Name="txtIDSaver" Grid.Column="2" Margin="41,34,5,19" Grid.Row="6" d:LayoutOverrides="Height" Background="Azure"/>
+
     </Grid>
 </UserControl>

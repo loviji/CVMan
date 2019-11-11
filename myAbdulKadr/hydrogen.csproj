@@ -89,6 +89,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Common\ControlData.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -155,6 +156,9 @@
     <Compile Include="Model\section.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\VW_Position.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\workhistory.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
@@ -196,12 +200,6 @@
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Settings\Test.xaml.cs">
-      <DependentUpon>Test.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Settings\Twister.xaml.cs">
-      <DependentUpon>Twister.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PersonalDataPages\personalData.xaml.cs">
       <DependentUpon>personalData.xaml</DependentUpon>
     </Compile>
@@ -227,14 +225,6 @@
       <DependentUpon>UserControlPersonID.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Page Include="Pages\Settings\Test.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Settings\Twister.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="PersonalDataPages\personalData.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

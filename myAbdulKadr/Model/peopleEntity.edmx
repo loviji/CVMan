@@ -109,6 +109,23 @@
           <Property Name="beginDate" Type="date" Nullable="false" />
           <Property Name="endDate" Type="date" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_Position">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="positionName" />
+            <PropertyRef Name="ismain" />
+            <PropertyRef Name="begindate" />
+            <PropertyRef Name="empID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="structName" Type="nvarchar" MaxLength="200" />
+          <Property Name="positionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ismain" Type="bit" Nullable="false" />
+          <Property Name="begindate" Type="date" Nullable="false" />
+          <Property Name="empID" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_address_employee">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
           <End Role="address" Type="Self.address" Multiplicity="*" />
@@ -208,6 +225,16 @@
           <EntitySet Name="position" EntityType="Self.position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="section" EntityType="Self.section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="workhistory" EntityType="Self.workhistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_Position" EntityType="Self.VW_Position" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_Position].[ID] AS [ID], 
+    [VW_Position].[structName] AS [structName], 
+    [VW_Position].[positionName] AS [positionName], 
+    [VW_Position].[ismain] AS [ismain], 
+    [VW_Position].[begindate] AS [begindate], 
+    [VW_Position].[empID] AS [empID]
+    FROM [dbo].[VW_Position] AS [VW_Position]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_address_employee" Association="Self.FK_address_employee">
             <End Role="employee" EntitySet="employee" />
             <End Role="address" EntitySet="address" />
@@ -353,6 +380,7 @@
             <End Role="organization" EntitySet="organization" />
             <End Role="department" EntitySet="department" />
           </AssociationSet>
+          <EntitySet Name="VW_Position" EntityType="peopleModel.VW_Position" />
         </EntityContainer>
         <EntityType Name="address">
           <Key>
@@ -487,6 +515,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VW_Position">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="positionName" />
+            <PropertyRef Name="ismain" />
+            <PropertyRef Name="begindate" />
+            <PropertyRef Name="empID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="structName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ismain" Type="Boolean" Nullable="false" />
+          <Property Name="begindate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="empID" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -603,6 +646,18 @@
             <EntityTypeMapping TypeName="peopleModel.organization">
               <MappingFragment StoreEntitySet="organization">
                 <ScalarProperty Name="organizationName" ColumnName="organizationName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_Position">
+            <EntityTypeMapping TypeName="peopleModel.VW_Position">
+              <MappingFragment StoreEntitySet="VW_Position">
+                <ScalarProperty Name="empID" ColumnName="empID" />
+                <ScalarProperty Name="begindate" ColumnName="begindate" />
+                <ScalarProperty Name="ismain" ColumnName="ismain" />
+                <ScalarProperty Name="positionName" ColumnName="positionName" />
+                <ScalarProperty Name="structName" ColumnName="structName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -93,13 +93,7 @@ namespace hydrogen.PersonalDataPages
             && r.value.StartsWith(k)).FirstOrDefault().ID);
         }
 
-        //private Dictionary<int, string> GetFamilyStatusByID(int familyStatusID)
-        //{
-
-        //    Dictionary<int, metaData> d= dbContext.metaData.Where(r => r.code == "fmlst" && r.ID == familyStatusID).ToList().ToDictionary(p => p.ID);
-        //    return d.Where(s => s.Key == familyStatusID).First();
-
-        //}
+     
 
         private int getNationalityStatusID(string k)
         {
@@ -243,19 +237,28 @@ namespace hydrogen.PersonalDataPages
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("hello");
+            try
+            {
+                FileDialog fldlg = new OpenFileDialog();
+                fldlg.InitialDirectory = Environment.SpecialFolder.MyPictures.ToString();
+                fldlg.Filter = "Image File (*.jpg;*.bmp;*.gif;*.png)|*.jpg;*.bmp;*.gif;*.png";
+                fldlg.ShowDialog();
+                {
+                    strName = fldlg.SafeFileName;
+                    imageName = fldlg.FileName;
+                    ImageSourceConverter isc = new ImageSourceConverter();
+                    personalPhoto.SetValue(System.Windows.Controls.Image.SourceProperty, isc.ConvertFromString(imageName));
+                }
+                fldlg = null;
+                insertImageData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
         string strName, imageName;
-
-
-
-        private void ImgCommit_Click(object sender, RoutedEventArgs e)
-        {
-            insertImageData();
-        }
-
-
-
+                     
         private void insertImageData()
         {
             try
@@ -293,7 +296,7 @@ namespace hydrogen.PersonalDataPages
                     }
                     finally
                     {
-                        MessageBox.Show("Melumatlar saxlanıldı");
+                       
                     }
 
                 }
@@ -339,7 +342,7 @@ namespace hydrogen.PersonalDataPages
             {
                 fillControlsWithSelectedPersonData();
             }
-            txtIDSaver.Text = e.Fragment;
+            
 
         }
 
@@ -376,6 +379,7 @@ namespace hydrogen.PersonalDataPages
             }
             personalNationality.SelectedValue = k.nationalityID;
             personalPoliticalParty.SelectedValue = k.partyID;
+            GetBitmapImage(k.photoID.Value);
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)

@@ -35,5 +35,6 @@ namespace myAbdulKadr.Model
         public virtual DbSet<position> position { get; set; }
         public virtual DbSet<workhistory> workhistory { get; set; }
         public virtual DbSet<organization> organization { get; set; }
+        public virtual DbSet<VW_Position> VW_Position { get; set; }
     }
 }
