@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="900">
     <Grid>
-     
+
         <DockPanel VerticalAlignment="Top" Height="300">
             <DataGrid Name="educationList" ItemsSource="{Binding}"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="EducationList_SelectedChanged">
                 <DataGrid.Columns>
@@ -29,7 +29,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
-        <ScrollViewer Name="positionEditor" Margin="0,0,0,0" Height="300" Width="850" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden">
+        <ScrollViewer Name="educationEditor" Margin="0,0,0,0" Height="300" Width="700" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden">
             <StackPanel MinWidth="200">
                 <!-- actual form starts here -->
                 <StackPanel x:Name="Form" Orientation="Vertical">
@@ -51,47 +51,37 @@
                         </Style>
                     </StackPanel.Resources>
                     <StackPanel>
-                        <Label Content="Təhsil növü" Target="{Binding ElementName=cmbEducationType}" Width="300"/>
+                        <Label Content="Təhsil növü" Target="{Binding ElementName=cmbEducationType}" Width="200"/>
                         <ComboBox x:Name="cmbEducationType" Width="500"/>
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Təhsil dərəcəsi" Target="{Binding ElementName=cmbEducationGrade}" Width="300"/>
+                        <Label Content="Təhsil dərəcəsi" Target="{Binding ElementName=cmbEducationGrade}" Width="200"/>
                         <ComboBox x:Name="cmbEducationGrade" Width="500"/>
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Təhsil müəssisəsinin adı" Target="{Binding ElementName=educationCentreName}" Width="300"/>
-                        <TextBox x:Name="educationCentreName" Width="500"/> <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
+                        <Label Content="Təhsil müəssisəsinin adı" Target="{Binding ElementName=ceducationCentreName}" Width="200"/>
+                        <TextBox x:Name="ceducationCentreName" Width="500"/>
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Fakültə" Target="{Binding ElementName=faculty}" Width="300"/>
+                        <Label Content="Fakültə" Target="{Binding ElementName=faculty}" Width="200"/>
                         <TextBox x:Name="faculty" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="İxtisas" Target="{Binding ElementName=speciality}" Width="300"/>
+                        <Label Content="İxtisas" Target="{Binding ElementName=speciality}" Width="200"/>
                         <TextBox x:Name="speciality" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Bitirdiyi il" Target="{Binding ElementName=endYear}" Width="300"/>
-                        <TextBox x:Name="endYear" Width="500"/>
+                        <Label Content="Bitirdiyi il" Target="{Binding ElementName=endYear}" Width="200"/>
+                        <TextBox x:Name="endYear" MaxLength="4" Width="500" PreviewTextInput="EndYear_PreviewTextInput"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Təsdiqedici sənədin nömrəsi" Target="{Binding ElementName=diplomNumber}" Width="300"/>
+                        <Label Content="Təsdiqedici sənədin nömrəsi" Target="{Binding ElementName=diplomNumber}" Width="200"/>
                         <TextBox x:Name="diplomNumber" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
-                    <!--<StackPanel>
-                        <Label Content="Təyinat tarixi" Target="{Binding ElementName=dtBeginDate}" />
-                        <DatePicker x:Name="dtBeginDate" />
-                    </StackPanel>
-                    <StackPanel >
-                        <Label />
-                        <CheckBox x:Name="isActualPositon">
-                            <TextBlock FontWeight="Bold">Əsas vəzifəsi</TextBlock>
-                        </CheckBox>
-                    </StackPanel>-->
                     <Grid HorizontalAlignment="Right">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="35"/>
@@ -144,10 +134,6 @@
                 </Style>
             </StackPanel.Resources>
             <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="AddNewEducation_Click" Foreground="#FF373BA0" />
-            <!--<mui:ModernButton Grid.Row="10" Grid.Column="3"
-                    FontWeight="Bold"
-                    Content="Yadda saxla"
-                     Width="120" Background="#FF42D43B" />-->
         </StackPanel>
     </Grid>
 </UserControl>

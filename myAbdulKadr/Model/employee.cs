@@ -21,6 +21,7 @@ namespace myAbdulKadr.Model
             this.familia = new HashSet<familia>();
             this.position = new HashSet<position>();
             this.workhistory = new HashSet<workhistory>();
+            this.education = new HashSet<education>();
         }
     
         public int ID { get; set; }
@@ -46,6 +47,7 @@ namespace myAbdulKadr.Model
         public virtual ICollection<position> position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<workhistory> workhistory { get; set; }
-        public virtual education education { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<education> education { get; set; }
     }
 }

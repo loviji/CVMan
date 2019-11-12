@@ -4,6 +4,7 @@ using myAbdulKadr.Model;
 using System;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,11 +15,11 @@ namespace hydrogen.PersonalDataPages
     /// </summary>
     /// 
 
-   
+
     public partial class personalEducation : UserControl, IContent
     {
         private int selectedPersonID { get; set; }
-       
+
 
         private static peopleEntities dbContext = new peopleEntities();
         private static ControlData cd = new ControlData();
@@ -37,7 +38,7 @@ namespace hydrogen.PersonalDataPages
                                          join mg in dbContext.metaData
                                                on new { ID = (int)e.grade, code = "edgd" }
                                            equals new { mg.ID, mg.code }
-                                         where e.empID==selectedPersonID
+                                         where e.empID == selectedPersonID
                                          select new
                                          {
                                              e.ID,
@@ -87,36 +88,38 @@ namespace hydrogen.PersonalDataPages
         {
             if (educationList.SelectedCells.Count > 0)
             {
-               
+
                 Object selectedItem = ((DataGrid)sender).SelectedItem;
-                Type type = selectedItem.GetType();
-                selectedEducation = (int)type.GetProperty("ID").GetValue(selectedItem, null);
-                //var selectedGridEducation =cellInfo.Column.GetCellContent(cellInfo.Item).DataContext
-                //                            select new { ID=m.id};
-                
-                if (selectedEducation > 0)
+                if (selectedItem != null)
                 {
-                   
+                    Type type = selectedItem.GetType();
+                    selectedEducation = (int)type.GetProperty("ID").GetValue(selectedItem, null);
+                    //var selectedGridEducation =cellInfo.Column.GetCellContent(cellInfo.Item).DataContext
+                    //                            select new { ID=m.id};
 
-                    var educationRecord = getEducationByID(selectedEducation);
+                    if (selectedEducation > 0)
+                    {
 
-                    cmbEducationType.ItemsSource = cd.GetMetaDataByType("edtp");
-                    cmbEducationType.DisplayMemberPath = "value";
-                    cmbEducationType.SelectedValuePath = "ID";
-                    cmbEducationType.SelectedValue = educationRecord.educationType;
+                        var educationRecord = getEducationByID(selectedEducation);
 
-                    cmbEducationGrade.ItemsSource = cd.GetMetaDataByType("edgd");
-                    cmbEducationGrade.DisplayMemberPath = "value";
-                    cmbEducationGrade.SelectedValuePath = "ID";
-                    cmbEducationGrade.SelectedValue = educationRecord.grade;
+                        cmbEducationType.ItemsSource = cd.GetMetaDataByType("edtp");
+                        cmbEducationType.DisplayMemberPath = "value";
+                        cmbEducationType.SelectedValuePath = "ID";
+                        cmbEducationType.SelectedValue = educationRecord.educationType;
 
-                    educationCentreName.Text = educationRecord.educationCentreName;
-                    faculty.Text = educationRecord.faculty;
-                    speciality.Text = educationRecord.speciality;
-                    endYear.Text = educationRecord.endYear.HasValue?educationRecord.endYear.Value.ToString():string.Empty;
-                    diplomNumber.Text = educationRecord.diplomNumber;
+                        cmbEducationGrade.ItemsSource = cd.GetMetaDataByType("edgd");
+                        cmbEducationGrade.DisplayMemberPath = "value";
+                        cmbEducationGrade.SelectedValuePath = "ID";
+                        cmbEducationGrade.SelectedValue = educationRecord.grade;
 
-                    positionEditor.Visibility = Visibility.Visible;
+                        ceducationCentreName.Text = educationRecord.educationCentreName;
+                        faculty.Text = educationRecord.faculty;
+                        speciality.Text = educationRecord.speciality;
+                        endYear.Text = educationRecord.endYear.HasValue ? educationRecord.endYear.Value.ToString() : string.Empty;
+                        diplomNumber.Text = educationRecord.diplomNumber;
+
+                        educationEditor.Visibility = Visibility.Visible;
+                    }
                 }
             }
         }
@@ -147,22 +150,21 @@ namespace hydrogen.PersonalDataPages
 
         private void AddNewEducation_Click(object sender, RoutedEventArgs e)
         {
-            positionEditor.Visibility = Visibility.Visible;
+            educationEditor.Visibility = Visibility.Visible;
             selectedEducation = 0;
             cmbEducationGrade.SelectedIndex = cmbEducationType.SelectedIndex = -1;
             cmbEducationGrade.ItemsSource = null;
             cmbEducationType.ItemsSource = null;
-            educationCentreName.Text = string.Empty;
+            ceducationCentreName.Text = string.Empty;
             faculty.Text = string.Empty;
-            //txtPosition.Text = string.Empty;
-            //dtBeginDate.Text = DateTime.Now.ToShortDateString();
-
-
-            cmbEducationGrade.ItemsSource = cd.GetOrganizationList();
+            endYear.Text = string.Empty;
+            diplomNumber.Text = string.Empty;
+            cmbEducationGrade.ItemsSource = cd.GetMetaDataByType("edgd");
             cmbEducationGrade.DisplayMemberPath = "value";
             cmbEducationGrade.SelectedValuePath = "ID";
-
-
+            cmbEducationType.ItemsSource = cd.GetMetaDataByType("edtp");
+            cmbEducationType.DisplayMemberPath = "value";
+            cmbEducationType.SelectedValuePath = "ID";
         }
 
         private void SaveNewPosition(object sender, RoutedEventArgs e)
@@ -175,12 +177,14 @@ namespace hydrogen.PersonalDataPages
                     education uEducation = dbContext.education.SingleOrDefault(k => k.ID == selectedEducation);
                     if (uEducation != null)
                     {
-                        //uEducation.orgID = Convert.ToInt32(cmbOrganization.SelectedValue);
-                        //uEducation.deptID = cmbDepartment.SelectedValue == null ? (int?)null : Convert.ToInt32(cmbDepartment.SelectedValue);
-                        //uEducation.sectID = cmbSection.SelectedValue == null ? (int?)null : Convert.ToInt32(cmbSection.SelectedValue);
-                        //uEducation.isMain = isActualPositon.IsChecked.Value;
-                        //uEducation.positionName = txtPosition.Text;
-                        //uEducation.beginDate = DateTime.Parse(dtBeginDate.Text);
+                        uEducation.grade = cmbEducationGrade.SelectedValue == null ? (int?)null : Convert.ToInt32(cmbEducationGrade.SelectedValue);
+                        uEducation.educationType = cmbEducationType.SelectedValue == null ? (int?)null : Convert.ToInt32(cmbEducationType.SelectedValue);
+                        uEducation.educationCentreName = ceducationCentreName.Text;
+                        uEducation.faculty = faculty.Text;
+
+                        uEducation.speciality = speciality.Text;
+                        uEducation.diplomNumber = diplomNumber.Text;
+                        uEducation.endYear = Convert.ToInt32(endYear.Text);
                     }
                 }
                 else
@@ -188,15 +192,19 @@ namespace hydrogen.PersonalDataPages
                     education edu = new education();
                     edu.grade = cmbEducationGrade.SelectedValue == null ? (int?)null : Convert.ToInt32(cmbEducationGrade.SelectedValue);
                     edu.educationType = cmbEducationType.SelectedValue == null ? (int?)null : Convert.ToInt32(cmbEducationType.SelectedValue);
-                    edu.educationCentreName = educationCentreName.Text;
+                    edu.educationCentreName = ceducationCentreName.Text;
                     edu.faculty = faculty.Text;
                     edu.empID = selectedPersonID;
+                    edu.speciality = speciality.Text;
+                    edu.diplomNumber = diplomNumber.Text;
+                    edu.endYear = Convert.ToInt32(endYear.Text);
 
                     dbContext.education.Add(edu);
                 }
                 dbContext.SaveChanges();
 
                 //  txtStatus.Text = rOrganization.organizationName + " has being added!";
+
             }
             catch (DbUpdateException ex)
             {
@@ -233,6 +241,18 @@ namespace hydrogen.PersonalDataPages
                 FillEducationList(selectedPersonID);
 
             }
+        }
+
+        private void EndYear_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            //int min = 1950;
+            //int max = DateTime.Now.Year;
+            //bool isValid = false;
+            //if (e.Text.Length>min || e.Text.Length < max || Regex.IsMatch(e.Text, "[^0-9]+"))
+            //    isValid = true;
+
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
         }
     }
 }

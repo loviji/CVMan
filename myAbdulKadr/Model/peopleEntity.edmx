@@ -166,15 +166,15 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_education_employee">
+        <Association Name="FK_education_employee1">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
-          <End Role="education" Type="Self.education" Multiplicity="0..1" />
+          <End Role="education" Type="Self.education" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="employee">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="education">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="empID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -270,7 +270,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             <End Role="organization" EntitySet="organization" />
             <End Role="department" EntitySet="department" />
           </AssociationSet>
-          <AssociationSet Name="FK_education_employee" Association="Self.FK_education_employee">
+          <AssociationSet Name="FK_education_employee1" Association="Self.FK_education_employee1">
             <End Role="employee" EntitySet="employee" />
             <End Role="education" EntitySet="education" />
           </AssociationSet>
@@ -331,7 +331,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <NavigationProperty Name="familia" Relationship="peopleModel.FK_familia_employee" FromRole="employee" ToRole="familia" />
           <NavigationProperty Name="position" Relationship="peopleModel.FK_position_employee" FromRole="employee" ToRole="position" />
           <NavigationProperty Name="workhistory" Relationship="peopleModel.FK_workhistory_employee" FromRole="employee" ToRole="workhistory" />
-          <NavigationProperty Name="education" Relationship="peopleModel.FK_education_employee" FromRole="employee" ToRole="education" />
+          <NavigationProperty Name="education" Relationship="peopleModel.FK_education_employee1" FromRole="employee" ToRole="education" />
         </EntityType>
         <EntityType Name="files">
           <Key>
@@ -414,7 +414,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           </AssociationSet>
           <EntitySet Name="VW_Position" EntityType="peopleModel.VW_Position" />
           <EntitySet Name="education" EntityType="peopleModel.education" />
-          <AssociationSet Name="FK_education_employee" Association="peopleModel.FK_education_employee">
+          <AssociationSet Name="FK_education_employee1" Association="peopleModel.FK_education_employee1">
             <End Role="employee" EntitySet="employee" />
             <End Role="education" EntitySet="education" />
           </AssociationSet>
@@ -580,17 +580,17 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="speciality" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="endYear" Type="Int32" />
           <Property Name="diplomNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="employee" Relationship="peopleModel.FK_education_employee" FromRole="education" ToRole="employee" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_education_employee1" FromRole="education" ToRole="employee" />
         </EntityType>
-        <Association Name="FK_education_employee">
+        <Association Name="FK_education_employee1">
           <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
-          <End Type="peopleModel.education" Role="education" Multiplicity="0..1" />
+          <End Type="peopleModel.education" Role="education" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="employee">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="education">
-              <PropertyRef Name="ID" />
+              <PropertyRef Name="empID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
