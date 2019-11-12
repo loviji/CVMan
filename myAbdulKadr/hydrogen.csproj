@@ -224,9 +224,6 @@
     <Compile Include="PersonalDataPages\PersonDataEditor.xaml.cs">
       <DependentUpon>PersonDataEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PersonalDataPages\UserControlPersonID.xaml.cs">
-      <DependentUpon>UserControlPersonID.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Page Include="PersonalDataPages\personalData.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -255,10 +252,6 @@
     <Page Include="PersonalDataPages\PersonDataEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="PersonalDataPages\UserControlPersonID.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -14,10 +14,7 @@
         <mui:ModernTab Layout="List" x:Name="PersonalOperations"  Links="{Binding Path=IPList}">
            
         </mui:ModernTab>
-        <StackPanel x:Name="LayoutRoot" xmlns:lib="clr-namespace:hydrogen.PersonalDataPages" VerticalAlignment="Bottom" Width="70" HorizontalAlignment="Left">
-            <TextBox Grid.Row="11" Grid.Column="2" x:Name="MyTextBox" Width="100" />
-            <lib:UserControlPersonID UserName="{Binding Path=Text, ElementName=MyTextBox, Mode=TwoWay}"/>
-        </StackPanel>
+        
     </Grid>
   
 </UserControl>

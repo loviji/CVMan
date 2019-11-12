@@ -3,10 +3,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:local="clr-namespace:myAbdulKadr.PersonalDataPages"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <Grid>
-            
+      
+            <StackPanel MinWidth="200">
+                <!-- actual form starts here -->
+                <StackPanel x:Name="Form" Orientation="Vertical">
+                    <!-- create viewmodel -->
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal" />
+                            <Setter Property="Margin" Value="0,0,0,4" />
+                        </Style>
+                        <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                            <Setter Property="Width" Value="100" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                            <Setter Property="Padding" Value="0,3" />
+                        </Style>
+                        <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+                            <Setter Property="Padding" Value="0,3" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <StackPanel>
+                        <Label Content="Qeydiyyatda olduğu ölkə" Target="{Binding ElementName=RegCountry}" Width="200"/>
+                        <TextBox x:Name="RegCountry" Width="500"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Qeydiyyatda olduğu şəhər" Target="{Binding ElementName=RegDistrict}" Width="200"/>
+                        <TextBox x:Name="RegDistrict" Width="500"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Qeydiyyatda olduğu ünvan" Target="{Binding ElementName=RegAddr}" Width="200"/>
+                        <TextBox x:Name="RegAddr" Width="500"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="FİN kodu" Target="{Binding ElementName=pincode}" Width="200"/>
+                        <TextBox x:Name="pincode" Width="100" MaxLength="7"/>
+                        <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
+                    </StackPanel>
+                  
+                    
+                    
+                    <Grid HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="35"/>
+                            <ColumnDefinition Width="35"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Horizontal" >
+
+                            <StackPanel.Resources>
+                                <PathGeometry x:Key="AddIconData">F1 M 53.2929,21.2929L 54.7071,22.7071C 56.4645,24.4645 56.4645,27.3137 54.7071,29.0711L 52.2323,31.5459L 44.4541,23.7677L 46.9289,21.2929C 48.6863,19.5355 51.5355,19.5355 53.2929,21.2929 Z M 31.7262,52.052L 23.948,44.2738L 43.0399,25.182L 50.818,32.9601L 31.7262,52.052 Z M 23.2409,47.1023L 28.8977,52.7591L 21.0463,54.9537L 23.2409,47.1023 Z M 17,28L 17,23L 23,23L 23,17L 28,17L 28,23L 34,23L 34,28L 28,28L 28,34L 23,34L 23,28L 17,28 Z</PathGeometry>
+                                <Style TargetType="mui:ModernButton">
+                                    <Setter Property="IconData" Value="{StaticResource AddIconData}" />
+                                    <Setter Property="Margin" Value="0,0,0,0" />
+                                    <Setter Property="BorderThickness" Value="2" />
+                                </Style>
+
+                            </StackPanel.Resources>
+                            <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="SaveNewPosition" />
+
+                        </StackPanel>
+               
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -118,7 +118,7 @@ namespace hydrogen
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             selectedID = e.Fragment;
-            MyTextBox.Text = selectedID;
+          
             FillList(IPList);
 
             // personID = Convert.ToInt32(selectedID);
