@@ -9,12 +9,12 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="empID" Type="int" Nullable="false" />
           <Property Name="countryName" Type="nvarchar" MaxLength="50" />
           <Property Name="cityName" Type="nvarchar" MaxLength="50" />
-          <Property Name="address" Type="nvarchar" MaxLength="250" />
-          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="streetName" Type="nvarchar" MaxLength="250" />
+          <Property Name="type" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="department">
           <Key>
@@ -327,11 +327,11 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="nationalityID" Type="Int32" />
           <Property Name="partyID" Type="Int32" />
           <Property Name="photoID" Type="Int32" />
-          <NavigationProperty Name="address" Relationship="peopleModel.FK_address_employee" FromRole="employee" ToRole="address" />
           <NavigationProperty Name="familia" Relationship="peopleModel.FK_familia_employee" FromRole="employee" ToRole="familia" />
           <NavigationProperty Name="position" Relationship="peopleModel.FK_position_employee" FromRole="employee" ToRole="position" />
           <NavigationProperty Name="workhistory" Relationship="peopleModel.FK_workhistory_employee" FromRole="employee" ToRole="workhistory" />
           <NavigationProperty Name="education" Relationship="peopleModel.FK_education_employee1" FromRole="employee" ToRole="education" />
+          <NavigationProperty Name="address" Relationship="peopleModel.FK_address_employee" FromRole="employee" ToRole="address" />
         </EntityType>
         <EntityType Name="files">
           <Key>
@@ -383,14 +383,9 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             <End Role="department" EntitySet="department" />
             <End Role="section" EntitySet="section" />
           </AssociationSet>
-          <EntitySet Name="address" EntityType="peopleModel.address" />
           <EntitySet Name="familia" EntityType="peopleModel.familia" />
           <EntitySet Name="position" EntityType="peopleModel.position" />
           <EntitySet Name="workhistory" EntityType="peopleModel.workhistory" />
-          <AssociationSet Name="FK_address_employee" Association="peopleModel.FK_address_employee">
-            <End Role="employee" EntitySet="employee" />
-            <End Role="address" EntitySet="address" />
-          </AssociationSet>
           <AssociationSet Name="FK_familia_employee" Association="peopleModel.FK_familia_employee">
             <End Role="employee" EntitySet="employee" />
             <End Role="familia" EntitySet="familia" />
@@ -418,19 +413,12 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             <End Role="employee" EntitySet="employee" />
             <End Role="education" EntitySet="education" />
           </AssociationSet>
+          <EntitySet Name="address" EntityType="peopleModel.address" />
+          <AssociationSet Name="FK_address_employee" Association="peopleModel.FK_address_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="address" EntitySet="address" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="address">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="empID" Type="Int32" Nullable="false" />
-          <Property Name="countryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="type" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="employee" Relationship="peopleModel.FK_address_employee" FromRole="address" ToRole="employee" />
-        </EntityType>
         <EntityType Name="familia">
           <Key>
             <PropertyRef Name="ID" />
@@ -470,18 +458,6 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="endDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="employee" Relationship="peopleModel.FK_workhistory_employee" FromRole="workhistory" ToRole="employee" />
         </EntityType>
-        <Association Name="FK_address_employee">
-          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
-          <End Type="peopleModel.address" Role="address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="address">
-              <PropertyRef Name="empID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_familia_employee">
           <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
           <End Type="peopleModel.familia" Role="familia" Multiplicity="*" />
@@ -594,6 +570,30 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empID" Type="Int32" Nullable="false" />
+          <Property Name="countryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="streetName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_address_employee" FromRole="address" ToRole="employee" />
+        </EntityType>
+        <Association Name="FK_address_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.address" Role="address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -653,18 +653,6 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="departmentID" ColumnName="departmentID" />
                 <ScalarProperty Name="sectionName" ColumnName="sectionName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="address">
-            <EntityTypeMapping TypeName="peopleModel.address">
-              <MappingFragment StoreEntitySet="address">
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="address1" ColumnName="address" />
-                <ScalarProperty Name="cityName" ColumnName="cityName" />
-                <ScalarProperty Name="countryName" ColumnName="countryName" />
-                <ScalarProperty Name="empID" ColumnName="empID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -736,6 +724,18 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
                 <ScalarProperty Name="educationCentreName" ColumnName="educationCentreName" />
                 <ScalarProperty Name="grade" ColumnName="grade" />
                 <ScalarProperty Name="educationType" ColumnName="educationType" />
+                <ScalarProperty Name="empID" ColumnName="empID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="address">
+            <EntityTypeMapping TypeName="peopleModel.address">
+              <MappingFragment StoreEntitySet="address">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="streetName" ColumnName="streetName" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+                <ScalarProperty Name="countryName" ColumnName="countryName" />
                 <ScalarProperty Name="empID" ColumnName="empID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

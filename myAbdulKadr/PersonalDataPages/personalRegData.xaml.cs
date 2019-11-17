@@ -3,6 +3,7 @@ using FirstFloor.ModernUI.Windows.Navigation;
 using myAbdulKadr.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,13 +33,50 @@ namespace myAbdulKadr.PersonalDataPages
 
         private void SaveNewPosition(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+
+                address uAddress = dbContext.address.SingleOrDefault(k => k.empID == selectedPersonID);
+                if (uAddress != null)
+                {
+
+                    uAddress.countryName = RegCountry.Text;
+                    uAddress.cityName = RegDistrict.Text;
+                    uAddress.streetName = RegAddr.Text;
+                    uAddress.empID = selectedPersonID;
+
+                }
+
+                else
+                {
+                    address addr = new address();
+
+                    addr.countryName = RegCountry.Text;
+                    addr.cityName = RegDistrict.Text;
+                    addr.streetName = RegAddr.Text;
+                    addr.empID = selectedPersonID;
+                    dbContext.address.Add(addr);
+                }
+                dbContext.SaveChanges();
+
+                //  txtStatus.Text = rOrganization.organizationName + " has being added!";
+            }
+            catch (DbUpdateException ex)
+            {
+                MessageBox.Show("Problem yarandı" + ex.ToString());
+            }
+            finally
+            {
+                
+                MessageBox.Show("Melumatlar saxlanıldı");
+            }
+
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
-           
-            
+
+
 
             selectedPersonID = Convert.ToInt32(e.Fragment);
             if (selectedPersonID != 0)
@@ -54,10 +92,10 @@ namespace myAbdulKadr.PersonalDataPages
             {
                 RegCountry.Text = addr.countryName;
                 RegDistrict.Text = addr.cityName;
-                RegAddr.Text = addr.address1;
+                RegAddr.Text = addr.streetName;
             }
             var emp = dbContext.employee.SingleOrDefault(s => s.ID == selectedPersonID);
-            if(emp!=null)
+            if (emp != null)
             {
                 pincode.Text = emp.FINCODE;
             }
@@ -65,17 +103,17 @@ namespace myAbdulKadr.PersonalDataPages
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            throw new NotImplementedException();
+
         }
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            throw new NotImplementedException();
+
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

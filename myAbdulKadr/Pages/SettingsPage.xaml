@@ -12,8 +12,8 @@
                 <mui:Link DisplayName="Təşkilatlar" Source="/Pages/GlobalList/Organizations.xaml"/>
                 <mui:Link DisplayName="Alt strukturlar" Source="/Pages/GlobalList/Department.xaml"/>
                 <mui:Link DisplayName="Seksiyalar" Source="/Pages/GlobalList/Sections.xaml"/>
-                <mui:Link DisplayName="appearance" Source="/Pages/Settings/Appearance.xaml" />
-                <mui:Link DisplayName="about" Source="/Pages/Settings/About.xaml" />
+                <mui:Link DisplayName="saxlamalar" Source="/Pages/Settings/Appearance.xaml" />
+                <mui:Link DisplayName="haqqında" Source="/Pages/Settings/About.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>
     </Grid>

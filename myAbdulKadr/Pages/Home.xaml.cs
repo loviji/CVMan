@@ -23,15 +23,26 @@ namespace hydrogen.Pages
         {
             InitializeComponent();
 
-            perList.DataContext = GetData();
+            perList.DataContext = GetData(string.Empty, string.Empty, string.Empty);
         }
 
-        private ObservableCollection<employee> GetData()
+        private ObservableCollection<employee> GetData(string name, string surname, string midname)
         {
-            var d = (from m in dbContext.employee
-                     select m);
+            List<employee> employeeList = null;
+            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(surname) && string.IsNullOrEmpty(midname))
+            {
+                employeeList = (from m in dbContext.employee
+                                select m).ToList();
+            }
+            else
+            {
+                employeeList = (from m in dbContext.employee
+                                where m.name.Contains(name) && m.surname.Contains(surname) && m.secondname.Contains(midname)
+                                select m).ToList();
+
+            }
             //new { m.ID, m.name, m.surname, m.secondname, m.birthdate, m.birthplace });
-            return new ObservableCollection<employee>(d);
+            return new ObservableCollection<employee>(employeeList);
             //return ObservableCollection<d;
         }
 
@@ -66,6 +77,9 @@ namespace hydrogen.Pages
             }
         }
 
-
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            perList.DataContext = GetData(pName.Text, pSurname.Text, pMidName.Text);
+        }
     }
 }

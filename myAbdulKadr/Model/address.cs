@@ -18,8 +18,8 @@ namespace myAbdulKadr.Model
         public int empID { get; set; }
         public string countryName { get; set; }
         public string cityName { get; set; }
-        public string address1 { get; set; }
-        public int type { get; set; }
+        public string streetName { get; set; }
+        public byte type { get; set; }
     
         public virtual employee employee { get; set; }
     }

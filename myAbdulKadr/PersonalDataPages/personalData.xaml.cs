@@ -37,7 +37,7 @@ namespace hydrogen.PersonalDataPages
 
         private void fillBasicControls()
         {
-            personalName.Text = "xzz";
+
 
             GetBitmapImage(insertedPhotoID);
 
@@ -150,7 +150,7 @@ namespace hydrogen.PersonalDataPages
                         uEmployee.sex = radioSexSelected.ToString();
                         uEmployee.birthdate = DateTime.Parse(personalBirthDate.Text);
                         uEmployee.birthplace = personalBirthPlace.Text;
-                        uEmployee.familyStatusID = getFamilyStatusID(radioFamilyStatusSelected.ToString()[0].ToString());
+                        uEmployee.familyStatusID = radioFamilyStatusSelected == null? (byte?)null:getFamilyStatusID(radioFamilyStatusSelected.ToString()[0].ToString());
                         uEmployee.photoID = insertedPhotoID;
                         uEmployee.nationalityID = Convert.ToInt32(personalNationality.SelectedValue);
                         uEmployee.partyID = Convert.ToInt32(personalPoliticalParty.SelectedValue);

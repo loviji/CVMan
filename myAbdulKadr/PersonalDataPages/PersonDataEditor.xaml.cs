@@ -37,9 +37,9 @@ namespace hydrogen
             IPList.Add(new Link() { DisplayName = "Şəxsi məlumatlar", Source = new Uri("/PersonalDataPages/personalData.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Vəzifə", Source = new Uri("/PersonalDataPages/personalPosition.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Təhsil", Source = new Uri("/PersonalDataPages/personalEducation.xaml#" + selectedID, UriKind.Relative) });
-            IPList.Add(new Link() { DisplayName = "Əmək fəaliyyəti", Source = new Uri("/PersonalDataPages/personalWorkHistory.xaml#" + selectedID, UriKind.Relative) });
+           // IPList.Add(new Link() { DisplayName = "Əmək fəaliyyəti", Source = new Uri("/PersonalDataPages/personalWorkHistory.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Qeydiyyat məlumatları", Source = new Uri("/PersonalDataPages/personalRegData.xaml#" + selectedID, UriKind.Relative) });
-            IPList.Add(new Link() { DisplayName = "Ailə tərkibi", Source = new Uri("/PersonalDataPages/personalFamily.xaml#" + selectedID, UriKind.Relative) });
+           // IPList.Add(new Link() { DisplayName = "Ailə tərkibi", Source = new Uri("/PersonalDataPages/personalFamily.xaml#" + selectedID, UriKind.Relative) });
         }
 
         public PersonDataEditor()
@@ -51,7 +51,7 @@ namespace hydrogen
             //InitializeComponent();
             InitializeComponent();
 
-            PersonalOperations.SelectedSourceChanged += PersonalTabList_SelectedSourceChanged;
+           // PersonalOperations.SelectedSourceChanged += PersonalTabList_SelectedSourceChanged;
 
         }
         public static readonly DependencyProperty SetTextProperty =
@@ -78,20 +78,20 @@ namespace hydrogen
         }
 
 
-        void PersonalTabList_SelectedSourceChanged(object sender, SourceEventArgs e)
-        {
-            //MessageBox.Show(selectedID);
+        //void PersonalTabList_SelectedSourceChanged(object sender, SourceEventArgs e)
+        //{
+        //    //MessageBox.Show(selectedID);
 
-            if (e.Source.OriginalString.Contains("personalData.xaml"))
-            {
-                //MessageBox.Show(selectedID);
-                //NavigationCommands.GoToPage.Execute("/PersonalDataPages/personalData.xaml#4", this);
-                //frame.Source = new Uri("/PersonalDataPages/personalData.xaml", UriKind.Relative);
-            }
+        //    if (e.Source.OriginalString.Contains("personalData.xaml"))
+        //    {
+        //        //MessageBox.Show(selectedID);
+        //        //NavigationCommands.GoToPage.Execute("/PersonalDataPages/personalData.xaml#4", this);
+        //        //frame.Source = new Uri("/PersonalDataPages/personalData.xaml", UriKind.Relative);
+        //    }
 
 
-            //}
-        }
+        //    //}
+        //}
 
 
 
@@ -137,7 +137,7 @@ namespace hydrogen
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            if (ModernDialog.ShowMessage("Əməliyyatı ləğv edirsiz?", "navigate", MessageBoxButton.YesNo) == MessageBoxResult.No)
+            if (ModernDialog.ShowMessage("Səhifəni tərk edirsiniz?", "navigate", MessageBoxButton.YesNo) == MessageBoxResult.No)
             {
                 e.Cancel = true;
             }

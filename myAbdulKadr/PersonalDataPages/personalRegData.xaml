@@ -41,7 +41,7 @@
                         <Label Content="Qeydiyyatda olduğu ünvan" Target="{Binding ElementName=RegAddr}" Width="200"/>
                         <TextBox x:Name="RegAddr" Width="500"/>
                     </StackPanel>
-                    <StackPanel>
+                    <StackPanel Visibility="Hidden">
                         <Label Content="FİN kodu" Target="{Binding ElementName=pincode}" Width="200"/>
                         <TextBox x:Name="pincode" Width="100" MaxLength="7"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
