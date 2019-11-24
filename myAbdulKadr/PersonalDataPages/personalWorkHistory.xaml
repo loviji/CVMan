@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="myAbdulKadr.PersonalDataPages.personalWorkHistory"
+﻿<UserControl x:Class="PersonMotion.PersonalDataPages.personalWorkHistory"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -81,7 +81,7 @@
                                 </Style>
 
                             </StackPanel.Resources>
-                            <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="SaveNewPosition" />
+                            <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="SaveNewWorkHistory" />
 
                         </StackPanel>
                         <StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Horizontal" >

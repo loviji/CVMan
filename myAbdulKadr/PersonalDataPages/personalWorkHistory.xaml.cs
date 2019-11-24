@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace myAbdulKadr.PersonalDataPages
+namespace PersonMotion.PersonalDataPages
 {
     /// <summary>
     /// Interaction logic for personalWorkHistory.xaml
@@ -108,7 +108,7 @@ namespace myAbdulKadr.PersonalDataPages
             workEndDate.Text = null;
         }
 
-        private void SaveNewPosition(object sender, RoutedEventArgs e)
+        private void SaveNewWorkHistory(object sender, RoutedEventArgs e)
         {
 
             try
@@ -179,16 +179,5 @@ namespace myAbdulKadr.PersonalDataPages
             }
         }
 
-        private void EndYear_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            //int min = 1950;
-            //int max = DateTime.Now.Year;
-            //bool isValid = false;
-            //if (e.Text.Length>min || e.Text.Length < max || Regex.IsMatch(e.Text, "[^0-9]+"))
-            //    isValid = true;
-
-            e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
-        }
     }
 }
