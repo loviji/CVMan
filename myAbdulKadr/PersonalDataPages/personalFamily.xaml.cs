@@ -74,16 +74,15 @@ namespace PersonMotion.PersonalDataPages
                 {
                     Type type = selectedItem.GetType();
                     selectedFamilyMember = (int)type.GetProperty("ID").GetValue(selectedItem, null);
-                    //var selectedGridEducation =cellInfo.Column.GetCellContent(cellInfo.Item).DataContext
-                    //                            select new { ID=m.id};
+  
 
                     if (selectedFamilyMember > 0)
                     {
                         var familyMember = getFamilyMemberByID(selectedFamilyMember);
-                        cstructureName.Text = familyMember.familyTypeName;
-                        positionName.Text = familyMember.familyname;
-                        workBeginDate.Text = familyMember.birthDate.ToString();
-                        workHistoryEditor.Visibility = Visibility.Visible;
+                        familyTypeName.Text = familyMember.familyTypeName;
+                        familyMemberName.Text = familyMember.familyname;
+                        familiMemberBirthYear.Text = familyMember.birthDate.ToString();
+                        familiaEditor.Visibility = Visibility.Visible;
                     }
                 }
             }
@@ -98,12 +97,12 @@ namespace PersonMotion.PersonalDataPages
 
         private void AddNewEducation_Click(object sender, RoutedEventArgs e)
         {
-            workHistoryEditor.Visibility = Visibility.Visible;
+            familiaEditor.Visibility = Visibility.Visible;
             selectedFamilyMember = 0;
-            cstructureName.Text = string.Empty;
-            positionName.Text = string.Empty;
-            workBeginDate.Text = DateTime.Now.ToShortDateString();
-            workEndDate.Text = null;
+            familyMemberName.Text = string.Empty;
+            familyTypeName.Text = string.Empty;
+            familiMemberBirthYear.Text = DateTime.Now.ToShortDateString();
+            
         }
 
         private void SaveNewFamilia(object sender, RoutedEventArgs e)
@@ -117,9 +116,9 @@ namespace PersonMotion.PersonalDataPages
                     if (uFamilia != null)
                     {
 
-                        uFamilia.familyTypeName = cstructureName.Text;
-                        uFamilia.familyname = positionName.Text;
-                        uFamilia.birthDate = DateTime.Parse(workBeginDate.Text);
+                        uFamilia.familyTypeName = familyTypeName.Text;
+                        uFamilia.familyname = familyMemberName.Text;
+                        uFamilia.birthDate = DateTime.Parse(familiMemberBirthYear.Text);
                        
                     }
                 }
@@ -128,9 +127,9 @@ namespace PersonMotion.PersonalDataPages
                     familia fml = new familia();
 
                     fml.empID = selectedPersonID;
-                    fml.familyTypeName = cstructureName.Text;
-                    fml.familyname = cstructureName.Text;
-                    fml.birthDate = DateTime.Parse(workBeginDate.Text);
+                    fml.familyTypeName = familyTypeName.Text;
+                    fml.familyname = familyTypeName.Text;
+                    fml.birthDate = DateTime.Parse(familiMemberBirthYear.Text);
                    
 
                     dbContext.familia.Add(fml);
@@ -153,10 +152,7 @@ namespace PersonMotion.PersonalDataPages
 
         }
 
-        private void ModernButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+     
 
         private void DeleteFamilia(object sender, RoutedEventArgs e)
         {

@@ -37,7 +37,7 @@ namespace hydrogen
             IPList.Add(new Link() { DisplayName = "Təhsil", Source = new Uri("/PersonalDataPages/personalEducation.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Əmək fəaliyyəti", Source = new Uri("/PersonalDataPages/personalWorkHistory.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Qeydiyyat məlumatları", Source = new Uri("/PersonalDataPages/personalRegData.xaml#" + selectedID, UriKind.Relative) });
-           // IPList.Add(new Link() { DisplayName = "Ailə tərkibi", Source = new Uri("/PersonalDataPages/personalFamily.xaml#" + selectedID, UriKind.Relative) });
+            IPList.Add(new Link() { DisplayName = "Ailə tərkibi", Source = new Uri("/PersonalDataPages/personalFamily.xaml#" + selectedID, UriKind.Relative) });
         }
 
         public PersonDataEditor()

@@ -75,8 +75,6 @@ namespace PersonMotion.PersonalDataPages
                 {
                     Type type = selectedItem.GetType();
                     selectedWorkHistory = (int)type.GetProperty("ID").GetValue(selectedItem, null);
-                    //var selectedGridEducation =cellInfo.Column.GetCellContent(cellInfo.Item).DataContext
-                    //                            select new { ID=m.id};
 
                     if (selectedWorkHistory > 0)
                     {

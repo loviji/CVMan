@@ -12,15 +12,13 @@
             <DataGrid Name="familiaList" ItemsSource="{Binding}"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="FamilyList_SelectedChanged">
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
-                    <mui:DataGridTextColumn Header="Müəsisə, struktur" Binding="{Binding structureName}" />
-                    <mui:DataGridTextColumn Header="Vəzifəsi" Binding="{Binding positionName}" />
-                    <mui:DataGridTextColumn Header="Təyin olunma tarixi" Binding="{Binding beginDate , StringFormat='dd-MM-yyyy'}"/>
-                    <mui:DataGridTextColumn Header="Xitam tarixi" Binding="{Binding endDate, StringFormat='dd-MM-yyyy'}"/>
-
+                    <mui:DataGridTextColumn Header="Qohumluq dərəcəsi" Binding="{Binding familyTypeName}" />
+                    <mui:DataGridTextColumn Header="Adı" Binding="{Binding familyname}" />
+                    <mui:DataGridTextColumn Header="Təvəllüdü" Binding="{Binding birthDate , StringFormat='dd-MM-yyyy'}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
-        <ScrollViewer Name="workHistoryEditor" Margin="0,0,0,0" Height="300" Width="700" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden">
+        <ScrollViewer Name="familiaEditor" Margin="0,0,0,0" Height="300" Width="700" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden">
             <StackPanel MinWidth="200">
                 <!-- actual form starts here -->
                 <StackPanel x:Name="Form" Orientation="Vertical">
@@ -34,33 +32,23 @@
                             <Setter Property="Width" Value="100" />
                             <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
-                        <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-                            <Setter Property="Padding" Value="0,3" />
-                        </Style>
-                        <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
-                            <Setter Property="Padding" Value="0,3" />
-                        </Style>
                     </StackPanel.Resources>
 
                     <StackPanel>
-                        <Label Content="Müəsisə, struktur" Target="{Binding ElementName=ceducationCentreName}" Width="200"/>
-                        <TextBox x:Name="cstructureName" Width="500"/>
+                        <Label Content="Qohumluq dərəcəsi" Target="{Binding ElementName=familyTypeName}" Width="200"/>
+                        <TextBox x:Name="familyTypeName" Width="500"/>
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Vəzifəsi" Target="{Binding ElementName=speciality}" Width="200"/>
-                        <TextBox x:Name="positionName" Width="500"/>
+                        <Label Content="Adı" Target="{Binding ElementName=familyMemberName}" Width="200"/>
+                        <TextBox x:Name="familyMemberName" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Bitirdiyi il" Target="{Binding ElementName=endYear}" Width="200"/>
-                        <DatePicker x:Name="workBeginDate" FirstDayOfWeek="Monday" Width="500"/>
+                        <Label Content="Təvəllüdü" Target="{Binding ElementName=familiMemberBirthYear}" Width="200"/>
+                        <DatePicker x:Name="familiMemberBirthYear" FirstDayOfWeek="Monday" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
-                    <StackPanel>
-                        <Label Content="Təsdiqedici sənədin nömrəsi" Target="{Binding ElementName=diplomNumber}" Width="200"/>
-                        <DatePicker x:Name="workEndDate" FirstDayOfWeek="Monday" Width="500"/>
-                        <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
-                    </StackPanel>
+
                     <Grid HorizontalAlignment="Right">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="35"/>
