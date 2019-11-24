@@ -63,7 +63,7 @@ namespace myAbdulKadr.ViewModel
 
     public class MyRepository
     {
-        private static peopleEntities dbContext = new peopleEntities();
+        private peopleEntities dbContext = new peopleEntities();
         public ObservableCollection<employee> Employees { get; private set; }
 
         public void ReadEmployees()

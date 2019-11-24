@@ -10,7 +10,7 @@ namespace myAbdulKadr.Common
 {
     public class ControlData
     {
-        private static peopleEntities dbContext = new peopleEntities();
+        private  peopleEntities dbContext = new peopleEntities();
 
         public ObservableCollection<organization> GetOrganizationList()
         {

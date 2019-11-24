@@ -18,11 +18,12 @@ namespace myAbdulKadr.Pages.GlobalList
     public partial class Department : UserControl, IContent, INotifyPropertyChanged
     {
 
-        private static peopleEntities dbContext = new peopleEntities();
-
+        private  peopleEntities dbContext = new peopleEntities();
+        
         public Department()
         {
             InitializeComponent();
+            dbContext.Configuration.AutoDetectChangesEnabled = true;
             //this.Loaded += new RoutedEventHandler(Window_Loaded);
         }
 
@@ -31,7 +32,14 @@ namespace myAbdulKadr.Pages.GlobalList
         {
             var list = from e in dbContext.organization select e;
 
-            return new ObservableCollection<organization>(list);
+            return new ObservableCollection<organization>(list.ToList());
+        }
+
+        private List<organization> GetOrganizationList2()
+        {
+            var list = from e in dbContext.organization select e;
+
+            return list.ToList();
         }
 
 
@@ -150,8 +158,9 @@ namespace myAbdulKadr.Pages.GlobalList
         public void OnNavigatedTo(NavigationEventArgs e)
         {
             cmbOrganization.Items.Clear();
-            OrgList = GetOrganizationList();
-            cmbOrganization.ItemsSource = OrgList;
+            //OrgList = GetOrganizationList();
+            
+            cmbOrganization.ItemsSource = GetOrganizationList2();
             cmbOrganization.DisplayMemberPath = "organizationName";
             cmbOrganization.SelectedValuePath = "ID";
             dgDept.ItemsSource = GetDepartmentList(selectedOrgID);

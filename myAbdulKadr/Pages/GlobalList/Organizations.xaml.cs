@@ -13,7 +13,7 @@ namespace myAbdulKadr.Pages.GlobalList
     /// </summary>
     public partial class Organizations : UserControl
     {
-        private static peopleEntities dbContext = new peopleEntities();
+        private  peopleEntities dbContext = new peopleEntities();
 
         public Organizations()
         {

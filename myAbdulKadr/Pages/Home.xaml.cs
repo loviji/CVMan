@@ -18,7 +18,7 @@ namespace hydrogen.Pages
     /// </summary>
     public partial class Home : UserControl, IContent
     {
-        private static peopleEntities dbContext = new peopleEntities();
+        private  peopleEntities dbContext = new peopleEntities();
 
       
 

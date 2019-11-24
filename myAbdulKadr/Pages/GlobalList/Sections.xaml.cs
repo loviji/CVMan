@@ -16,7 +16,7 @@ namespace myAbdulKadr.Pages.GlobalList
     /// </summary>
     public partial class Sections : UserControl, IContent, INotifyPropertyChanged
     {
-        private static peopleEntities dbContext = new peopleEntities();
+        private  peopleEntities dbContext = new peopleEntities();
 
         public Sections()
         {
