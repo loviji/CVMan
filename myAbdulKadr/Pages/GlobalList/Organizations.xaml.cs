@@ -1,5 +1,5 @@
-﻿using myAbdulKadr.Common;
-using myAbdulKadr.Model;
+﻿using PersonMotion.Common;
+using PersonMotion.Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;

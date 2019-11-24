@@ -1,4 +1,4 @@
-﻿using myAbdulKadr.Model;
+﻿using PersonMotion.Model;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +9,7 @@ using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
 using System.Collections.Generic;
 using System.ComponentModel;
-using myAbdulKadr.Common;
+using PersonMotion.Common;
 
 namespace myAbdulKadr.Pages.GlobalList
 {

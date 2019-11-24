@@ -1,8 +1,8 @@
-﻿using myAbdulKadr.Model;
+﻿using PersonMotion.Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace myAbdulKadr.Common
+namespace PersonMotion.Common
 {
     public class ControlData
     {

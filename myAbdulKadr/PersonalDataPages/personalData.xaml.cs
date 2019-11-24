@@ -1,7 +1,7 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using Microsoft.Win32;
-using myAbdulKadr.Common;
-using myAbdulKadr.Model;
+using PersonMotion.Common;
+using PersonMotion.Model;
 using System;
 using System.Data.Entity.Infrastructure;
 using System.IO;

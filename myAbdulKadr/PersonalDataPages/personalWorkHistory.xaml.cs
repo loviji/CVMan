@@ -1,6 +1,6 @@
 ﻿using FirstFloor.ModernUI.Windows;
-using myAbdulKadr.Common;
-using myAbdulKadr.Model;
+using PersonMotion.Common;
+using PersonMotion.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;

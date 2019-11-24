@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace myAbdulKadr.Model
+namespace PersonMotion.Model
 {
     using System;
     using System.Data.Entity;

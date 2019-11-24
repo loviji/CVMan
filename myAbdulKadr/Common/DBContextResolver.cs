@@ -1,6 +1,6 @@
-﻿using myAbdulKadr.Model;
+﻿using PersonMotion.Model;
 
-namespace myAbdulKadr.Common
+namespace PersonMotion.Common
 {
     public class DBContextResolver
     {

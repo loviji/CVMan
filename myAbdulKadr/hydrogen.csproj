@@ -8,7 +8,7 @@
     <ProjectGuid>{E3BB9156-B03B-42DB-8159-EA40D241DE05}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>myAbdulKadr</RootNamespace>
+    <RootNamespace>PersonMotion</RootNamespace>
     <AssemblyName>PersonMotion</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
