@@ -18,14 +18,16 @@ namespace myAbdulKadr.Pages.GlobalList
     public partial class Department : UserControl, IContent, INotifyPropertyChanged
     {
 
-        private  peopleEntities dbContext = new peopleEntities();
+        private peopleEntities dbContext = null;
         
         public Department()
         {
             InitializeComponent();
-            dbContext.Configuration.AutoDetectChangesEnabled = true;
+           // dbContext.Configuration.AutoDetectChangesEnabled = true;
             //this.Loaded += new RoutedEventHandler(Window_Loaded);
         }
+
+       
 
      
         private ObservableCollection<organization> GetOrganizationList()
@@ -152,11 +154,12 @@ namespace myAbdulKadr.Pages.GlobalList
 
         public void OnNavigatedFrom(NavigationEventArgs e)
         {
-            //throw new NotImplementedException();
+            dbContext.Dispose();
         }
 
         public void OnNavigatedTo(NavigationEventArgs e)
         {
+            dbContext = new peopleEntities();
             cmbOrganization.Items.Clear();
             //OrgList = GetOrganizationList();
             
