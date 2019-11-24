@@ -97,7 +97,7 @@ namespace myAbdulKadr.Pages.GlobalList
                                            select o).SingleOrDefault();
                 if (e.Command == DataGrid.DeleteCommand)
                 {
-                    if (!(MessageBox.Show("Are you sure?", "Confirm Delete!", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
+                    if (!(MessageBox.Show("Əminsiniz mi?", "Məlumat silinməsini təsdiqləyin!", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
                     {
                         e.Handled = true;
                     }

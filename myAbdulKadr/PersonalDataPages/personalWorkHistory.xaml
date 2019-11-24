@@ -9,7 +9,7 @@
     <Grid>
 
         <DockPanel VerticalAlignment="Top" Height="300">
-            <DataGrid Name="educationList" ItemsSource="{Binding}"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="EducationList_SelectedChanged">
+            <DataGrid Name="workHistoryList" ItemsSource="{Binding}"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="WorkHistoryList_SelectedChanged">
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                     <mui:DataGridTextColumn Header="Müəsisə, struktur" Binding="{Binding structureName}" />
@@ -20,7 +20,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
-        <ScrollViewer Name="educationEditor" Margin="0,0,0,0" Height="300" Width="700" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden">
+        <ScrollViewer Name="workHistoryEditor" Margin="0,0,0,0" Height="300" Width="700" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden">
             <StackPanel MinWidth="200">
                 <!-- actual form starts here -->
                 <StackPanel x:Name="Form" Orientation="Vertical">
@@ -41,36 +41,24 @@
                             <Setter Property="Padding" Value="0,3" />
                         </Style>
                     </StackPanel.Resources>
+
                     <StackPanel>
-                        <Label Content="Təhsil növü" Target="{Binding ElementName=cmbEducationType}" Width="200"/>
-                        <ComboBox x:Name="cmbEducationType" Width="500"/>
+                        <Label Content="Müəsisə, struktur" Target="{Binding ElementName=ceducationCentreName}" Width="200"/>
+                        <TextBox x:Name="cstructureName" Width="500"/>
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Təhsil dərəcəsi" Target="{Binding ElementName=cmbEducationGrade}" Width="200"/>
-                        <ComboBox x:Name="cmbEducationGrade" Width="500"/>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="Təhsil müəssisəsinin adı" Target="{Binding ElementName=ceducationCentreName}" Width="200"/>
-                        <TextBox x:Name="ceducationCentreName" Width="500"/>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="Fakültə" Target="{Binding ElementName=faculty}" Width="200"/>
-                        <TextBox x:Name="faculty" Width="500"/>
-                        <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="İxtisas" Target="{Binding ElementName=speciality}" Width="200"/>
-                        <TextBox x:Name="speciality" Width="500"/>
+                        <Label Content="Vəzifəsi" Target="{Binding ElementName=speciality}" Width="200"/>
+                        <TextBox x:Name="positionName" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
                     <StackPanel>
                         <Label Content="Bitirdiyi il" Target="{Binding ElementName=endYear}" Width="200"/>
-                        <TextBox x:Name="endYear" MaxLength="4" Width="500" PreviewTextInput="EndYear_PreviewTextInput"/>
+                        <DatePicker x:Name="workBeginDate" FirstDayOfWeek="Monday" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
                     <StackPanel>
                         <Label Content="Təsdiqedici sənədin nömrəsi" Target="{Binding ElementName=diplomNumber}" Width="200"/>
-                        <TextBox x:Name="diplomNumber" Width="500"/>
+                        <DatePicker x:Name="workEndDate" FirstDayOfWeek="Monday" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
                     <Grid HorizontalAlignment="Right">

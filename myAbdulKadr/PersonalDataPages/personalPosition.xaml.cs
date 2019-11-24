@@ -210,7 +210,7 @@ namespace hydrogen.PersonalDataPages
             var matchedPosition = (from po in dbContext.position
                                      where po.ID == selectedPosition
                                      select po).SingleOrDefault();
-            if (!(MessageBox.Show("Are you sure?", "Confirm Delete!", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
+            if (!(MessageBox.Show("Əminsiniz mi?", "Məlumat silinməsini təsdiqləyin!", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
             {
                 e.Handled = true;
             }

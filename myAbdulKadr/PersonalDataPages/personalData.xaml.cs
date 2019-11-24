@@ -157,9 +157,6 @@ namespace hydrogen.PersonalDataPages
                         uEmployee.partyID = Convert.ToInt32(personalPoliticalParty.SelectedValue);
                     }
 
-                    //make update
-                    // dbContext.SaveChanges();
-
                 }
                 dbContext.SaveChanges();
             }

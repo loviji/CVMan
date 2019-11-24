@@ -229,7 +229,7 @@ namespace hydrogen.PersonalDataPages
             var matchedEducation = (from ed in dbContext.education
                                     where ed.ID == selectedEducation
                                     select ed).SingleOrDefault();
-            if (!(MessageBox.Show("Are you sure?", "Confirm Delete!", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
+            if (!(MessageBox.Show("Əminsiniz mi?", "Məlumat silinməsini təsdiqləyin!", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
             {
                 e.Handled = true;
             }
