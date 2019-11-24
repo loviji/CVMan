@@ -5,13 +5,17 @@ using System.Windows.Controls;
 using System.Linq;
 using System.Windows.Input;
 using System;
+using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Navigation;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace myAbdulKadr.Pages.GlobalList
 {
     /// <summary>
     /// Interaction logic for Department.xaml
     /// </summary>
-    public partial class Department : UserControl
+    public partial class Department : UserControl, IContent, INotifyPropertyChanged
     {
 
         private static peopleEntities dbContext = new peopleEntities();
@@ -19,23 +23,14 @@ namespace myAbdulKadr.Pages.GlobalList
         public Department()
         {
             InitializeComponent();
-            this.Loaded += new RoutedEventHandler(Window_Loaded);
+            //this.Loaded += new RoutedEventHandler(Window_Loaded);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-            cmbOrganization.ItemsSource = GetOrganizationList();
-            cmbOrganization.DisplayMemberPath = "organizationName";
-            cmbOrganization.SelectedValuePath = "ID";
-            dgDept.ItemsSource = GetDepartmentList(selectedOrgID);
-
-        }
-
+     
         private ObservableCollection<organization> GetOrganizationList()
         {
             var list = from e in dbContext.organization select e;
-            
+
             return new ObservableCollection<organization>(list);
         }
 
@@ -108,10 +103,64 @@ namespace myAbdulKadr.Pages.GlobalList
 
         private int selectedOrgID = 0;
 
+        private ObservableCollection<organization> orgList;
+
+        public ObservableCollection<organization> OrgList
+        {
+            get
+            {
+                return orgList;
+            }
+            set
+            {
+                if (value != orgList)
+                {
+                    orgList = value;
+                    NotifyPropertyChanged("OrgList"); // method implemented below
+                }
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         private void CmbOrganization_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedOrgID = Convert.ToInt32(cmbOrganization.SelectedValue);
             dgDept.ItemsSource = GetDepartmentList(selectedOrgID);
+        }
+
+        public void OnFragmentNavigation(FragmentNavigationEventArgs e)
+        {
+      
+        }
+
+        public void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void OnNavigatedTo(NavigationEventArgs e)
+        {
+            cmbOrganization.Items.Clear();
+            OrgList = GetOrganizationList();
+            cmbOrganization.ItemsSource = OrgList;
+            cmbOrganization.DisplayMemberPath = "organizationName";
+            cmbOrganization.SelectedValuePath = "ID";
+            dgDept.ItemsSource = GetDepartmentList(selectedOrgID);
+        }
+
+        public void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            cmbOrganization.ItemsSource = null;
+            dgDept.ItemsSource = null;
         }
     }
 }

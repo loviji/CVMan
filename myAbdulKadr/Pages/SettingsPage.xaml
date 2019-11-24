@@ -7,12 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid Style="{StaticResource ContentRoot}">
-        <mui:ModernTab Layout="List" SelectedSource="/Pages/Settings/Appearance.xaml">
+        <mui:ModernTab Layout="List" SelectedSource="/Pages/GlobalList/Organizations.xaml">
             <mui:ModernTab.Links>
                 <mui:Link DisplayName="Təşkilatlar" Source="/Pages/GlobalList/Organizations.xaml"/>
                 <mui:Link DisplayName="Alt strukturlar" Source="/Pages/GlobalList/Department.xaml"/>
                 <mui:Link DisplayName="Seksiyalar" Source="/Pages/GlobalList/Sections.xaml"/>
-                <mui:Link DisplayName="saxlamalar" Source="/Pages/Settings/Appearance.xaml" />
+                <mui:Link DisplayName="sazlamalar" Source="/Pages/Settings/Appearance.xaml" />
                 <mui:Link DisplayName="haqqında" Source="/Pages/Settings/About.xaml" />
             </mui:ModernTab.Links>
         </mui:ModernTab>

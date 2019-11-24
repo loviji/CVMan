@@ -37,7 +37,7 @@ namespace hydrogen
             IPList.Add(new Link() { DisplayName = "Şəxsi məlumatlar", Source = new Uri("/PersonalDataPages/personalData.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Vəzifə", Source = new Uri("/PersonalDataPages/personalPosition.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Təhsil", Source = new Uri("/PersonalDataPages/personalEducation.xaml#" + selectedID, UriKind.Relative) });
-           // IPList.Add(new Link() { DisplayName = "Əmək fəaliyyəti", Source = new Uri("/PersonalDataPages/personalWorkHistory.xaml#" + selectedID, UriKind.Relative) });
+            IPList.Add(new Link() { DisplayName = "Əmək fəaliyyəti", Source = new Uri("/PersonalDataPages/personalWorkHistory.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Qeydiyyat məlumatları", Source = new Uri("/PersonalDataPages/personalRegData.xaml#" + selectedID, UriKind.Relative) });
            // IPList.Add(new Link() { DisplayName = "Ailə tərkibi", Source = new Uri("/PersonalDataPages/personalFamily.xaml#" + selectedID, UriKind.Relative) });
         }
@@ -51,7 +51,7 @@ namespace hydrogen
             //InitializeComponent();
             InitializeComponent();
 
-           // PersonalOperations.SelectedSourceChanged += PersonalTabList_SelectedSourceChanged;
+         
 
         }
         public static readonly DependencyProperty SetTextProperty =
@@ -75,44 +75,6 @@ namespace hydrogen
         private void OnSetTextChanged(DependencyPropertyChangedEventArgs e)
         {
             var s = e.NewValue.ToString();
-        }
-
-
-        //void PersonalTabList_SelectedSourceChanged(object sender, SourceEventArgs e)
-        //{
-        //    //MessageBox.Show(selectedID);
-
-        //    if (e.Source.OriginalString.Contains("personalData.xaml"))
-        //    {
-        //        //MessageBox.Show(selectedID);
-        //        //NavigationCommands.GoToPage.Execute("/PersonalDataPages/personalData.xaml#4", this);
-        //        //frame.Source = new Uri("/PersonalDataPages/personalData.xaml", UriKind.Relative);
-        //    }
-
-
-        //    //}
-        //}
-
-
-
-
-
-        private void PersonalOperations_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            FrameworkElement link = e.OriginalSource as FrameworkElement;
-            var k = this.Name;
-            if (link != null)
-            {
-
-                if (link.Name == "PositionData")
-                {
-
-                }
-                else if (link.Name == "PersonalData")
-                {
-                    //MessageBox.Show("3");
-                }
-            }
         }
 
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)

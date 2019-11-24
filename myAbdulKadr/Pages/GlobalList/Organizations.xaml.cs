@@ -57,7 +57,7 @@ namespace myAbdulKadr.Pages.GlobalList
                     matchedData.organizationName = org.organizationName;
                     dbContext.SaveChanges();
                     dgOrg.ItemsSource = GetOrganizationList();
-                    txtStatus.Text = "Success. Info updated";
+                    txtStatus.Text = "Məlumat yeniləndi";
                 }
             }
 
@@ -74,7 +74,7 @@ namespace myAbdulKadr.Pages.GlobalList
                                            select o).SingleOrDefault();
                 if (e.Command == DataGrid.DeleteCommand)
                 {
-                    if (!(MessageBox.Show("Are you sure?", "Confirm Delete!", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
+                    if (!(MessageBox.Show("Əminsiniz?", "Sətir Silinir!", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
                     {
                         e.Handled = true;
                     }

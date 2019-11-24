@@ -5,14 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:myAbdulKadr.Pages.GlobalList"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="Window_Loaded">
+             mc:Ignorable="d" d:DesignWidth="1000" Loaded="Window_Loaded" Height="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.192*"/>
-            <RowDefinition Height="0.088*"/>
+            <RowDefinition Height="550" />
+            <RowDefinition Height="35" />
+
         </Grid.RowDefinitions>
-        <DataGrid x:Name="dgOrg" HorizontalAlignment="Left" Height="491" Margin="10,10,0,0" VerticalAlignment="Top" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="970" />
+
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dgOrg" HorizontalAlignment="Left" 
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding}" 
                   RowEditEnding="dgOrg_RowEditEnding" 
@@ -20,9 +24,9 @@
                   CommandManager.PreviewExecuted="DgOrg_PreviewExecuted"
                   CanUserAddRows="True" CanUserDeleteRows="True">
             <DataGrid.Columns>
-                <mui:DataGridTextColumn Binding="{Binding ID, NotifyOnTargetUpdated=True,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" Header="ID" IsReadOnly="True" />
-                <mui:DataGridTextColumn Binding="{Binding organizationName, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" Header="Təşkilatın adı"/>
-             </DataGrid.Columns>
+                <mui:DataGridTextColumn Binding="{Binding ID, NotifyOnTargetUpdated=True,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="70" Header="ID" IsReadOnly="True" />
+                <mui:DataGridTextColumn Binding="{Binding organizationName, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="850" Header="Təşkilatın adı"/>
+            </DataGrid.Columns>
         </DataGrid>
         <TextBlock x:Name="txtStatus" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="8,0,0,0"
                    TextWrapping="Wrap" Grid.Row="1"/>

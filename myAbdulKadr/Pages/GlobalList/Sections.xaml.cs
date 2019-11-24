@@ -1,6 +1,9 @@
-﻿using myAbdulKadr.Model;
+﻿using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Navigation;
+using myAbdulKadr.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,7 +14,7 @@ namespace myAbdulKadr.Pages.GlobalList
     /// <summary>
     /// Interaction logic for Sections.xaml
     /// </summary>
-    public partial class Sections : UserControl
+    public partial class Sections : UserControl, IContent, INotifyPropertyChanged
     {
         private static peopleEntities dbContext = new peopleEntities();
 
@@ -25,9 +28,7 @@ namespace myAbdulKadr.Pages.GlobalList
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            cmbOrganization.ItemsSource = GetOrganizationList();
-            cmbOrganization.DisplayMemberPath = "organizationName";
-            cmbOrganization.SelectedValuePath = "ID";
+           
 
 
 
@@ -118,6 +119,8 @@ namespace myAbdulKadr.Pages.GlobalList
 
         private int selectedOrgID = 0;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private void CmbOrganization_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedOrgID = Convert.ToInt32(cmbOrganization.SelectedValue);
@@ -130,6 +133,56 @@ namespace myAbdulKadr.Pages.GlobalList
         {
             selectedDeptID = Convert.ToInt32(cmbDepartment.SelectedValue);
             dgSect.ItemsSource = GetSectionList(selectedDeptID);
+        }
+
+        public void OnFragmentNavigation(FragmentNavigationEventArgs e)
+        {
+            
+        }
+
+        public void OnNavigatedFrom(NavigationEventArgs e)
+        {
+           
+        }
+
+        public void OnNavigatedTo(NavigationEventArgs e)
+        {
+            orgList = GetOrganizationList();
+            cmbOrganization.ItemsSource = OrgList;
+            cmbOrganization.ItemsSource = GetOrganizationList();
+            cmbOrganization.DisplayMemberPath = "organizationName";
+            cmbOrganization.SelectedValuePath = "ID";
+        }
+
+        public void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+          
+        }
+
+
+        private ObservableCollection<organization> orgList;
+
+        public ObservableCollection<organization> OrgList
+        {
+            get
+            {
+                return orgList;
+            }
+            set
+            {
+                orgList = value;
+                NotifyPropertyChanged("OrgList"); // method implemented below
+            }
+        }
+
+
+      
+        public void NotifyPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }
