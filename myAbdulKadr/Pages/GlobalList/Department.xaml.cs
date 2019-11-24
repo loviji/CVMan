@@ -9,6 +9,7 @@ using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
 using System.Collections.Generic;
 using System.ComponentModel;
+using myAbdulKadr.Common;
 
 namespace myAbdulKadr.Pages.GlobalList
 {
@@ -18,7 +19,7 @@ namespace myAbdulKadr.Pages.GlobalList
     public partial class Department : UserControl, IContent, INotifyPropertyChanged
     {
 
-        private peopleEntities dbContext = null;
+        private peopleEntities dbContext = DBContextResolver.Instance;
         
         public Department()
         {
@@ -154,12 +155,12 @@ namespace myAbdulKadr.Pages.GlobalList
 
         public void OnNavigatedFrom(NavigationEventArgs e)
         {
-            dbContext.Dispose();
+            
         }
 
         public void OnNavigatedTo(NavigationEventArgs e)
         {
-            dbContext = new peopleEntities();
+           
             cmbOrganization.Items.Clear();
             //OrgList = GetOrganizationList();
             

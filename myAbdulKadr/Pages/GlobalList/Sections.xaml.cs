@@ -1,5 +1,6 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
+using myAbdulKadr.Common;
 using myAbdulKadr.Model;
 using System;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace myAbdulKadr.Pages.GlobalList
     /// </summary>
     public partial class Sections : UserControl, IContent, INotifyPropertyChanged
     {
-        private  peopleEntities dbContext = new peopleEntities();
+        private  peopleEntities dbContext = DBContextResolver.Instance;
 
         public Sections()
         {

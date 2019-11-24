@@ -1,5 +1,6 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using Microsoft.Win32;
+using myAbdulKadr.Common;
 using myAbdulKadr.Model;
 using System;
 using System.Data.Entity.Infrastructure;
@@ -19,7 +20,7 @@ namespace hydrogen.PersonalDataPages
     /// </summary>
     public partial class PersonalData : UserControl, IContent
     {
-        private static peopleEntities dbContext = new peopleEntities();
+        private static peopleEntities dbContext = DBContextResolver.Instance;
         private char radioSexSelected;
         private string radioFamilyStatusSelected;
         private const int minimumTextLength = 3;

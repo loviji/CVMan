@@ -22,14 +22,12 @@ namespace hydrogen
             if (IPList.Count() == 0)
             {
                 papulateList(IPList);
-
             }
             else
             {
                 IPList.Clear();
                 papulateList(IPList);
             }
-
         }
 
         private void papulateList(LinkCollection IPList)
@@ -45,14 +43,9 @@ namespace hydrogen
         public PersonDataEditor()
         {
             DataContext = this;
-
             IPList = new LinkCollection();
-
             //InitializeComponent();
             InitializeComponent();
-
-         
-
         }
         public static readonly DependencyProperty SetTextProperty =
          DependencyProperty.Register("SetText", typeof(string), typeof(PersonDataEditor), new
@@ -104,9 +97,6 @@ namespace hydrogen
                 e.Cancel = true;
             }
         }
-
-
-
     }
 }
 

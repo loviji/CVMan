@@ -21,7 +21,7 @@ namespace hydrogen.PersonalDataPages
         private int selectedPersonID { get; set; }
 
 
-        private static peopleEntities dbContext = new peopleEntities();
+        private static peopleEntities dbContext = DBContextResolver.Instance;
         private static ControlData cd = new ControlData();
         public personalEducation()
         {

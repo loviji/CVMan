@@ -1,4 +1,5 @@
-﻿using myAbdulKadr.Model;
+﻿using myAbdulKadr.Common;
+using myAbdulKadr.Model;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -13,7 +14,7 @@ namespace myAbdulKadr.Pages.GlobalList
     /// </summary>
     public partial class Organizations : UserControl
     {
-        private  peopleEntities dbContext = new peopleEntities();
+        private peopleEntities dbContext = DBContextResolver.Instance;
 
         public Organizations()
         {

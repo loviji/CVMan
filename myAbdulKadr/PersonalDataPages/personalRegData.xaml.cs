@@ -1,5 +1,6 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
+using myAbdulKadr.Common;
 using myAbdulKadr.Model;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace myAbdulKadr.PersonalDataPages
         {
             InitializeComponent();
         }
-        private static peopleEntities dbContext = new peopleEntities();
+        private static peopleEntities dbContext = DBContextResolver.Instance;
         private int selectedPersonID { get; set; }
 
         private void SaveNewPosition(object sender, RoutedEventArgs e)

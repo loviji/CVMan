@@ -1,5 +1,6 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Navigation;
+using myAbdulKadr.Common;
 using myAbdulKadr.Model;
 using myAbdulKadr.ViewModel;
 using System;
@@ -18,9 +19,9 @@ namespace hydrogen.Pages
     /// </summary>
     public partial class Home : UserControl, IContent
     {
-        private  peopleEntities dbContext = new peopleEntities();
+        private  peopleEntities dbContext = DBContextResolver.Instance;
 
-      
+
 
         public Home()
         {
