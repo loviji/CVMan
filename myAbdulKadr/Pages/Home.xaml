@@ -7,31 +7,37 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1100">
     <Grid>
-        <DockPanel  Height="30" VerticalAlignment="Top">
-            <StackPanel x:Name="Form" Orientation="Horizontal" Margin="0,0,0,0">
+        <DockPanel   VerticalAlignment="Top">
+            <StackPanel x:Name="Form" Orientation="Horizontal" Margin="10,12,10,22" Height="30">
                 <!-- create viewmodel -->
                 <StackPanel.Resources>
                     <Style TargetType="StackPanel">
                         <Setter Property="Orientation" Value="Horizontal" />
-                        <Setter Property="Margin" Value="0,0,4,4" />
+                        
 
                     </Style>
                     <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                        <Setter Property="Width" Value="100" />
-                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="Margin" Value="10,0,0,0"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                    </Style>
+                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                        <Setter Property="Margin" Value="3"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="Width" Value="125" />
                     </Style>
                 </StackPanel.Resources>
                 <StackPanel>
-                    <Label Content="Ad" Target="{Binding ElementName=pName}" Width="50"/>
-                    <TextBox x:Name="pName" Width="150"/>
+                    <Label Content="Ad" Target="{Binding ElementName=pName}" Width="18"/>
+                    <TextBox x:Name="pName"/>
                 </StackPanel>
                 <StackPanel>
-                    <Label Content="Soyad" Target="{Binding ElementName=pSurname}" Width="50"/>
-                    <TextBox x:Name="pSurname" Width="150"/>
+                    <Label Content="Soyad" Target="{Binding ElementName=pSurname}" Width="41"/>
+                    <TextBox x:Name="pSurname"/>
                 </StackPanel>
                 <StackPanel>
-                    <Label Content="Ata adı" Target="{Binding ElementName=pMidName}" Width="50"/>
-                    <TextBox x:Name="pMidName" Width="150"/>
+                    <Label Content="Ata adı" Target="{Binding ElementName=pMidName}" Width="41"/>
+                    <TextBox x:Name="pMidName"/>
                 </StackPanel>
                 <StackPanel  HorizontalAlignment="Right" Orientation="Horizontal" Height="35" Width="40" VerticalAlignment="Bottom" Margin="0,0,4,-9" >
                     <StackPanel.Resources>
@@ -42,12 +48,21 @@
                             <Setter Property="BorderThickness" Value="2" />
                         </Style>
                     </StackPanel.Resources>
-                    <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="SearchButton_Click" Foreground="#FF373BA0" Height="35" VerticalAlignment="Bottom" />
+                    <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="SearchButton_Click" Foreground="#FF373BA0" Height="35" VerticalAlignment="Bottom" RenderTransformOrigin="0.647,0.086" />
                 </StackPanel>
             </StackPanel>
         </DockPanel>
-        <ScrollViewer Name="educationEditor" Margin="0,0,0,0" Height="550" Width="1000"  HorizontalAlignment="Left">
-            <DataGrid Name="perList" ItemsSource="{Binding Path=Employees, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" IsReadOnly="True"  MouseDoubleClick="PerList_MouseDoubleClick" >
+        <ScrollViewer Name="educationEditor" Margin="0,46,0,25" Width="1000"  HorizontalAlignment="Left">
+            <DataGrid Name="perList" ItemsSource="{Binding Path=Employees, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" IsReadOnly="True"  MouseDoubleClick="PerList_MouseDoubleClick" Height="522" >
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding name}" Value="Telman" >
+                                <Setter Property="Foreground" Value="Orange" />
+                             </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"  />
                     <mui:DataGridTextColumn Header="Adı" Binding="{Binding name}" />

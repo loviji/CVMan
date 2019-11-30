@@ -35,13 +35,13 @@ namespace hydrogen.Pages
             List<employee> employeeList = null;
             if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(surname) && string.IsNullOrEmpty(midname))
             {
-               // employeeList = new EmployeeViewModel();
+                employeeList = new EmployeeViewModel().Employees.ToList();
             }
             else
             {
-                //employeeList = (from m in dbContext.employee
-                //                where m.name.Contains(name) && m.surname.Contains(surname) && m.secondname.Contains(midname)
-                //                select m).ToList();
+                employeeList = new EmployeeViewModel().Employees.Where(m => m.name.Contains(name) && m.surname.Contains(surname) && m.secondname.Contains(midname)).ToList();
+                                //where m.name.Contains(name) && m.surname.Contains(surname) && m.secondname.Contains(midname)
+                                //select m).ToList();
 
             }
             //new { m.ID, m.name, m.surname, m.secondname, m.birthdate, m.birthplace });
@@ -58,7 +58,8 @@ namespace hydrogen.Pages
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            perList.DataContext = GetData(pName.Text, pSurname.Text, pMidName.Text);
+            
+            perList.ItemsSource = GetData(pName.Text, pSurname.Text, pMidName.Text);
         }
 
         private void PerList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
