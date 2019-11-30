@@ -78,12 +78,11 @@ namespace myAbdulKadr.Pages
                 {
 
 
-                    // string url = "../PersonalDataPages/PersonDataEditor.xaml#" + selectedEmp.ID.ToString();
-                    // NavigationCommands.GoToPage.Execute(url, this);
+                   
                     HRCard hc = new HRCard();
-                   // WindowInteropHelper wih = new WindowInteropHelper();
-                    hc.personID = "18470";// selectedEmp.ID.ToString();
-                    //hc.WindowState = System.Windows.Forms.WindowState.Maximized;
+                 
+                    hc.personID =  selectedEmp.ID.ToString();
+                   
                     hc.ShowDialog();
                 }
 
