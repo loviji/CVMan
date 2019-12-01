@@ -52,12 +52,12 @@
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Bitirdiyi il" Target="{Binding ElementName=endYear}" Width="200"/>
+                        <Label Content="Təyin olunma tarixi" Target="{Binding ElementName=workBeginDate}" Width="200"/>
                         <DatePicker x:Name="workBeginDate" FirstDayOfWeek="Monday" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
                     <StackPanel>
-                        <Label Content="Təsdiqedici sənədin nömrəsi" Target="{Binding ElementName=diplomNumber}" Width="200"/>
+                        <Label Content="Xitam tarixi" Target="{Binding ElementName=workEndDate}" Width="200"/>
                         <DatePicker x:Name="workEndDate" FirstDayOfWeek="Monday" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>

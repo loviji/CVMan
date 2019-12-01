@@ -27,6 +27,7 @@ namespace myAbdulKadr.PersonalDataPages
             {
 
                 address uAddress = dbContext.address.SingleOrDefault(k => k.empID == selectedPersonID);
+                employee uEmployee = dbContext.employee.SingleOrDefault(k => k.ID == selectedPersonID);
                 if (uAddress != null)
                 {
 
@@ -47,6 +48,11 @@ namespace myAbdulKadr.PersonalDataPages
                     addr.empID = selectedPersonID;
                     dbContext.address.Add(addr);
                 }
+                uEmployee.salary = Convert.ToDecimal(salary.Text);
+                uEmployee.FINCODE = pincode.Text;
+                uEmployee.workPhone = phone.Text;
+                uEmployee.mobilePhone = mobilePhone.Text;
+                uEmployee.emailaddr = email.Text;
                 dbContext.SaveChanges();
 
                 //  txtStatus.Text = rOrganization.organizationName + " has being added!";
@@ -83,11 +89,16 @@ namespace myAbdulKadr.PersonalDataPages
                 RegCountry.Text = addr.countryName;
                 RegDistrict.Text = addr.cityName;
                 RegAddr.Text = addr.streetName;
+                
             }
             var emp = dbContext.employee.SingleOrDefault(s => s.ID == selectedPersonID);
             if (emp != null)
             {
                 pincode.Text = emp.FINCODE;
+                salary.Text = emp.salary.ToString();
+                email.Text = emp.emailaddr;
+                phone.Text = emp.workPhone;
+                mobilePhone.Text = emp.mobilePhone;
             }
         }
 

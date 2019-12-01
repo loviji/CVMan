@@ -34,7 +34,7 @@ namespace myAbdulKadr.Pages
         {
             InitializeComponent();
 
-           
+            perList.DataContext = new EmployeeViewModel();
         }
 
         private ObservableCollection<employee> GetData(string name, string surname, string midname)
@@ -55,12 +55,7 @@ namespace myAbdulKadr.Pages
         }
 
 
-        private void AddNewPersonal_Click(object sender, RoutedEventArgs e)
-        {
-            string url = "../PersonalDataPages/PersonDataEditor.xaml#0";
-            NavigationCommands.GoToPage.Execute(url, this);
-        }
-
+        
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -103,7 +98,7 @@ namespace myAbdulKadr.Pages
         public void OnNavigatedTo(NavigationEventArgs e)
         {
        
-            perList.DataContext = new EmployeeViewModel();
+            
 
        
         }

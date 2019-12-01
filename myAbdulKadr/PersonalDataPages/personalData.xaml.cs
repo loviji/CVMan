@@ -1,8 +1,11 @@
 ﻿using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Controls;
 using Microsoft.Win32;
 using PersonMotion.Common;
 using PersonMotion.Model;
+using PersonMotion.PersonalDataPages.Dialog;
 using System;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
@@ -94,7 +97,7 @@ namespace hydrogen.PersonalDataPages
             && r.value.StartsWith(k)).FirstOrDefault().ID);
         }
 
-     
+
 
         private int getNationalityStatusID(string k)
         {
@@ -151,7 +154,7 @@ namespace hydrogen.PersonalDataPages
                         uEmployee.sex = radioSexSelected.ToString();
                         uEmployee.birthdate = DateTime.Parse(personalBirthDate.Text);
                         uEmployee.birthplace = personalBirthPlace.Text;
-                        uEmployee.familyStatusID = radioFamilyStatusSelected == null? (byte?)null:getFamilyStatusID(radioFamilyStatusSelected.ToString()[0].ToString());
+                        uEmployee.familyStatusID = radioFamilyStatusSelected == null ? (byte?)null : getFamilyStatusID(radioFamilyStatusSelected.ToString()[0].ToString());
                         uEmployee.photoID = insertedPhotoID;
                         uEmployee.nationalityID = Convert.ToInt32(personalNationality.SelectedValue);
                         uEmployee.partyID = Convert.ToInt32(personalPoliticalParty.SelectedValue);
@@ -252,11 +255,12 @@ namespace hydrogen.PersonalDataPages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show("Şəkil seçilmədi və yaxud uyğun deyildir");
             }
         }
         string strName, imageName;
-                     
+        private object dialogResult;
+
         private void insertImageData()
         {
             try
@@ -269,8 +273,11 @@ namespace hydrogen.PersonalDataPages
                     //Initialize a byte array with size of stream
                     byte[] imgByteArr = new byte[fs.Length];
 
+
+
                     //Read data from the file stream and put into the byte array
                     fs.Read(imgByteArr, 0, Convert.ToInt32(fs.Length));
+
 
                     //Close a file stream
                     fs.Close();
@@ -294,7 +301,7 @@ namespace hydrogen.PersonalDataPages
                     }
                     finally
                     {
-                       
+
                     }
 
                 }
@@ -305,11 +312,6 @@ namespace hydrogen.PersonalDataPages
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            int d = (int)((ComboBoxItem)personalNationality.SelectedItem).Tag;
-            MessageBox.Show(personalNationality.SelectedItem.ToString());
-        }
 
         private void ImgBrowse_Click(object sender, RoutedEventArgs e)
         {
@@ -340,7 +342,7 @@ namespace hydrogen.PersonalDataPages
             {
                 fillControlsWithSelectedPersonData();
             }
-            
+
 
         }
 
@@ -388,6 +390,45 @@ namespace hydrogen.PersonalDataPages
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
 
+        }
+
+        private void Fire_Employee(object sender, RoutedEventArgs e)
+        {
+            var dlg = new ModernDialog
+            {
+                Title = "Xitam verilmə",
+                Content = new FireEmployee(selectedPersonID)
+            };
+            try
+            {
+                dlg.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Çox güman ki, tarix düzgün təyin olunmayıb");
+            }
+        }
+
+        private void Delete_Employee(object sender, RoutedEventArgs e)
+        {
+            var dlg = new ModernDialog
+            {
+                Title = "Məlumat silgisi",
+                Content = new DropEmployee()
+            };
+            dlg.Buttons = new Button[] { dlg.OkButton, dlg.CancelButton };
+
+            dlg.ShowDialog();
+            if(dlg.DialogResult.HasValue&&dlg.DialogResult.Value)
+            {
+                var employer = dbContext.employee.SingleOrDefault(j => j.ID == selectedPersonID);
+                dbContext.Entry(employer).State = EntityState.Deleted;
+                dbContext.SaveChanges();
+
+                selectedPersonID = 0;
+                fillBasicControls();
+            }
+        
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

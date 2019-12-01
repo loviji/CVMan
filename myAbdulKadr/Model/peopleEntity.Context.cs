@@ -26,7 +26,6 @@ namespace PersonMotion.Model
         }
     
         public virtual DbSet<department> department { get; set; }
-        public virtual DbSet<employee> employee { get; set; }
         public virtual DbSet<files> files { get; set; }
         public virtual DbSet<metaData> metaData { get; set; }
         public virtual DbSet<section> section { get; set; }
@@ -37,5 +36,6 @@ namespace PersonMotion.Model
         public virtual DbSet<VW_Position> VW_Position { get; set; }
         public virtual DbSet<education> education { get; set; }
         public virtual DbSet<address> address { get; set; }
+        public virtual DbSet<employee> employee { get; set; }
     }
 }

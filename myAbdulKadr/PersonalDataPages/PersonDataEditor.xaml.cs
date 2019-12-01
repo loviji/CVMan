@@ -4,8 +4,10 @@ using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
+
 
 namespace hydrogen
 {
@@ -36,7 +38,7 @@ namespace hydrogen
             IPList.Add(new Link() { DisplayName = "Vəzifə", Source = new Uri("/PersonalDataPages/personalPosition.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Təhsil", Source = new Uri("/PersonalDataPages/personalEducation.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Əmək fəaliyyəti", Source = new Uri("/PersonalDataPages/personalWorkHistory.xaml#" + selectedID, UriKind.Relative) });
-            IPList.Add(new Link() { DisplayName = "Qeydiyyat məlumatları", Source = new Uri("/PersonalDataPages/personalRegData.xaml#" + selectedID, UriKind.Relative) });
+            IPList.Add(new Link() { DisplayName = "Digər məlumatlar", Source = new Uri("/PersonalDataPages/personalRegData.xaml#" + selectedID, UriKind.Relative) });
             IPList.Add(new Link() { DisplayName = "Ailə tərkibi", Source = new Uri("/PersonalDataPages/personalFamily.xaml#" + selectedID, UriKind.Relative) });
         }
 
@@ -73,11 +75,8 @@ namespace hydrogen
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
             selectedID = e.Fragment;
-          
             FillList(IPList);
-
-            // personID = Convert.ToInt32(selectedID);
-
+            PersonalOperations.SelectedSource= new Uri("/PersonalDataPages/personalData.xaml#" + selectedID, UriKind.Relative);
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)

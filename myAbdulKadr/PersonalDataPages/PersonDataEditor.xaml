@@ -11,7 +11,7 @@
     <Grid Style="{StaticResource ContentRoot}">
         <!-- TODO: set @SelectedSource -->
 
-        <mui:ModernTab Layout="List" x:Name="PersonalOperations"  Links="{Binding Path=IPList}">
+        <mui:ModernTab Layout="List" x:Name="PersonalOperations"  Links="{Binding Path=IPList}"  >
            
         </mui:ModernTab>
         

@@ -48,8 +48,7 @@ namespace PersonMotion.WF
       ,[partiya]
       ,[herbi_rutb]
       ,[tehsili]
-      ,[bittehmues]
-      ,[dipuzixt]
+     
       ,[ev_unvani]
       ,[telefon]
       ,[mobil]
@@ -61,12 +60,9 @@ namespace PersonMotion.WF
       ,[teytar]
       ,[iscixtar]
       ,[emekfealiy]
-      ,[atestar]
-      ,[sebeb]
+
       ,[oklad]
-      ,[sahe]
-      ,[tehnovu]
-      ,[bitvaxt]
+  
 ,[photo]
   FROM [people].[dbo].[EMP_CV] ";
 

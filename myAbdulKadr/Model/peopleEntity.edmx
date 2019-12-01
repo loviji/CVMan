@@ -56,6 +56,11 @@
           <Property Name="nationalityID" Type="int" />
           <Property Name="partyID" Type="int" />
           <Property Name="photoID" Type="int" />
+          <Property Name="workPhone" Type="varchar" MaxLength="50" />
+          <Property Name="mobilePhone" Type="varchar" MaxLength="50" />
+          <Property Name="emailaddr" Type="varchar" MaxLength="50" />
+          <Property Name="salary" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="militaryStatusID" Type="tinyint" />
         </EntityType>
         <EntityType Name="familia">
           <Key>
@@ -309,30 +314,6 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <NavigationProperty Name="section" Relationship="Self.FK_section_department" FromRole="department" ToRole="section" />
           <NavigationProperty Name="organization" Relationship="peopleModel.FK_department_Organization" FromRole="department" ToRole="organization" />
         </EntityType>
-        <EntityType Name="employee">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="secondname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="birthplace" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="familyStatusID" Type="Byte" />
-          <Property Name="passportSerial" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-          <Property Name="passportNumber" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
-          <Property Name="FINCODE" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
-          <Property Name="nationalityID" Type="Int32" />
-          <Property Name="partyID" Type="Int32" />
-          <Property Name="photoID" Type="Int32" />
-          <NavigationProperty Name="familia" Relationship="peopleModel.FK_familia_employee" FromRole="employee" ToRole="familia" />
-          <NavigationProperty Name="position" Relationship="peopleModel.FK_position_employee" FromRole="employee" ToRole="position" />
-          <NavigationProperty Name="workhistory" Relationship="peopleModel.FK_workhistory_employee" FromRole="employee" ToRole="workhistory" />
-          <NavigationProperty Name="education" Relationship="peopleModel.FK_education_employee1" FromRole="employee" ToRole="education" />
-          <NavigationProperty Name="address" Relationship="peopleModel.FK_address_employee" FromRole="employee" ToRole="address" />
-        </EntityType>
         <EntityType Name="files">
           <Key>
             <PropertyRef Name="ID" />
@@ -375,7 +356,6 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
         </Association>
         <EntityContainer Name="peopleEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="department" EntityType="Self.department" />
-          <EntitySet Name="employee" EntityType="Self.employee" />
           <EntitySet Name="files" EntityType="Self.files" />
           <EntitySet Name="metaData" EntityType="Self.metaData" />
           <EntitySet Name="section" EntityType="Self.section" />
@@ -386,18 +366,6 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySet Name="familia" EntityType="peopleModel.familia" />
           <EntitySet Name="position" EntityType="peopleModel.position" />
           <EntitySet Name="workhistory" EntityType="peopleModel.workhistory" />
-          <AssociationSet Name="FK_familia_employee" Association="peopleModel.FK_familia_employee">
-            <End Role="employee" EntitySet="employee" />
-            <End Role="familia" EntitySet="familia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_position_employee" Association="peopleModel.FK_position_employee">
-            <End Role="employee" EntitySet="employee" />
-            <End Role="position" EntitySet="position" />
-          </AssociationSet>
-          <AssociationSet Name="FK_workhistory_employee" Association="peopleModel.FK_workhistory_employee">
-            <End Role="employee" EntitySet="employee" />
-            <End Role="workhistory" EntitySet="workhistory" />
-          </AssociationSet>
           <AssociationSet Name="FK_position_section" Association="peopleModel.FK_position_section">
             <End Role="section" EntitySet="section" />
             <End Role="position" EntitySet="position" />
@@ -409,14 +377,27 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           </AssociationSet>
           <EntitySet Name="VW_Position" EntityType="peopleModel.VW_Position" />
           <EntitySet Name="education" EntityType="peopleModel.education" />
+          <EntitySet Name="address" EntityType="peopleModel.address" />
+          <EntitySet Name="employee" EntityType="peopleModel.employee" />
+          <AssociationSet Name="FK_address_employee" Association="peopleModel.FK_address_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="address" EntitySet="address" />
+          </AssociationSet>
           <AssociationSet Name="FK_education_employee1" Association="peopleModel.FK_education_employee1">
             <End Role="employee" EntitySet="employee" />
             <End Role="education" EntitySet="education" />
           </AssociationSet>
-          <EntitySet Name="address" EntityType="peopleModel.address" />
-          <AssociationSet Name="FK_address_employee" Association="peopleModel.FK_address_employee">
+          <AssociationSet Name="FK_familia_employee" Association="peopleModel.FK_familia_employee">
             <End Role="employee" EntitySet="employee" />
-            <End Role="address" EntitySet="address" />
+            <End Role="familia" EntitySet="familia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_position_employee" Association="peopleModel.FK_position_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="position" EntitySet="position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_workhistory_employee" Association="peopleModel.FK_workhistory_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="workhistory" EntitySet="workhistory" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="familia">
@@ -443,8 +424,8 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="beginDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="endDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="employee" Relationship="peopleModel.FK_position_employee" FromRole="position" ToRole="employee" />
           <NavigationProperty Name="section" Relationship="peopleModel.FK_position_section" FromRole="position" ToRole="section" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_position_employee" FromRole="position" ToRole="employee" />
         </EntityType>
         <EntityType Name="workhistory">
           <Key>
@@ -458,42 +439,6 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="endDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="employee" Relationship="peopleModel.FK_workhistory_employee" FromRole="workhistory" ToRole="employee" />
         </EntityType>
-        <Association Name="FK_familia_employee">
-          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
-          <End Type="peopleModel.familia" Role="familia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="familia">
-              <PropertyRef Name="empID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_position_employee">
-          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
-          <End Type="peopleModel.position" Role="position" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="position">
-              <PropertyRef Name="empID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_workhistory_employee">
-          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
-          <End Type="peopleModel.workhistory" Role="workhistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="workhistory">
-              <PropertyRef Name="empID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_position_section">
           <End Type="peopleModel.section" Role="section" Multiplicity="0..1" />
           <End Type="peopleModel.position" Role="position" Multiplicity="*" />
@@ -558,18 +503,6 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="diplomNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="employee" Relationship="peopleModel.FK_education_employee1" FromRole="education" ToRole="employee" />
         </EntityType>
-        <Association Name="FK_education_employee1">
-          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
-          <End Type="peopleModel.education" Role="education" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="education">
-              <PropertyRef Name="empID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="address">
           <Key>
             <PropertyRef Name="ID" />
@@ -582,6 +515,35 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="type" Type="Byte" Nullable="false" />
           <NavigationProperty Name="employee" Relationship="peopleModel.FK_address_employee" FromRole="address" ToRole="employee" />
         </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secondname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sex" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="birthplace" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="familyStatusID" Type="Byte" />
+          <Property Name="passportSerial" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="passportNumber" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="FINCODE" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="nationalityID" Type="Int32" />
+          <Property Name="partyID" Type="Int32" />
+          <Property Name="photoID" Type="Int32" />
+          <Property Name="workPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emailaddr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salary" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="militaryStatusID" Type="Byte" />
+          <NavigationProperty Name="address" Relationship="peopleModel.FK_address_employee" FromRole="employee" ToRole="address" />
+          <NavigationProperty Name="education" Relationship="peopleModel.FK_education_employee1" FromRole="employee" ToRole="education" />
+          <NavigationProperty Name="familia" Relationship="peopleModel.FK_familia_employee" FromRole="employee" ToRole="familia" />
+          <NavigationProperty Name="position" Relationship="peopleModel.FK_position_employee" FromRole="employee" ToRole="position" />
+          <NavigationProperty Name="workhistory" Relationship="peopleModel.FK_workhistory_employee" FromRole="employee" ToRole="workhistory" />
+        </EntityType>
         <Association Name="FK_address_employee">
           <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
           <End Type="peopleModel.address" Role="address" Multiplicity="*" />
@@ -590,6 +552,54 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="address">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_education_employee1">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.education" Role="education" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="education">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_familia_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.familia" Role="familia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="familia">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_position_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.position" Role="position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="position">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_workhistory_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.workhistory" Role="workhistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="workhistory">
               <PropertyRef Name="empID" />
             </Dependent>
           </ReferentialConstraint>
@@ -607,26 +617,6 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
                 <ScalarProperty Name="organizationID" ColumnName="organizationID" />
                 <ScalarProperty Name="departmentName" ColumnName="departmentName" />
               </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="employee">
-            <EntityTypeMapping TypeName="peopleModel.employee">
-              <MappingFragment StoreEntitySet="employee">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="surname" ColumnName="surname" />
-                <ScalarProperty Name="secondname" ColumnName="secondname" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
-                <ScalarProperty Name="birthplace" ColumnName="birthplace" />
-                <ScalarProperty Name="familyStatusID" ColumnName="familyStatusID" />
-                <ScalarProperty Name="passportSerial" ColumnName="passportSerial" />
-                <ScalarProperty Name="passportNumber" ColumnName="passportNumber" />
-                <ScalarProperty Name="FINCODE" ColumnName="FINCODE" />
-                <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
-                <ScalarProperty Name="partyID" ColumnName="partyID" />
-                <ScalarProperty Name="photoID" ColumnName="photoID" />
-                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="files">
@@ -737,6 +727,31 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
                 <ScalarProperty Name="cityName" ColumnName="cityName" />
                 <ScalarProperty Name="countryName" ColumnName="countryName" />
                 <ScalarProperty Name="empID" ColumnName="empID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee">
+            <EntityTypeMapping TypeName="peopleModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="militaryStatusID" ColumnName="militaryStatusID" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="emailaddr" ColumnName="emailaddr" />
+                <ScalarProperty Name="mobilePhone" ColumnName="mobilePhone" />
+                <ScalarProperty Name="workPhone" ColumnName="workPhone" />
+                <ScalarProperty Name="photoID" ColumnName="photoID" />
+                <ScalarProperty Name="partyID" ColumnName="partyID" />
+                <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
+                <ScalarProperty Name="FINCODE" ColumnName="FINCODE" />
+                <ScalarProperty Name="passportNumber" ColumnName="passportNumber" />
+                <ScalarProperty Name="passportSerial" ColumnName="passportSerial" />
+                <ScalarProperty Name="familyStatusID" ColumnName="familyStatusID" />
+                <ScalarProperty Name="birthplace" ColumnName="birthplace" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="secondname" ColumnName="secondname" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

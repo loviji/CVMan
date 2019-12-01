@@ -41,15 +41,31 @@
                         <Label Content="Qeydiyyatda olduğu ünvan" Target="{Binding ElementName=RegAddr}" Width="200"/>
                         <TextBox x:Name="RegAddr" Width="500"/>
                     </StackPanel>
-                    <StackPanel Visibility="Hidden">
+                    <StackPanel>
                         <Label Content="FİN kodu" Target="{Binding ElementName=pincode}" Width="200"/>
                         <TextBox x:Name="pincode" Width="100" MaxLength="7"/>
-                        <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
-                    </StackPanel>
                   
-                    
-                    
-                    <Grid HorizontalAlignment="Right">
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Əmək haqqı" Target="{Binding ElementName=salary}" Width="200"/>
+                        <TextBox x:Name="salary" Width="100"/>
+                 
+                    </StackPanel>
+                <StackPanel>
+                    <Label Content="Email" Target="{Binding ElementName=email}" Width="200"/>
+                    <TextBox x:Name="email" Width="500"/>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Mobil telefon:" Target="{Binding ElementName=mobilePhone}" Width="200"/>
+                    <TextBox x:Name="mobilePhone" Width="500"/>
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Ev telefonu:" Target="{Binding ElementName=phone}" Width="200"/>
+                    <TextBox x:Name="phone" Width="500"/>
+                </StackPanel>
+
+
+                <Grid HorizontalAlignment="Right">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="35"/>
                             <ColumnDefinition Width="35"/>

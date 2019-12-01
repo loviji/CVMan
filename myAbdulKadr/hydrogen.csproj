@@ -127,6 +127,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\DBContextResolver.cs" />
+    <Compile Include="PersonalDataPages\Dialog\DropEmployee.xaml.cs">
+      <DependentUpon>DropEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalDataPages\Dialog\FireEmployee.xaml.cs">
+      <DependentUpon>FireEmployee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModel\PersonViewModel.cs" />
     <Compile Include="WF\HRCard.cs">
@@ -275,6 +281,14 @@
       <DependentUpon>PersonDataEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Page Include="PersonalDataPages\Dialog\DropEmployee.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PersonalDataPages\Dialog\FireEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PersonalDataPages\personalData.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

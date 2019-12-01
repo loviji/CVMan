@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="bb34c09b7626447cb119e825c80bbc21" Name="Diagram1">
         <EntityTypeShape EntityType="peopleModel.department" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="peopleModel.employee" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="peopleModel.files" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="peopleModel.metaData" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="peopleModel.section" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
@@ -14,17 +13,18 @@
         <EntityTypeShape EntityType="peopleModel.familia" Width="1.5" PointX="3" PointY="13" />
         <EntityTypeShape EntityType="peopleModel.position" Width="1.5" PointX="7.5" PointY="3.25" />
         <EntityTypeShape EntityType="peopleModel.workhistory" Width="1.5" PointX="3" PointY="9.875" />
-        <AssociationConnector Association="peopleModel.FK_familia_employee" />
-        <AssociationConnector Association="peopleModel.FK_position_employee" />
-        <AssociationConnector Association="peopleModel.FK_workhistory_employee" />
         <AssociationConnector Association="peopleModel.FK_position_section" />
         <EntityTypeShape EntityType="peopleModel.organization" Width="1.5" PointX="0.75" PointY="1.125" />
         <AssociationConnector Association="peopleModel.FK_department_Organization" />
         <EntityTypeShape EntityType="peopleModel.VW_Position" Width="1.5" PointX="3.375" PointY="6.75" />
         <EntityTypeShape EntityType="peopleModel.education" Width="1.5" PointX="3" PointY="19.625" />
-        <AssociationConnector Association="peopleModel.FK_education_employee1" />
         <EntityTypeShape EntityType="peopleModel.address" Width="1.5" PointX="3" PointY="23.875" />
+        <EntityTypeShape EntityType="peopleModel.employee" Width="1.5" PointX="0.75" PointY="11.875" />
         <AssociationConnector Association="peopleModel.FK_address_employee" />
+        <AssociationConnector Association="peopleModel.FK_education_employee1" />
+        <AssociationConnector Association="peopleModel.FK_familia_employee" />
+        <AssociationConnector Association="peopleModel.FK_position_employee" />
+        <AssociationConnector Association="peopleModel.FK_workhistory_employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

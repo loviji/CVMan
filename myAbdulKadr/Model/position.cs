@@ -24,7 +24,7 @@ namespace PersonMotion.Model
         public System.DateTime beginDate { get; set; }
         public Nullable<System.DateTime> endDate { get; set; }
     
-        public virtual employee employee { get; set; }
         public virtual section section { get; set; }
+        public virtual employee employee { get; set; }
     }
 }

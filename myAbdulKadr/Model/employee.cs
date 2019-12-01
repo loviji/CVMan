@@ -17,11 +17,11 @@ namespace PersonMotion.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public employee()
         {
+            this.address = new HashSet<address>();
+            this.education = new HashSet<education>();
             this.familia = new HashSet<familia>();
             this.position = new HashSet<position>();
             this.workhistory = new HashSet<workhistory>();
-            this.education = new HashSet<education>();
-            this.address = new HashSet<address>();
         }
     
         public int ID { get; set; }
@@ -38,16 +38,21 @@ namespace PersonMotion.Model
         public Nullable<int> nationalityID { get; set; }
         public Nullable<int> partyID { get; set; }
         public Nullable<int> photoID { get; set; }
+        public string workPhone { get; set; }
+        public string mobilePhone { get; set; }
+        public string emailaddr { get; set; }
+        public Nullable<decimal> salary { get; set; }
+        public Nullable<byte> militaryStatusID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<address> address { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<education> education { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<familia> familia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<position> position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<workhistory> workhistory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<education> education { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<address> address { get; set; }
     }
 }
