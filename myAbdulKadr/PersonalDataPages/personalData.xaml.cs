@@ -259,8 +259,7 @@ namespace hydrogen.PersonalDataPages
             }
         }
         string strName, imageName;
-        private object dialogResult;
-
+       
         private void insertImageData()
         {
             try

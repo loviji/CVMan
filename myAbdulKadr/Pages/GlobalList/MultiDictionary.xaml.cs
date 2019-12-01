@@ -1,27 +1,35 @@
-﻿using PersonMotion.Model;
+﻿using FirstFloor.ModernUI.Windows;
+using FirstFloor.ModernUI.Windows.Navigation;
+using PersonMotion.Common;
+using PersonMotion.Model;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Linq;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
-using System;
-using FirstFloor.ModernUI.Windows;
-using FirstFloor.ModernUI.Windows.Navigation;
-using System.Collections.Generic;
-using System.ComponentModel;
-using PersonMotion.Common;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
-namespace myAbdulKadr.Pages.GlobalList
+using System.Windows.Shapes;
+
+namespace PersonMotion.Pages.GlobalList
 {
     /// <summary>
-    /// Interaction logic for Department.xaml
+    /// Interaction logic for MultiDictionary.xaml
     /// </summary>
-    public partial class Department : UserControl, IContent, INotifyPropertyChanged
+    public partial class MultiDictionary : UserControl, IContent, INotifyPropertyChanged
     {
 
         private peopleEntities dbContext = DBContextResolver.Instance;
-        
-        public Department()
+
+        public MultiDictionary()
         {
             InitializeComponent();
         }
@@ -42,8 +50,8 @@ namespace myAbdulKadr.Pages.GlobalList
         private ObservableCollection<department> GetDepartmentList(int orgID)
         {
             var list = from dp in dbContext.department
-                        where dp.organizationID == orgID
-                        select dp;
+                       where dp.organizationID == orgID
+                       select dp;
             return new ObservableCollection<department>(list);
         }
 
@@ -61,10 +69,10 @@ namespace myAbdulKadr.Pages.GlobalList
                 {
                     department rDepartment = new department();
                     rDepartment.departmentName = dept.departmentName;
-                    rDepartment.organizationID = selectedOrgID;
+                    rDepartment.organizationID = selectedMDictID;
                     dbContext.department.Add(rDepartment);
                     dbContext.SaveChanges();
-                    dgDept.ItemsSource = GetDepartmentList(selectedOrgID);
+                    dgDept.ItemsSource = GetDepartmentList(selectedMDictID);
                     txtStatus.Text = rDepartment.departmentName + " has being added!";
 
                 }
@@ -72,22 +80,22 @@ namespace myAbdulKadr.Pages.GlobalList
                 {
                     matchedData.departmentName = dept.departmentName;
                     dbContext.SaveChanges();
-                    dgDept.ItemsSource = GetDepartmentList(selectedOrgID);
+                    dgDept.ItemsSource = GetDepartmentList(selectedMDictID);
                     txtStatus.Text = "Success. Info updated";
                 }
             }
 
         }
-   
+
         private void DgDept_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             department dDept = dgDept.SelectedItem as department;
 
             if (dDept != null)
             {
-                var matchedDepartment= (from o in dbContext.department
-                                           where o.ID ==dDept.ID 
-                                           select o).SingleOrDefault();
+                var matchedDepartment = (from o in dbContext.department
+                                         where o.ID == dDept.ID
+                                         select o).SingleOrDefault();
                 if (e.Command == DataGrid.DeleteCommand)
                 {
                     if (!(MessageBox.Show("Əminsiniz mi?", "Məlumat silinməsini təsdiqləyin!", MessageBoxButton.YesNo) == MessageBoxResult.Yes))
@@ -105,7 +113,7 @@ namespace myAbdulKadr.Pages.GlobalList
             }
         }
 
-        private int selectedOrgID = 0;
+        private int selectedMDictID = 0;
 
         private ObservableCollection<organization> orgList;
 
@@ -137,30 +145,30 @@ namespace myAbdulKadr.Pages.GlobalList
 
         private void CmbOrganization_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedOrgID = Convert.ToInt32(cmbOrganization.SelectedValue);
-            dgDept.ItemsSource = GetDepartmentList(selectedOrgID);
+            selectedMDictID = Convert.ToInt32(cmbMDict.SelectedValue);
+            dgDept.ItemsSource = GetDepartmentList(selectedMDictID);
         }
 
         public void OnFragmentNavigation(FragmentNavigationEventArgs e)
         {
-      
+
         }
 
         public void OnNavigatedFrom(NavigationEventArgs e)
         {
-            
+
         }
 
         public void OnNavigatedTo(NavigationEventArgs e)
         {
-           
-            cmbOrganization.Items.Clear();
+
+            cmbMDict.Items.Clear();
             //OrgList = GetOrganizationList();
-            
+
             cmbOrganization.ItemsSource = GetOrganizationList2();
             cmbOrganization.DisplayMemberPath = "organizationName";
             cmbOrganization.SelectedValuePath = "ID";
-            dgDept.ItemsSource = GetDepartmentList(selectedOrgID);
+            dgDept.ItemsSource = GetDepartmentList(selectedMDictID);
         }
 
         public void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -168,5 +176,8 @@ namespace myAbdulKadr.Pages.GlobalList
             cmbOrganization.ItemsSource = null;
             dgDept.ItemsSource = null;
         }
+
+       
     }
 }
+

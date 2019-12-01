@@ -127,6 +127,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Common\DBContextResolver.cs" />
+    <Compile Include="Pages\GlobalList\MultiDictionary.xaml.cs">
+      <DependentUpon>MultiDictionary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PersonalDataPages\Dialog\DropEmployee.xaml.cs">
       <DependentUpon>DropEmployee.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\GlobalList\Department.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GlobalList\MultiDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
