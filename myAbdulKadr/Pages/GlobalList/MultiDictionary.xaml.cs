@@ -2,22 +2,13 @@
 using FirstFloor.ModernUI.Windows.Navigation;
 using PersonMotion.Common;
 using PersonMotion.Model;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-
-using System.Windows.Shapes;
 
 namespace PersonMotion.Pages.GlobalList
 {
@@ -34,67 +25,71 @@ namespace PersonMotion.Pages.GlobalList
             InitializeComponent();
         }
 
-        private ObservableCollection<organization> GetOrganizationList()
+        private SortedDictionary<string, string> GetMetaTypes()
         {
-            var list = from e in dbContext.organization select e;
-            return new ObservableCollection<organization>(list.ToList());
+            SortedDictionary<string, string> MDCache = new SortedDictionary<string, string>
+{
+ 
+  {"edtp", "Təhsil növləri"},
+   {"edgd", "Təhsil dərəcələri"},
+                {"natgl","Milliyətlər" },
+                {"pltpr", "Siyasi partiyalar" }
+
+};
+
+            return MDCache;
         }
 
-        private List<organization> GetOrganizationList2()
-        {
-            var list = from e in dbContext.organization select e;
-            return list.ToList();
-        }
 
-
-        private ObservableCollection<department> GetDepartmentList(int orgID)
+        private ObservableCollection<metaData> GetMetaDataList(string metaCode)
         {
-            var list = from dp in dbContext.department
-                       where dp.organizationID == orgID
+            var list = from dp in dbContext.metaData
+                       where dp.code == metaCode
                        select dp;
-            return new ObservableCollection<department>(list);
+            return new ObservableCollection<metaData>(list);
         }
 
 
-        private void dgDept_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private void DgMD_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                department dept = e.Row.DataContext as department;
+                metaData dept = e.Row.DataContext as metaData;
 
-                var matchedData = (from dp in dbContext.department
+                var matchedData = (from dp in dbContext.metaData
                                    where dp.ID == dept.ID
                                    select dp).SingleOrDefault();
                 if (matchedData == null)
                 {
-                    department rDepartment = new department();
-                    rDepartment.departmentName = dept.departmentName;
-                    rDepartment.organizationID = selectedMDictID;
-                    dbContext.department.Add(rDepartment);
+                    metaData rMetaData = new metaData();
+                    rMetaData.value = dept.value;
+                    rMetaData.code = selectedMDictCode;
+                    //rDepartment.organizationID = selectedMDictCode;
+                    dbContext.metaData.Add(rMetaData);
                     dbContext.SaveChanges();
-                    dgDept.ItemsSource = GetDepartmentList(selectedMDictID);
-                    txtStatus.Text = rDepartment.departmentName + " has being added!";
+                    dgMetaData.ItemsSource = GetMetaDataList(selectedMDictCode);
+                    txtStatus.Text = rMetaData.value + " has being added!";
 
                 }
                 else
                 {
-                    matchedData.departmentName = dept.departmentName;
+                    matchedData.value = dept.value;
                     dbContext.SaveChanges();
-                    dgDept.ItemsSource = GetDepartmentList(selectedMDictID);
+                    dgMetaData.ItemsSource = GetMetaDataList(selectedMDictCode);
                     txtStatus.Text = "Success. Info updated";
                 }
             }
 
         }
 
-        private void DgDept_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void DgMD_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            department dDept = dgDept.SelectedItem as department;
+            metaData dMetaData = dgMetaData.SelectedItem as metaData;
 
-            if (dDept != null)
+            if (dMetaData != null)
             {
-                var matchedDepartment = (from o in dbContext.department
-                                         where o.ID == dDept.ID
+                var matchedMetaData = (from o in dbContext.metaData
+                                         where o.ID == dMetaData.ID
                                          select o).SingleOrDefault();
                 if (e.Command == DataGrid.DeleteCommand)
                 {
@@ -104,7 +99,7 @@ namespace PersonMotion.Pages.GlobalList
                     }
                     else
                     {
-                        dbContext.Entry(matchedDepartment).State = System.Data.Entity.EntityState.Deleted;
+                        dbContext.Entry(matchedMetaData).State = System.Data.Entity.EntityState.Deleted;
                         dbContext.SaveChanges();
 
 
@@ -113,25 +108,25 @@ namespace PersonMotion.Pages.GlobalList
             }
         }
 
-        private int selectedMDictID = 0;
+        private string selectedMDictCode = string.Empty;
 
-        private ObservableCollection<organization> orgList;
+        //private ObservableCollection<organization> orgList;
 
-        public ObservableCollection<organization> OrgList
-        {
-            get
-            {
-                return orgList;
-            }
-            set
-            {
-                if (value != orgList)
-                {
-                    orgList = value;
-                    NotifyPropertyChanged("OrgList"); // method implemented below
-                }
-            }
-        }
+        //public ObservableCollection<organization> OrgList
+        //{
+        //    get
+        //    {
+        //        return orgList;
+        //    }
+        //    set
+        //    {
+        //        if (value != orgList)
+        //        {
+        //            orgList = value;
+        //            NotifyPropertyChanged("OrgList"); // method implemented below
+        //        }
+        //    }
+        //}
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -143,10 +138,10 @@ namespace PersonMotion.Pages.GlobalList
             }
         }
 
-        private void CmbOrganization_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CmbMDict_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedMDictID = Convert.ToInt32(cmbMDict.SelectedValue);
-            dgDept.ItemsSource = GetDepartmentList(selectedMDictID);
+            selectedMDictCode = cmbMDict.SelectedValue.ToString();
+            dgMetaData.ItemsSource = GetMetaDataList(selectedMDictCode);
         }
 
         public void OnFragmentNavigation(FragmentNavigationEventArgs e)
@@ -165,19 +160,19 @@ namespace PersonMotion.Pages.GlobalList
             cmbMDict.Items.Clear();
             //OrgList = GetOrganizationList();
 
-            cmbMDict.ItemsSource = GetOrganizationList2();
-            cmbMDict.DisplayMemberPath = "organizationName";
-            cmbMDict.SelectedValuePath = "ID";
-            dgDept.ItemsSource = GetDepartmentList(selectedMDictID);
+            cmbMDict.ItemsSource = GetMetaTypes();
+            cmbMDict.DisplayMemberPath = "Value";
+            cmbMDict.SelectedValuePath = "Key";
+            dgMetaData.ItemsSource = GetMetaDataList(selectedMDictCode);
         }
 
         public void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             cmbMDict.ItemsSource = null;
-            dgDept.ItemsSource = null;
+            dgMetaData.ItemsSource = null;
         }
 
-       
+
     }
 }
 

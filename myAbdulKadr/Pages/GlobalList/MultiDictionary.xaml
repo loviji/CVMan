@@ -20,18 +20,18 @@
 
         </Grid.ColumnDefinitions>
         <ComboBox Grid.Row="0" x:Name="cmbMDict" Margin="0,5,0,0" ItemsSource="{Binding multiDictionaryList}"
-                  SelectionChanged="CmbOrganization_SelectionChanged" SelectedValue="{Binding ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                  SelectionChanged="CmbMDict_SelectionChanged" SelectedValue="{Binding ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <DataGrid Grid.Row="1" x:Name="dgDept"  Margin="0"  
+        <DataGrid Grid.Row="1" x:Name="dgMetaData"  Margin="0"  
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding}" 
-                  RowEditEnding="dgDept_RowEditEnding" 
+                  RowEditEnding="DgMD_RowEditEnding" 
          
-                  CommandManager.PreviewExecuted="DgDept_PreviewExecuted"
+                  CommandManager.PreviewExecuted="DgMD_PreviewExecuted"
                   CanUserAddRows="True" CanUserDeleteRows="True">
             <DataGrid.Columns>
                 <mui:DataGridTextColumn Binding="{Binding ID, NotifyOnTargetUpdated=True,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="70" Header="ID" IsReadOnly="True" />
-                <mui:DataGridTextColumn Binding="{Binding departmentName, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="850" Header="Alt strukturun adı"/>
+                <mui:DataGridTextColumn Binding="{Binding value, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="850" Header="məlumat"/>
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock Grid.Row="2" x:Name="txtStatus" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="8,0,0,0"
