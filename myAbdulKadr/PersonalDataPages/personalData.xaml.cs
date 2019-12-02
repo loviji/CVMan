@@ -253,8 +253,9 @@ namespace hydrogen.PersonalDataPages
                 fldlg = null;
                 insertImageData();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+
                 MessageBox.Show("Şəkil seçilmədi və yaxud uyğun deyildir");
             }
         }

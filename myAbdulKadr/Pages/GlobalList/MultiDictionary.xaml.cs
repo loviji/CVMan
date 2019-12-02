@@ -165,15 +165,15 @@ namespace PersonMotion.Pages.GlobalList
             cmbMDict.Items.Clear();
             //OrgList = GetOrganizationList();
 
-            cmbOrganization.ItemsSource = GetOrganizationList2();
-            cmbOrganization.DisplayMemberPath = "organizationName";
-            cmbOrganization.SelectedValuePath = "ID";
+            cmbMDict.ItemsSource = GetOrganizationList2();
+            cmbMDict.DisplayMemberPath = "organizationName";
+            cmbMDict.SelectedValuePath = "ID";
             dgDept.ItemsSource = GetDepartmentList(selectedMDictID);
         }
 
         public void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            cmbOrganization.ItemsSource = null;
+            cmbMDict.ItemsSource = null;
             dgDept.ItemsSource = null;
         }
 

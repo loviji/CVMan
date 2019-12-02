@@ -52,7 +52,7 @@
                 </StackPanel>
             </StackPanel>
         </DockPanel>
-        <ScrollViewer Name="educationEditor" Margin="0,46,0,25" Width="1000"  HorizontalAlignment="Left">
+        <ScrollViewer Name="educationEditor" Margin="0,65,0,25" Width="1000"  HorizontalAlignment="Left" VerticalAlignment="Top">
             <DataGrid Name="perList" ItemsSource="{Binding Path=Employees, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" IsReadOnly="True"  MouseDoubleClick="PerList_MouseDoubleClick" Height="522" >
                 <DataGrid.CellStyle>
                     <Style TargetType="{x:Type DataGridCell}">

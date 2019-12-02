@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:myAbdulKadr.Pages.GlobalList"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             mc:Ignorable="d" d:DesignWidth="1000" Loaded="Window_Loaded" Height="600">
+             mc:Ignorable="d" d:DesignWidth="600" Loaded="Window_Loaded" d:DesignHeight="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="550" />
@@ -16,7 +16,7 @@
             <ColumnDefinition Width="970" />
 
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgOrg" HorizontalAlignment="Left" 
+        <DataGrid Grid.Row="0" x:Name="dgOrg" HorizontalAlignment="Left" VerticalAlignment="Top"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding}" 
                   RowEditEnding="dgOrg_RowEditEnding" 

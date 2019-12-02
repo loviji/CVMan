@@ -5,7 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="1100">
     <Grid>
         <DockPanel   VerticalAlignment="Top">
             <StackPanel x:Name="Form" Orientation="Horizontal" Margin="10,12,10,22" Height="30">
@@ -52,7 +52,7 @@
                 </StackPanel>
             </StackPanel>
         </DockPanel>
-        <ScrollViewer Name="educationEditor" Margin="0,46,0,25" Width="1000"  HorizontalAlignment="Left">
+        <ScrollViewer Name="educationEditor" Margin="0,65,0,25" Width="1000"  HorizontalAlignment="Left" VerticalAlignment="Top">
             <DataGrid Name="perList" ItemsSource="{Binding Path=Employees, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" IsReadOnly="True"  MouseDoubleClick="PerList_MouseDoubleClick" Height="522" >
                 <DataGrid.CellStyle>
                     <Style TargetType="{x:Type DataGridCell}">
