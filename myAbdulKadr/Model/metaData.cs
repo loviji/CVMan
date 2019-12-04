@@ -17,5 +17,6 @@ namespace PersonMotion.Model
         public int ID { get; set; }
         public string code { get; set; }
         public string value { get; set; }
+        public Nullable<bool> isdeleted { get; set; }
     }
 }

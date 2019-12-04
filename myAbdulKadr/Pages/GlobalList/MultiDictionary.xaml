@@ -20,7 +20,7 @@
 
         </Grid.ColumnDefinitions>
         <ComboBox Grid.Row="0" x:Name="cmbMDict" Margin="0,5,0,0" ItemsSource="{Binding multiDictionaryList}"
-                  SelectionChanged="CmbMDict_SelectionChanged" SelectedValue="{Binding ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                  SelectionChanged="CmbMDict_SelectionChanged" SelectedValue="{Binding Key, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <DataGrid Grid.Row="1" x:Name="dgMetaData"  Margin="0"  
                   AutoGenerateColumns="False"

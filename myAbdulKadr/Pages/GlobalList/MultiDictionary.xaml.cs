@@ -44,7 +44,7 @@ namespace PersonMotion.Pages.GlobalList
         private ObservableCollection<metaData> GetMetaDataList(string metaCode)
         {
             var list = from dp in dbContext.metaData
-                       where dp.code == metaCode
+                       where dp.code == metaCode&&dp.isdeleted==false
                        select dp;
             return new ObservableCollection<metaData>(list);
         }
@@ -64,7 +64,7 @@ namespace PersonMotion.Pages.GlobalList
                     metaData rMetaData = new metaData();
                     rMetaData.value = dept.value;
                     rMetaData.code = selectedMDictCode;
-                    //rDepartment.organizationID = selectedMDictCode;
+                    rMetaData.isdeleted = false;
                     dbContext.metaData.Add(rMetaData);
                     dbContext.SaveChanges();
                     dgMetaData.ItemsSource = GetMetaDataList(selectedMDictCode);
@@ -81,7 +81,7 @@ namespace PersonMotion.Pages.GlobalList
             }
 
         }
-
+        
         private void DgMD_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             metaData dMetaData = dgMetaData.SelectedItem as metaData;
@@ -99,8 +99,10 @@ namespace PersonMotion.Pages.GlobalList
                     }
                     else
                     {
-                        dbContext.Entry(matchedMetaData).State = System.Data.Entity.EntityState.Deleted;
+                        matchedMetaData.isdeleted = true;
                         dbContext.SaveChanges();
+                        dgMetaData.ItemsSource = GetMetaDataList(selectedMDictCode);
+                        txtStatus.Text = "Success. Info updated";
 
 
                     }
@@ -110,23 +112,23 @@ namespace PersonMotion.Pages.GlobalList
 
         private string selectedMDictCode = string.Empty;
 
-        //private ObservableCollection<organization> orgList;
+        private ObservableCollection<metaData> mdList;
 
-        //public ObservableCollection<organization> OrgList
-        //{
-        //    get
-        //    {
-        //        return orgList;
-        //    }
-        //    set
-        //    {
-        //        if (value != orgList)
-        //        {
-        //            orgList = value;
-        //            NotifyPropertyChanged("OrgList"); // method implemented below
-        //        }
-        //    }
-        //}
+        public ObservableCollection<metaData> MDList
+        {
+            get
+            {
+                return mdList;
+            }
+            set
+            {
+                if (value != mdList)
+                {
+                    mdList = value;
+                    NotifyPropertyChanged("MDList"); // method implemented below
+                }
+            }
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -140,8 +142,11 @@ namespace PersonMotion.Pages.GlobalList
 
         private void CmbMDict_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedMDictCode = cmbMDict.SelectedValue.ToString();
-            dgMetaData.ItemsSource = GetMetaDataList(selectedMDictCode);
+            if (cmbMDict.SelectedValue != null)
+            {
+                selectedMDictCode = cmbMDict.SelectedValue.ToString();
+                dgMetaData.ItemsSource = GetMetaDataList(selectedMDictCode);
+            }
         }
 
         public void OnFragmentNavigation(FragmentNavigationEventArgs e)
