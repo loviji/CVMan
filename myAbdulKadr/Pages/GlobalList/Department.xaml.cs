@@ -28,13 +28,13 @@ namespace myAbdulKadr.Pages.GlobalList
 
         private ObservableCollection<organization> GetOrganizationList()
         {
-            var list = from e in dbContext.organization select e;
+            var list = from e in dbContext.organization where e.isdeleted==false select e;
             return new ObservableCollection<organization>(list.ToList());
         }
 
         private List<organization> GetOrganizationList2()
         {
-            var list = from e in dbContext.organization select e;
+            var list = from e in dbContext.organization where e.isdeleted==false select e;
             return list.ToList();
         }
 
@@ -42,7 +42,7 @@ namespace myAbdulKadr.Pages.GlobalList
         private ObservableCollection<department> GetDepartmentList(int orgID)
         {
             var list = from dp in dbContext.department
-                        where dp.organizationID == orgID
+                       where dp.organizationID == orgID && dp.isdeleted == false
                         select dp;
             return new ObservableCollection<department>(list);
         }
@@ -96,8 +96,11 @@ namespace myAbdulKadr.Pages.GlobalList
                     }
                     else
                     {
-                        dbContext.Entry(matchedDepartment).State = System.Data.Entity.EntityState.Deleted;
+
+                        matchedDepartment.isdeleted = true;
                         dbContext.SaveChanges();
+                        txtStatus.Text = "Success. Info deleted";
+                  
 
 
                     }

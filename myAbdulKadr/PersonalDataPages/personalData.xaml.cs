@@ -87,7 +87,7 @@ namespace hydrogen.PersonalDataPages
 
         private IQueryable<metaData> FillMetaCombobox(string metaType)
         {
-            return dbContext.metaData.Where(r => r.code == metaType).OrderBy(f => f.value);
+            return dbContext.metaData.Where(r => r.code == metaType && r.isdeleted == false).OrderBy(f => f.value);
         }
 
         private byte getFamilyStatusID(string k)
@@ -260,7 +260,7 @@ namespace hydrogen.PersonalDataPages
             }
         }
         string strName, imageName;
-       
+
         private void insertImageData()
         {
             try
@@ -379,7 +379,8 @@ namespace hydrogen.PersonalDataPages
             }
             personalNationality.SelectedValue = k.nationalityID;
             personalPoliticalParty.SelectedValue = k.partyID;
-            GetBitmapImage(k.photoID.Value);
+            if (k.photoID.HasValue)
+                GetBitmapImage(k.photoID.Value);
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
@@ -402,6 +403,9 @@ namespace hydrogen.PersonalDataPages
             try
             {
                 dlg.ShowDialog();
+                var employer = dbContext.employee.SingleOrDefault(j => j.ID == selectedPersonID);
+                employer.isfired = true;
+                dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -419,16 +423,15 @@ namespace hydrogen.PersonalDataPages
             dlg.Buttons = new Button[] { dlg.OkButton, dlg.CancelButton };
 
             dlg.ShowDialog();
-            if(dlg.DialogResult.HasValue&&dlg.DialogResult.Value)
+            if (dlg.DialogResult.HasValue && dlg.DialogResult.Value)
             {
                 var employer = dbContext.employee.SingleOrDefault(j => j.ID == selectedPersonID);
-                dbContext.Entry(employer).State = EntityState.Deleted;
+                employer.isdeleted = true;
                 dbContext.SaveChanges();
 
                 selectedPersonID = 0;
                 fillBasicControls();
             }
-        
         }
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)

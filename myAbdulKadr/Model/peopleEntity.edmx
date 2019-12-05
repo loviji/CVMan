@@ -23,6 +23,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="organizationID" Type="int" Nullable="false" />
           <Property Name="departmentName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="isdeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="education">
           <Key>
@@ -61,6 +62,8 @@
           <Property Name="emailaddr" Type="varchar" MaxLength="50" />
           <Property Name="salary" Type="decimal" Precision="7" Scale="2" />
           <Property Name="militaryStatusID" Type="tinyint" />
+          <Property Name="isdeleted" Type="bit" />
+          <Property Name="isfired" Type="bit" />
         </EntityType>
         <EntityType Name="familia">
           <Key>
@@ -95,6 +98,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="organizationName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="isdeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="position">
           <Key>
@@ -117,6 +121,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="departmentID" Type="int" Nullable="false" />
           <Property Name="sectionName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="isdeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="workhistory">
           <Key>
@@ -314,6 +319,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="departmentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="section" Relationship="Self.FK_section_department" FromRole="department" ToRole="section" />
           <NavigationProperty Name="organization" Relationship="peopleModel.FK_department_Organization" FromRole="department" ToRole="organization" />
+          <Property Name="isdeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="files">
           <Key>
@@ -341,6 +347,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="sectionName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="department" Relationship="Self.FK_section_department" FromRole="section" ToRole="department" />
           <NavigationProperty Name="position" Relationship="peopleModel.FK_position_section" FromRole="section" ToRole="position" />
+          <Property Name="isdeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_section_department">
           <End Role="department" Type="Self.department" Multiplicity="1">
@@ -460,6 +467,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="organizationName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="department" Relationship="peopleModel.FK_department_Organization" FromRole="organization" ToRole="department" />
+          <Property Name="isdeleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_department_Organization">
           <End Type="peopleModel.organization" Role="organization" Multiplicity="1">
@@ -545,6 +553,8 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <NavigationProperty Name="familia" Relationship="peopleModel.FK_familia_employee" FromRole="employee" ToRole="familia" />
           <NavigationProperty Name="position" Relationship="peopleModel.FK_position_employee" FromRole="employee" ToRole="position" />
           <NavigationProperty Name="workhistory" Relationship="peopleModel.FK_workhistory_employee" FromRole="employee" ToRole="workhistory" />
+          <Property Name="isdeleted" Type="Boolean" />
+          <Property Name="isfired" Type="Boolean" />
         </EntityType>
         <Association Name="FK_address_employee">
           <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
@@ -615,6 +625,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySetMapping Name="department">
             <EntityTypeMapping TypeName="peopleModel.department">
               <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="organizationID" ColumnName="organizationID" />
                 <ScalarProperty Name="departmentName" ColumnName="departmentName" />
@@ -643,6 +654,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySetMapping Name="section">
             <EntityTypeMapping TypeName="peopleModel.section">
               <MappingFragment StoreEntitySet="section">
+                <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="departmentID" ColumnName="departmentID" />
                 <ScalarProperty Name="sectionName" ColumnName="sectionName" />
@@ -690,6 +702,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySetMapping Name="organization">
             <EntityTypeMapping TypeName="peopleModel.organization">
               <MappingFragment StoreEntitySet="organization">
+                <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
                 <ScalarProperty Name="organizationName" ColumnName="organizationName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -737,6 +750,8 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySetMapping Name="employee">
             <EntityTypeMapping TypeName="peopleModel.employee">
               <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="isfired" ColumnName="isfired" />
+                <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
                 <ScalarProperty Name="militaryStatusID" ColumnName="militaryStatusID" />
                 <ScalarProperty Name="salary" ColumnName="salary" />
                 <ScalarProperty Name="emailaddr" ColumnName="emailaddr" />

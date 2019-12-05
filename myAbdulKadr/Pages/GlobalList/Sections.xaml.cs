@@ -38,7 +38,7 @@ namespace myAbdulKadr.Pages.GlobalList
 
         private ObservableCollection<organization> GetOrganizationList()
         {
-            var list = from e in dbContext.organization select e;
+            var list = from e in dbContext.organization where e.isdeleted==false select e;
 
             return new ObservableCollection<organization>(list);
         }
@@ -47,7 +47,7 @@ namespace myAbdulKadr.Pages.GlobalList
         private ObservableCollection<department> GetDepartmentList(int orgID)
         {
             var list = from dp in dbContext.department
-                       where dp.organizationID == orgID
+                       where dp.organizationID == orgID && dp.isdeleted==false
                        select dp;
             return new ObservableCollection<department>(list);
         }
@@ -56,7 +56,7 @@ namespace myAbdulKadr.Pages.GlobalList
         private ObservableCollection<section> GetSectionList(int deptID)
         {
             var list = from sc in dbContext.section
-                       where sc.departmentID == deptID
+                       where sc.departmentID == deptID && sc.isdeleted==false
                        select sc;
             return new ObservableCollection<section>(list);
         }
@@ -70,7 +70,7 @@ namespace myAbdulKadr.Pages.GlobalList
                 section sect = e.Row.DataContext as section;
 
                 var matchedData = (from sc in dbContext.section
-                                   where sc.ID == sect.ID
+                                   where sc.ID == sect.ID 
                                    select sc).SingleOrDefault();
                 if (matchedData == null)
                 {
@@ -111,8 +111,9 @@ namespace myAbdulKadr.Pages.GlobalList
                     }
                     else
                     {
-                        dbContext.Entry(matchedSection).State = System.Data.Entity.EntityState.Deleted;
+                        matchedSection.isdeleted = true;
                         dbContext.SaveChanges();
+                        txtStatus.Text = "Success. Info deleted";
                     }
                 }
             }

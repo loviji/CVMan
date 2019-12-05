@@ -28,7 +28,7 @@ namespace myAbdulKadr.Pages.GlobalList
         }
         private ObservableCollection<organization> GetOrganizationList()
         {
-            var list = from e in dbContext.organization select e;
+            var list = from e in dbContext.organization where e.isdeleted==false select e;
             return new ObservableCollection<organization>(list);
         }
 
@@ -81,13 +81,16 @@ namespace myAbdulKadr.Pages.GlobalList
                     }
                     else
                     {
-                        dbContext.Entry(matchedOrganization).State = System.Data.Entity.EntityState.Deleted;
+                        matchedOrganization.isdeleted = true;
                         dbContext.SaveChanges();
-
+                        txtStatus.Text = "Success. Info deleted";
 
                     }
                 }
             }
+
+
+           
         }
     }
 }

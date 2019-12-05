@@ -43,6 +43,8 @@ namespace PersonMotion.Model
         public string emailaddr { get; set; }
         public Nullable<decimal> salary { get; set; }
         public Nullable<byte> militaryStatusID { get; set; }
+        public Nullable<bool> isdeleted { get; set; }
+        public Nullable<bool> isfired { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<address> address { get; set; }

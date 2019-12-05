@@ -22,6 +22,7 @@ namespace PersonMotion.Model
     
         public int ID { get; set; }
         public string organizationName { get; set; }
+        public bool isdeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<department> department { get; set; }

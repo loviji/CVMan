@@ -44,21 +44,7 @@ namespace myAbdulKadr.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(v));
         }
 
-        //public ObservableCollection<PersonViewModel> Employees { get; set; }
-
-        //public EmployeeViewModel()
-        //{
-        //    Employees = new ObservableCollection<PersonViewModel>(from m in dbContext.employee
-        //                                                   select new PersonViewModel { Name=m.name }  );
-        //}
-
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //public void OnPropertyChanged([CallerMemberName]string prop = "")
-        //{
-        //    if (PropertyChanged != null)
-        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        //}
+    
     }
 
     public class MyRepository
@@ -70,35 +56,9 @@ namespace myAbdulKadr.ViewModel
         {
             // db is the Entity Framework Context
             // In the real word I would use a separate DAL object
-            Employees = new ObservableCollection<employee>(from m in dbContext.employee select m);
+            Employees = new ObservableCollection<employee>(from m in dbContext.employee orderby m.isfired select m );
         }
     }
 
-    //public class PersonViewModel : INotifyPropertyChanged
-    //{
-    //    private employee person;
-
-    //    public PersonViewModel()
-    //    {
-    //        //person = e;
-    //    }
-
-    //    public string Name
-    //    {
-    //        get { return person.name; }
-    //        set
-    //        {
-    //            person.name = value;
-    //            OnPropertyChanged("Name");
-    //        }
-    //    }
-        
-
-    //    public event PropertyChangedEventHandler PropertyChanged;
-    //    public void OnPropertyChanged([CallerMemberName]string prop = "")
-    //    {
-    //        if (PropertyChanged != null)
-    //            PropertyChanged(this, new PropertyChangedEventArgs(prop));
-    //    }
-    //}
+   
 }

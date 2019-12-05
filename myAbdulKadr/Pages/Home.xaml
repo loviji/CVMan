@@ -57,7 +57,7 @@
                 <DataGrid.CellStyle>
                     <Style TargetType="{x:Type DataGridCell}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding name}" Value="Telman" >
+                            <DataTrigger Binding="{Binding isfired}" Value="True" >
                                 <Setter Property="Foreground" Value="Orange" />
                              </DataTrigger>
                         </Style.Triggers>
@@ -70,6 +70,7 @@
                     <mui:DataGridTextColumn Header="Ata adı" Binding="{Binding secondname}"/>
                     <mui:DataGridTextColumn Header="Təvəllüdü" Binding="{Binding birthdate , StringFormat='dd-MM-yyyy'}" />
                     <mui:DataGridTextColumn Header="Doğulduğu yer" Binding="{Binding birthplace}" />
+                    <mui:DataGridTextColumn Header="İşləmə statusu" Binding="{Binding isfired}" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

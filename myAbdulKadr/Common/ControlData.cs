@@ -10,14 +10,15 @@ namespace PersonMotion.Common
 
         public ObservableCollection<organization> GetOrganizationList()
         {
-            var list = from e in dbContext.organization select e;
+            var list = from e in dbContext.organization
+                       where e.isdeleted==false  select e;
             return new ObservableCollection<organization>(list);
         }
 
         public ObservableCollection<department> GetDepartmentList(int orgID)
         {
             var list = from dp in dbContext.department
-                       where dp.organizationID == orgID
+                       where dp.organizationID == orgID && dp.isdeleted == false
                        select dp;
             return new ObservableCollection<department>(list);
         }
@@ -26,7 +27,7 @@ namespace PersonMotion.Common
         public ObservableCollection<section> GetSectionList(int deptID)
         {
             var list = from sc in dbContext.section
-                       where sc.departmentID == deptID
+                       where sc.departmentID == deptID && sc.isdeleted == false
                        select sc;
             return new ObservableCollection<section>(list);
         }
@@ -35,7 +36,7 @@ namespace PersonMotion.Common
         public ObservableCollection<metaData> GetMetaDataByType(string metaType)
         {
             var list = from sc in dbContext.metaData
-                       where sc.code == metaType
+                       where sc.code == metaType && sc.isdeleted==false
                        select sc;
             return new ObservableCollection<metaData>(list);
         }
