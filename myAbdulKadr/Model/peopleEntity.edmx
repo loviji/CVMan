@@ -61,6 +61,10 @@
           <Property Name="mobilePhone" Type="varchar" MaxLength="50" />
           <Property Name="emailaddr" Type="varchar" MaxLength="50" />
           <Property Name="salary" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="prnmID" Type="int" />
+          <Property Name="prnmSalary" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="prgdID" Type="int" />
+          <Property Name="prgdSalary" Type="decimal" Precision="7" Scale="2" />
           <Property Name="militaryStatusID" Type="tinyint" />
           <Property Name="isdeleted" Type="bit" />
           <Property Name="isfired" Type="bit" />
@@ -114,6 +118,17 @@
           <Property Name="beginDate" Type="date" Nullable="false" />
           <Property Name="endDate" Type="date" />
         </EntityType>
+        <EntityType Name="reproval">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rType" Type="tinyint" Nullable="false" />
+          <Property Name="empID" Type="int" Nullable="false" />
+          <Property Name="rDefinition" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="rNotes" Type="nvarchar(max)" />
+          <Property Name="rDate" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="section">
           <Key>
             <PropertyRef Name="ID" />
@@ -151,7 +166,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="begindate" Type="date" Nullable="false" />
           <Property Name="empID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_address_employee">
+        <Association Name="FK__address__empID__398D8EEE">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
           <End Role="address" Type="Self.address" Multiplicity="*" />
           <ReferentialConstraint>
@@ -163,7 +178,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_department_Organization">
+        <Association Name="FK__departmen__organ__3A81B327">
           <End Role="organization" Type="Self.organization" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -177,7 +192,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_education_employee1">
+        <Association Name="FK__education__empID__3B75D760">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
           <End Role="education" Type="Self.education" Multiplicity="*" />
           <ReferentialConstraint>
@@ -189,7 +204,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_familia_employee">
+        <Association Name="FK__familia__empID__3C69FB99">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
           <End Role="familia" Type="Self.familia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -201,7 +216,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_position_employee">
+        <Association Name="FK__position__empID__3D5E1FD2">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
           <End Role="position" Type="Self.position" Multiplicity="*" />
           <ReferentialConstraint>
@@ -213,7 +228,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_position_section">
+        <Association Name="FK__position__sectID__3E52440B">
           <End Role="section" Type="Self.section" Multiplicity="0..1" />
           <End Role="position" Type="Self.position" Multiplicity="*" />
           <ReferentialConstraint>
@@ -225,7 +240,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_section_department">
+        <Association Name="FK__section__departm__3F466844">
           <End Role="department" Type="Self.department" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -239,7 +254,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_workhistory_employee">
+        <Association Name="FK__workhisto__empID__403A8C7D">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
           <End Role="workhistory" Type="Self.workhistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -247,6 +262,18 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="workhistory">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reproval_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="reproval" Type="Self.reproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="reproval">
               <PropertyRef Name="empID" />
             </Dependent>
           </ReferentialConstraint>
@@ -261,6 +288,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySet Name="metaData" EntityType="Self.metaData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="organization" EntityType="Self.organization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="position" EntityType="Self.position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reproval" EntityType="Self.reproval" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="section" EntityType="Self.section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="workhistory" EntityType="Self.workhistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VW_Position" EntityType="Self.VW_Position" store:Type="Views" store:Schema="dbo">
@@ -273,37 +301,41 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
     [VW_Position].[empID] AS [empID]
     FROM [dbo].[VW_Position] AS [VW_Position]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_address_employee" Association="Self.FK_address_employee">
+          <AssociationSet Name="FK__address__empID__398D8EEE" Association="Self.FK__address__empID__398D8EEE">
             <End Role="employee" EntitySet="employee" />
             <End Role="address" EntitySet="address" />
           </AssociationSet>
-          <AssociationSet Name="FK_department_Organization" Association="Self.FK_department_Organization">
+          <AssociationSet Name="FK__departmen__organ__3A81B327" Association="Self.FK__departmen__organ__3A81B327">
             <End Role="organization" EntitySet="organization" />
             <End Role="department" EntitySet="department" />
           </AssociationSet>
-          <AssociationSet Name="FK_education_employee1" Association="Self.FK_education_employee1">
+          <AssociationSet Name="FK__education__empID__3B75D760" Association="Self.FK__education__empID__3B75D760">
             <End Role="employee" EntitySet="employee" />
             <End Role="education" EntitySet="education" />
           </AssociationSet>
-          <AssociationSet Name="FK_familia_employee" Association="Self.FK_familia_employee">
+          <AssociationSet Name="FK__familia__empID__3C69FB99" Association="Self.FK__familia__empID__3C69FB99">
             <End Role="employee" EntitySet="employee" />
             <End Role="familia" EntitySet="familia" />
           </AssociationSet>
-          <AssociationSet Name="FK_position_employee" Association="Self.FK_position_employee">
+          <AssociationSet Name="FK__position__empID__3D5E1FD2" Association="Self.FK__position__empID__3D5E1FD2">
             <End Role="employee" EntitySet="employee" />
             <End Role="position" EntitySet="position" />
           </AssociationSet>
-          <AssociationSet Name="FK_position_section" Association="Self.FK_position_section">
+          <AssociationSet Name="FK__position__sectID__3E52440B" Association="Self.FK__position__sectID__3E52440B">
             <End Role="section" EntitySet="section" />
             <End Role="position" EntitySet="position" />
           </AssociationSet>
-          <AssociationSet Name="FK_section_department" Association="Self.FK_section_department">
+          <AssociationSet Name="FK__section__departm__3F466844" Association="Self.FK__section__departm__3F466844">
             <End Role="department" EntitySet="department" />
             <End Role="section" EntitySet="section" />
           </AssociationSet>
-          <AssociationSet Name="FK_workhistory_employee" Association="Self.FK_workhistory_employee">
+          <AssociationSet Name="FK__workhisto__empID__403A8C7D" Association="Self.FK__workhisto__empID__403A8C7D">
             <End Role="employee" EntitySet="employee" />
             <End Role="workhistory" EntitySet="workhistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reproval_employee" Association="Self.FK_reproval_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="reproval" EntitySet="reproval" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -408,7 +440,12 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             <End Role="employee" EntitySet="employee" />
             <End Role="workhistory" EntitySet="workhistory" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="reproval" EntityType="peopleModel.reproval" />
+          <AssociationSet Name="FK_reproval_employee" Association="peopleModel.FK_reproval_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="reproval" EntitySet="reproval" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="familia">
           <Key>
             <PropertyRef Name="ID" />
@@ -555,7 +592,12 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <NavigationProperty Name="workhistory" Relationship="peopleModel.FK_workhistory_employee" FromRole="employee" ToRole="workhistory" />
           <Property Name="isdeleted" Type="Boolean" />
           <Property Name="isfired" Type="Boolean" />
-        </EntityType>
+          <Property Name="prnmID" Type="Int32" />
+          <Property Name="prnmSalary" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="prgdID" Type="Int32" />
+          <Property Name="prgdSalary" Type="Decimal" Precision="7" Scale="2" />
+          <NavigationProperty Name="reproval" Relationship="peopleModel.FK_reproval_employee" FromRole="employee" ToRole="reproval" />
+          </EntityType>
         <Association Name="FK_address_employee">
           <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
           <End Type="peopleModel.address" Role="address" Multiplicity="*" />
@@ -616,7 +658,31 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="reproval">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rType" Type="Byte" Nullable="false" />
+          <Property Name="empID" Type="Int32" Nullable="false" />
+          <Property Name="rDefinition" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="rNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_reproval_employee" FromRole="reproval" ToRole="employee" />
+        </EntityType>
+        <Association Name="FK_reproval_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.reproval" Role="reproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="reproval">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -750,6 +816,10 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySetMapping Name="employee">
             <EntityTypeMapping TypeName="peopleModel.employee">
               <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="prgdSalary" ColumnName="prgdSalary" />
+                <ScalarProperty Name="prgdID" ColumnName="prgdID" />
+                <ScalarProperty Name="prnmSalary" ColumnName="prnmSalary" />
+                <ScalarProperty Name="prnmID" ColumnName="prnmID" />
                 <ScalarProperty Name="isfired" ColumnName="isfired" />
                 <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
                 <ScalarProperty Name="militaryStatusID" ColumnName="militaryStatusID" />
@@ -770,6 +840,18 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
                 <ScalarProperty Name="secondname" ColumnName="secondname" />
                 <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reproval">
+            <EntityTypeMapping TypeName="peopleModel.reproval">
+              <MappingFragment StoreEntitySet="reproval">
+                <ScalarProperty Name="rDate" ColumnName="rDate" />
+                <ScalarProperty Name="rNotes" ColumnName="rNotes" />
+                <ScalarProperty Name="rDefinition" ColumnName="rDefinition" />
+                <ScalarProperty Name="empID" ColumnName="empID" />
+                <ScalarProperty Name="rType" ColumnName="rType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

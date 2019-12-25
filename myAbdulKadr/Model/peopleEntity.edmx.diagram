@@ -25,7 +25,9 @@
         <AssociationConnector Association="peopleModel.FK_familia_employee" />
         <AssociationConnector Association="peopleModel.FK_position_employee" />
         <AssociationConnector Association="peopleModel.FK_workhistory_employee" />
-      </Diagram>
+        <EntityTypeShape EntityType="peopleModel.reproval" Width="1.5" PointX="3" PointY="16.125" />
+        <AssociationConnector Association="peopleModel.FK_reproval_employee" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -22,6 +22,7 @@ namespace PersonMotion.Model
             this.familia = new HashSet<familia>();
             this.position = new HashSet<position>();
             this.workhistory = new HashSet<workhistory>();
+            this.reproval = new HashSet<reproval>();
         }
     
         public int ID { get; set; }
@@ -45,6 +46,10 @@ namespace PersonMotion.Model
         public Nullable<byte> militaryStatusID { get; set; }
         public Nullable<bool> isdeleted { get; set; }
         public Nullable<bool> isfired { get; set; }
+        public Nullable<int> prnmID { get; set; }
+        public Nullable<decimal> prnmSalary { get; set; }
+        public Nullable<int> prgdID { get; set; }
+        public Nullable<decimal> prgdSalary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<address> address { get; set; }
@@ -56,5 +61,7 @@ namespace PersonMotion.Model
         public virtual ICollection<position> position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<workhistory> workhistory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<reproval> reproval { get; set; }
     }
 }
