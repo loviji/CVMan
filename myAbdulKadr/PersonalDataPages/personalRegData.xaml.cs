@@ -48,7 +48,7 @@ namespace myAbdulKadr.PersonalDataPages
                     addr.empID = selectedPersonID;
                     dbContext.address.Add(addr);
                 }
-                uEmployee.salary = Convert.ToDecimal(salary.Text);
+                uEmployee.salary = Convert.ToDecimal(string.IsNullOrEmpty(salary.Text) ? "0" : salary.Text);
                 uEmployee.FINCODE = pincode.Text;
                 uEmployee.workPhone = phone.Text;
                 uEmployee.mobilePhone = mobilePhone.Text;
