@@ -19,7 +19,7 @@ namespace hydrogen.Pages
     /// </summary>
     public partial class Home : UserControl, IContent
     {
-        private  peopleEntities dbContext = DBContextResolver.Instance;
+        private peopleEntities dbContext = DBContextResolver.Instance;
 
 
 
@@ -40,8 +40,8 @@ namespace hydrogen.Pages
             else
             {
                 employeeList = new EmployeeViewModel().Employees.Where(m => m.name.Contains(name) && m.surname.Contains(surname) && m.secondname.Contains(midname)).ToList();
-                                //where m.name.Contains(name) && m.surname.Contains(surname) && m.secondname.Contains(midname)
-                                //select m).ToList();
+                //where m.name.Contains(name) && m.surname.Contains(surname) && m.secondname.Contains(midname)
+                //select m).ToList();
 
             }
             //new { m.ID, m.name, m.surname, m.secondname, m.birthdate, m.birthplace });
@@ -58,10 +58,12 @@ namespace hydrogen.Pages
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             perList.ItemsSource = GetData(pName.Text, pSurname.Text, pMidName.Text);
         }
 
+        private const string mainWindowHeader = "Person motion";
+        private string personFullName = string.Empty;
         private void PerList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (perList.SelectedCells.Count > 0)
@@ -72,8 +74,11 @@ namespace hydrogen.Pages
                 if (selectedEmp.ID > 0)
                 {
 
-
+                    
                     string url = "../PersonalDataPages/PersonDataEditor.xaml#" + selectedEmp.ID.ToString();
+                    Window mainWindow = Application.Current.MainWindow;
+                    personFullName = dbContext.employee.Where(s => s.ID == selectedEmp.ID).Select(s=>s.name+" "+s.surname+" "+s.secondname).SingleOrDefault();
+                    mainWindow.Title = mainWindowHeader + " "+personFullName;
                     NavigationCommands.GoToPage.Execute(url, this);
 
                 }
@@ -84,12 +89,12 @@ namespace hydrogen.Pages
 
         public void OnFragmentNavigation(FragmentNavigationEventArgs e)
         {
-         
+
         }
 
         public void OnNavigatedFrom(NavigationEventArgs e)
         {
-            
+
         }
 
         public void OnNavigatedTo(NavigationEventArgs e)
@@ -102,14 +107,14 @@ namespace hydrogen.Pages
 
             //perList.ItemsSource = null;
 
-   //         perList.ItemsSource = new EmployeeViewModel().Employees;//Preferably do this somewhere else, not in the add method.
+            //         perList.ItemsSource = new EmployeeViewModel().Employees;//Preferably do this somewhere else, not in the add method.
             //perList.Items.Refresh();
 
         }
 
         public void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-          
+
         }
     }
 }

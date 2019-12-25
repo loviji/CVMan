@@ -76,24 +76,28 @@ namespace hydrogen
         {
             selectedID = e.Fragment;
             FillList(IPList);
-            PersonalOperations.SelectedSource= new Uri("/PersonalDataPages/personalData.xaml#" + selectedID, UriKind.Relative);
+            PersonalOperations.SelectedSource = new Uri("/PersonalDataPages/personalData.xaml#" + selectedID, UriKind.Relative);
         }
 
         public void OnNavigatedFrom(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
-            //throw new NotImplementedException();
+            Window mainWindow = Application.Current.MainWindow;
+            mainWindow.Title = mainWindowHeader;
+
         }
 
         public void OnNavigatedTo(FirstFloor.ModernUI.Windows.Navigation.NavigationEventArgs e)
         {
             // throw new NotImplementedException();
         }
-
+        private const string mainWindowHeader = "Person motion";
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
             if (ModernDialog.ShowMessage("Səhifəni tərk edirsiniz?", "navigate", MessageBoxButton.YesNo) == MessageBoxResult.No)
             {
                 e.Cancel = true;
+
+
             }
         }
     }
