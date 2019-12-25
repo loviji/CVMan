@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
@@ -10,7 +11,7 @@ namespace PersonMotion.WF
     public partial class HRCard : Form
     {
         public string personID = string.Empty;
-        private string s = @"data source=.\sqlexpress;initial catalog=people;integrated security=True;";
+        private string s = ConfigurationManager.AppSettings["cs"];
 
         public HRCard()
         {

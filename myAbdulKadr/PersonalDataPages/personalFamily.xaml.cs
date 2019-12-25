@@ -128,7 +128,7 @@ namespace PersonMotion.PersonalDataPages
 
                     fml.empID = selectedPersonID;
                     fml.familyTypeName = familyTypeName.Text;
-                    fml.familyname = familyTypeName.Text;
+                    fml.familyname = familyMemberName.Text;
                     fml.birthDate = DateTime.Parse(familiMemberBirthYear.Text);
                    
 
