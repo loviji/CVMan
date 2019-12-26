@@ -117,8 +117,8 @@ namespace PersonMotion.PersonalDataPages
                     if (uWorkHistory != null)
                     {
                        
-                        uWorkHistory.structureName = cstructureName.Text;
-                        uWorkHistory.positionName = positionName.Text;
+                        uWorkHistory.structureName = cstructureName.Text.Substring(0, cstructureName.Text.Length > 500 ? 500 : cstructureName.Text.Length);
+                        uWorkHistory.positionName = positionName.Text.Substring(0, positionName.Text.Length > 500 ? 500 : positionName.Text.Length);
                         uWorkHistory.beginDate = DateTime.Parse(workBeginDate.Text);
                         uWorkHistory.endDate = !string.IsNullOrEmpty(workEndDate.Text) ? DateTime.Parse(workEndDate.Text) : (DateTime?)null;
                     }
@@ -128,8 +128,8 @@ namespace PersonMotion.PersonalDataPages
                     workhistory wkh = new workhistory();
              
                     wkh.empID = selectedPersonID;
-                    wkh.structureName = cstructureName.Text;
-                    wkh.positionName = cstructureName.Text;
+                    wkh.structureName = cstructureName.Text.Substring(0, cstructureName.Text.Length > 500 ? 500 : cstructureName.Text.Length);
+                    wkh.positionName = positionName.Text.Substring(0, positionName.Text.Length > 500 ? 500 : positionName.Text.Length);
                     wkh.beginDate = DateTime.Parse(workBeginDate.Text);
                     wkh.endDate =  !string.IsNullOrEmpty(workEndDate.Text)?DateTime.Parse(workEndDate.Text): (DateTime?)null;
 

@@ -145,7 +145,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="empID" Type="int" Nullable="false" />
           <Property Name="structureName" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="positionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="positionName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="beginDate" Type="date" Nullable="false" />
           <Property Name="endDate" Type="date" />
         </EntityType>
@@ -480,7 +480,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="empID" Type="Int32" Nullable="false" />
           <Property Name="structureName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="positionName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="beginDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="endDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="employee" Relationship="peopleModel.FK_workhistory_employee" FromRole="workhistory" ToRole="employee" />
