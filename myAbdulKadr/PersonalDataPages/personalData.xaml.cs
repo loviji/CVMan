@@ -141,7 +141,9 @@ namespace hydrogen.PersonalDataPages
 
                     };
                     dbContext.employee.Add(newEmployee);
+                    dbContext.SaveChanges();
 
+                    selectedPersonID = newEmployee.ID;
                 }
                 else
                 {
@@ -159,9 +161,12 @@ namespace hydrogen.PersonalDataPages
                         uEmployee.nationalityID = Convert.ToInt32(personalNationality.SelectedValue);
                         uEmployee.partyID = Convert.ToInt32(personalPoliticalParty.SelectedValue);
                     }
+                    dbContext.SaveChanges();
 
                 }
-                dbContext.SaveChanges();
+                
+
+                
             }
             catch (DbUpdateException ex)
             {
@@ -169,7 +174,8 @@ namespace hydrogen.PersonalDataPages
             }
             finally
             {
-                MessageBox.Show("Melumatlar saxlanıldı");
+                MessageBox.Show("Melumatlar saxlanıldı"+selectedPersonID.ToString());
+                
             }
         }
 
@@ -436,6 +442,9 @@ namespace hydrogen.PersonalDataPages
 
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
+            if (selectedPersonID != 0)
+
+                GlobalCache.currentPersonID = selectedPersonID;
 
         }
     }

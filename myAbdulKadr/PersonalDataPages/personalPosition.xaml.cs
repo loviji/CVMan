@@ -33,8 +33,10 @@ namespace hydrogen.PersonalDataPages
         {
 
             selectedPersonID = Convert.ToInt32(e.Fragment);
-            if (selectedPersonID != 0)
+            
+            if (GlobalCache.currentPersonID!=0)
             {
+                selectedPersonID = GlobalCache.currentPersonID;
                 FillPositionList(selectedPersonID);
             }
             //txtIDSaver.Text = e.Fragment;

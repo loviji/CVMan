@@ -59,12 +59,21 @@ namespace hydrogen.PersonalDataPages
 
         void IContent.OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
-
             selectedPersonID = Convert.ToInt32(e.Fragment);
-            if (selectedPersonID != 0)
+
+            if (GlobalCache.currentPersonID != 0)
             {
+                selectedPersonID = GlobalCache.currentPersonID;
                 FillEducationList(selectedPersonID);
             }
+
+
+
+            //selectedPersonID = Convert.ToInt32(e.Fragment);
+            //if (selectedPersonID != 0)
+            //{
+            //    FillEducationList(selectedPersonID);
+            //}
             //txtIDSaver.Text = e.Fragment;
 
         }

@@ -41,10 +41,18 @@ namespace PersonMotion.PersonalDataPages
         {
 
             selectedPersonID = Convert.ToInt32(e.Fragment);
-            if (selectedPersonID != 0)
+
+            if (GlobalCache.currentPersonID != 0)
             {
+                selectedPersonID = GlobalCache.currentPersonID;
                 FillFamilyList(selectedPersonID);
             }
+
+            //selectedPersonID = Convert.ToInt32(e.Fragment);
+            //if (selectedPersonID != 0)
+            //{
+            //    FillFamilyList(selectedPersonID);
+            //}
             //txtIDSaver.Text = e.Fragment;
 
         }

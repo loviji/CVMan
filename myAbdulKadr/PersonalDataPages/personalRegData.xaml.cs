@@ -72,13 +72,20 @@ namespace myAbdulKadr.PersonalDataPages
         public void OnFragmentNavigation(FirstFloor.ModernUI.Windows.Navigation.FragmentNavigationEventArgs e)
         {
 
-
-
             selectedPersonID = Convert.ToInt32(e.Fragment);
-            if (selectedPersonID != 0)
+
+            if (GlobalCache.currentPersonID != 0)
             {
+                selectedPersonID = GlobalCache.currentPersonID;
                 populateFormControls(selectedPersonID);
             }
+
+
+            //selectedPersonID = Convert.ToInt32(e.Fragment);
+            //if (selectedPersonID != 0)
+            //{
+            //    populateFormControls(selectedPersonID);
+            //}
         }
 
         private void populateFormControls(int selectedPersonID)
