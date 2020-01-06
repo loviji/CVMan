@@ -145,9 +145,27 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="empID" Type="int" Nullable="false" />
           <Property Name="structureName" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="positionName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="positionName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="beginDate" Type="date" Nullable="false" />
           <Property Name="endDate" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'people.dbo.EMP_LIST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EMP_LIST">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="surname" />
+            <PropertyRef Name="birthdate" />
+          </Key>
+          <Property Name="isfired" Type="bit" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="secondname" Type="nvarchar" MaxLength="50" />
+          <Property Name="birthdate" Type="date" Nullable="false" />
+          <Property Name="birthplace" Type="nvarchar" MaxLength="150" />
+          <Property Name="position" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -291,6 +309,18 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySet Name="reproval" EntityType="Self.reproval" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="section" EntityType="Self.section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="workhistory" EntityType="Self.workhistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMP_LIST" EntityType="Self.EMP_LIST" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EMP_LIST].[isfired] AS [isfired], 
+    [EMP_LIST].[ID] AS [ID], 
+    [EMP_LIST].[name] AS [name], 
+    [EMP_LIST].[surname] AS [surname], 
+    [EMP_LIST].[secondname] AS [secondname], 
+    [EMP_LIST].[birthdate] AS [birthdate], 
+    [EMP_LIST].[birthplace] AS [birthplace], 
+    [EMP_LIST].[position] AS [position]
+    FROM [dbo].[EMP_LIST] AS [EMP_LIST]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VW_Position" EntityType="Self.VW_Position" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VW_Position].[ID] AS [ID], 
@@ -445,6 +475,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             <End Role="employee" EntitySet="employee" />
             <End Role="reproval" EntitySet="reproval" />
           </AssociationSet>
+          <EntitySet Name="EMP_LIST" EntityType="peopleModel.EMP_LIST" />
           </EntityContainer>
         <EntityType Name="familia">
           <Key>
@@ -480,7 +511,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="empID" Type="Int32" Nullable="false" />
           <Property Name="structureName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="positionName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="beginDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="endDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="employee" Relationship="peopleModel.FK_workhistory_employee" FromRole="workhistory" ToRole="employee" />
@@ -682,6 +713,22 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EMP_LIST">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="surname" />
+            <PropertyRef Name="birthdate" />
+          </Key>
+          <Property Name="isfired" Type="Boolean" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="secondname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="position" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="birthplace" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -853,6 +900,20 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
                 <ScalarProperty Name="empID" ColumnName="empID" />
                 <ScalarProperty Name="rType" ColumnName="rType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMP_LIST">
+            <EntityTypeMapping TypeName="peopleModel.EMP_LIST">
+              <MappingFragment StoreEntitySet="EMP_LIST">
+                <ScalarProperty Name="birthplace" ColumnName="birthplace" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="secondname" ColumnName="secondname" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="isfired" ColumnName="isfired" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

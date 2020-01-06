@@ -1,5 +1,6 @@
 ﻿using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
+using FirstFloor.ModernUI.Windows.Navigation;
 using Microsoft.Win32;
 using PersonMotion.Common;
 using PersonMotion.Model;
@@ -125,6 +126,10 @@ namespace hydrogen.PersonalDataPages
             {
                 if (selectedPersonID == 0)
                 {
+                    string fmlStat = "S";
+                    if (radioFamilyStatusSelected != null)
+
+                        fmlStat = radioFamilyStatusSelected.ToString()[0].ToString();
                     var newEmployee = new employee()
                     {
                         name = personalName.Text,
@@ -133,7 +138,7 @@ namespace hydrogen.PersonalDataPages
                         sex = radioSexSelected.ToString(),
                         birthdate = DateTime.Parse(personalBirthDate.Text),
                         birthplace = personalBirthPlace.Text,
-                        familyStatusID = getFamilyStatusID(radioFamilyStatusSelected.ToString()[0].ToString()),
+                        familyStatusID = getFamilyStatusID(fmlStat),
                         photoID = insertedPhotoID,
                         nationalityID = Convert.ToInt32(personalNationality.SelectedValue),
                         partyID = Convert.ToInt32(personalPoliticalParty.SelectedValue)
@@ -164,9 +169,9 @@ namespace hydrogen.PersonalDataPages
                     dbContext.SaveChanges();
 
                 }
-                
 
-                
+
+
             }
             catch (DbUpdateException ex)
             {
@@ -174,8 +179,8 @@ namespace hydrogen.PersonalDataPages
             }
             finally
             {
-                MessageBox.Show("Melumatlar saxlanıldı"+selectedPersonID.ToString());
-                
+                MessageBox.Show("Melumatlar saxlanıldı" + selectedPersonID.ToString());
+
             }
         }
 
@@ -409,7 +414,7 @@ namespace hydrogen.PersonalDataPages
             try
             {
                 dlg.ShowDialog();
-               
+
             }
             catch (Exception ex)
             {
@@ -432,11 +437,13 @@ namespace hydrogen.PersonalDataPages
                 var employer = dbContext.employee.SingleOrDefault(j => j.ID == selectedPersonID);
                 employer.isdeleted = true;
                 dbContext.SaveChanges();
-             //   string url = "/Pages/Home.xaml";
-             //   NavigationCommands.PreviousPage.Execute(url,this);
+                GlobalCache.showdialog = false;
+                //   string url = "/Pages/Home.xaml";
+                //   NavigationCommands.PreviousPage.Execute(url,this);
+                IInputElement target = NavigationHelper.FindFrame("_top", this);
+                NavigationCommands.GoToPage.Execute("/Pages/Home.xaml", target);
 
 
-                
                 // selectedPersonID = 0;
                 //fillBasicControls();
             }

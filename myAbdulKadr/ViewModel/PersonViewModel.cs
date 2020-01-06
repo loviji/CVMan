@@ -14,7 +14,7 @@ namespace myAbdulKadr.ViewModel
     {
         MyRepository mr = new MyRepository();
 
-        public ObservableCollection<employee> Employees
+        public ObservableCollection<EMP_LIST> Employees
         {
             get { return mr.Employees; }
 
@@ -50,13 +50,13 @@ namespace myAbdulKadr.ViewModel
     public class MyRepository
     {
         private peopleEntities dbContext = new peopleEntities();
-        public ObservableCollection<employee> Employees { get; private set; }
+        public ObservableCollection<EMP_LIST> Employees { get; private set; }
 
         public void ReadEmployees()
         {
             // db is the Entity Framework Context
             // In the real word I would use a separate DAL object
-            Employees = new ObservableCollection<employee>(from m in dbContext.employee where m.isdeleted != true orderby m.isfired select m);
+            Employees = new ObservableCollection<EMP_LIST>(from m in dbContext.EMP_LIST orderby m.isfired select m);
         }
     }
 

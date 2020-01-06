@@ -27,6 +27,7 @@
         <AssociationConnector Association="peopleModel.FK_workhistory_employee" />
         <EntityTypeShape EntityType="peopleModel.reproval" Width="1.5" PointX="3" PointY="16.125" />
         <AssociationConnector Association="peopleModel.FK_reproval_employee" />
+        <EntityTypeShape EntityType="peopleModel.EMP_LIST" Width="1.5" PointX="0.75" PointY="6.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

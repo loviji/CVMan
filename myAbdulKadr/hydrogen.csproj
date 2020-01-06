@@ -137,6 +137,9 @@
     </Compile>
     <Compile Include="Common\DBContextResolver.cs" />
     <Compile Include="Common\GlobalCache.cs" />
+    <Compile Include="Model\EMP_LIST.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\reproval.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>

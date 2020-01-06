@@ -37,9 +37,9 @@ namespace myAbdulKadr.Pages
             perList.DataContext = new EmployeeViewModel();
         }
 
-        private ObservableCollection<employee> GetData(string name, string surname, string midname)
+        private ObservableCollection<EMP_LIST> GetData(string name, string surname, string midname)
         {
-            List<employee> employeeList = null;
+            List<EMP_LIST> employeeList = null;
             if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(surname) && string.IsNullOrEmpty(midname))
             {
                 employeeList = new EmployeeViewModel().Employees.ToList();
@@ -50,7 +50,7 @@ namespace myAbdulKadr.Pages
 
             }
             //new { m.ID, m.name, m.surname, m.secondname, m.birthdate, m.birthplace });
-            return new ObservableCollection<employee>(employeeList);
+            return new ObservableCollection<EMP_LIST>(employeeList);
             //return ObservableCollection<d;
         }
 
@@ -67,7 +67,7 @@ namespace myAbdulKadr.Pages
             if (perList.SelectedCells.Count > 0)
             {
                 var cellInfo = perList.SelectedCells[0];
-                var selectedEmp = (employee)(cellInfo.Column.GetCellContent(cellInfo.Item).DataContext);
+                var selectedEmp = (EMP_LIST)(cellInfo.Column.GetCellContent(cellInfo.Item).DataContext);
 
                 if (selectedEmp.ID > 0)
                 {

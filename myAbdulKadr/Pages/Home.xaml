@@ -52,17 +52,24 @@
                 </StackPanel>
             </StackPanel>
         </DockPanel>
-        <ScrollViewer Name="educationEditor" Margin="0,65,0,25" Width="1000"  HorizontalAlignment="Left" VerticalAlignment="Top">
+        <ScrollViewer Name="educationEditor" Margin="0,65,0,25" Width="1200"  HorizontalAlignment="Left" VerticalAlignment="Top">
             <DataGrid Name="perList" ItemsSource="{Binding Path=Employees, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" IsReadOnly="True"  MouseDoubleClick="PerList_MouseDoubleClick" Height="522" >
-                <DataGrid.CellStyle>
-                    <Style TargetType="{x:Type DataGridCell}">
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding isfired}" Value="True" >
-                                <Setter Property="Foreground" Value="Orange" />
+                               
+                                <Setter Property="Background" Value="DarkSalmon" />
                              </DataTrigger>
+                            <DataTrigger Binding="{Binding name}" Value="Vakant" >
+
+                                <Setter Property="Background" Value="Turquoise" />
+                            </DataTrigger>
                         </Style.Triggers>
+                        
                     </Style>
-                </DataGrid.CellStyle>
+                </DataGrid.RowStyle>
+           
                 <DataGrid.Columns>
                     <mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"  />
                     <mui:DataGridTextColumn Header="Adı" Binding="{Binding name}" />
@@ -70,6 +77,7 @@
                     <mui:DataGridTextColumn Header="Ata adı" Binding="{Binding secondname}"/>
                     <mui:DataGridTextColumn Header="Təvəllüdü" Binding="{Binding birthdate , StringFormat='dd-MM-yyyy'}" />
                     <mui:DataGridTextColumn Header="Doğulduğu yer" Binding="{Binding birthplace}" />
+                    <mui:DataGridTextColumn Header="Vəzifəsi" Binding="{Binding position}" />
                     <mui:DataGridTextColumn Header="İşləmə statusu" Binding="{Binding isfired}" Visibility="Hidden"/>
                 </DataGrid.Columns>
             </DataGrid>

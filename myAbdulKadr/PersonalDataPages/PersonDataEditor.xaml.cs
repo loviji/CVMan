@@ -1,6 +1,7 @@
 ﻿using FirstFloor.ModernUI.Presentation;
 using FirstFloor.ModernUI.Windows;
 using FirstFloor.ModernUI.Windows.Controls;
+using PersonMotion.Common;
 using System;
 using System.Linq;
 using System.Windows;
@@ -93,15 +94,18 @@ namespace hydrogen
         private const string mainWindowHeader = "Person motion";
         public void OnNavigatingFrom(FirstFloor.ModernUI.Windows.Navigation.NavigatingCancelEventArgs e)
         {
-            if (ModernDialog.ShowMessage("Səhifəni tərk edirsiniz?", "navigate", MessageBoxButton.YesNo) == MessageBoxResult.No)
+            if (GlobalCache.showdialog)
             {
-                e.Cancel = true;
+                if (ModernDialog.ShowMessage("Səhifəni tərk edirsiniz?", "navigate", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                {
+                    e.Cancel = true;
 
 
+                }
             }
         }
 
-       
+
     }
 }
 
