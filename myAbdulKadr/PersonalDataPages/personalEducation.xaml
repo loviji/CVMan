@@ -52,9 +52,9 @@
                     </StackPanel.Resources>
                     <StackPanel>
                         <Label Content="Təhsil növü" Target="{Binding ElementName=cmbEducationType}" Width="200"/>
-                        <ComboBox x:Name="cmbEducationType" Width="500"/>
+                        <ComboBox x:Name="cmbEducationType" Width="500" IsEditable="True" TextBoxBase.TextChanged="ComboBox_TextChanged" />
                     </StackPanel>
-                    <StackPanel>
+                    <StackPanel Name="panelCMBEduGrade">
                         <Label Content="Təhsil dərəcəsi" Target="{Binding ElementName=cmbEducationGrade}" Width="200"/>
                         <ComboBox x:Name="cmbEducationGrade" Width="500"/>
                     </StackPanel>
@@ -62,12 +62,12 @@
                         <Label Content="Təhsil müəssisəsinin adı" Target="{Binding ElementName=ceducationCentreName}" Width="200"/>
                         <TextBox x:Name="ceducationCentreName" Width="500"/>
                     </StackPanel>
-                    <StackPanel>
+                    <StackPanel Name="panelFaculty">
                         <Label Content="Fakültə" Target="{Binding ElementName=faculty}" Width="200"/>
                         <TextBox x:Name="faculty" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->
                     </StackPanel>
-                    <StackPanel>
+                    <StackPanel Name="panelSpeciality">
                         <Label Content="İxtisas" Target="{Binding ElementName=speciality}" Width="200"/>
                         <TextBox x:Name="speciality" Width="500"/>
                         <!--Text="{Binding educationCentreName, Mode=TwoWay, ValidatesOnDataErrors=True}"-->

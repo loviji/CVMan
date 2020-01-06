@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="600" Width="800">
 
@@ -44,7 +45,7 @@
         <TextBox Grid.Row="0" Grid.Column="1" x:Name="personalName" Margin="0,5"/>
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="personalSurname" Margin="0,5"/>
         <TextBox Grid.Row="2" Grid.Column="1" x:Name="personalPatroynmic" Margin="0,5"/>
-        <DatePicker x:Name="personalBirthDate" Grid.Row="4" Grid.Column="1" FirstDayOfWeek="Monday" Margin="0,5"/>
+        <DatePicker x:Name="personalBirthDate" Grid.Row="4" Grid.Column="1" FirstDayOfWeek="Monday" Margin="0,5" DisplayDateEnd="{x:Static sys:DateTime.Today}"/>
         <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,5">
             <RadioButton GroupName="personalSex" x:Name="personalSexMan" Content="Kişi" Checked="RadioButtonChecked"/>
             <RadioButton GroupName="personalSex" x:Name="personalSexWoman" Content="Qadın" Checked="RadioButtonChecked"/>

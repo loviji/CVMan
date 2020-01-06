@@ -34,17 +34,19 @@ namespace hydrogen.PersonalDataPages
             educationList.DataContext = (from e in dbContext.education
                                          join m in dbContext.metaData
                                                on new { ID = (int)e.educationType, code = "edtp" }
-                                           equals new { m.ID, m.code }
+                                           equals new { m.ID, m.code } into edt
+                                         from edpmeta in edt.DefaultIfEmpty()
                                          join mg in dbContext.metaData
                                                on new { ID = (int)e.grade, code = "edgd" }
-                                           equals new { mg.ID, mg.code }
+                                           equals new { mg.ID, mg.code } into edg
+                                         from edgmeta in edg.DefaultIfEmpty()
                                          where e.empID == selectedPersonID
                                          select new
                                          {
                                              e.ID,
                                              e.empID,
-                                             educationTypeName = m.value,
-                                             gradeName = mg.value,
+                                             educationTypeName = edpmeta.value,
+                                             gradeName = edgmeta.value,
                                              e.educationCentreName,
                                              e.faculty,
                                              e.speciality,
@@ -186,12 +188,23 @@ namespace hydrogen.PersonalDataPages
                     education uEducation = dbContext.education.SingleOrDefault(k => k.ID == selectedEducation);
                     if (uEducation != null)
                     {
-                        uEducation.grade = cmbEducationGrade.SelectedValue == null ? (int?)null : Convert.ToInt32(cmbEducationGrade.SelectedValue);
                         uEducation.educationType = cmbEducationType.SelectedValue == null ? (int?)null : Convert.ToInt32(cmbEducationType.SelectedValue);
-                        uEducation.educationCentreName = ceducationCentreName.Text;
-                        uEducation.faculty = faculty.Text;
+                        if (cmbEducationType.Text.ToLower().Contains("ali"))
+                        {
+                            uEducation.grade = cmbEducationGrade.SelectedValue == null ? (int?)null : Convert.ToInt32(cmbEducationGrade.SelectedValue);
+                            uEducation.faculty = faculty.Text;
 
-                        uEducation.speciality = speciality.Text;
+                            uEducation.speciality = speciality.Text;
+                        }
+                        else
+                        { 
+                            uEducation.grade = null;
+                            uEducation.faculty = string.Empty;
+
+                            uEducation.speciality = string.Empty;
+                        }
+                        uEducation.educationCentreName = ceducationCentreName.Text;
+                       
                         uEducation.diplomNumber = diplomNumber.Text;
                         uEducation.endYear = Convert.ToInt32(endYear.Text);
                     }
@@ -262,6 +275,31 @@ namespace hydrogen.PersonalDataPages
             //    isValid = true;
 
             e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+        }
+
+        //private void CmbEducationType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (!cmbEducationType.Text.ToLower().Contains("ali"))
+        //        panelCMBEduGrade.Visibility = Visibility.Hidden;
+        //    else
+        //        panelCMBEduGrade.Visibility = Visibility.Visible;
+        //}
+
+
+        private void ComboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!cmbEducationType.Text.ToLower().Contains("ali"))
+            {
+                panelCMBEduGrade.Visibility = Visibility.Collapsed;
+                panelFaculty.Visibility = Visibility.Collapsed;
+                panelSpeciality.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                panelCMBEduGrade.Visibility = Visibility.Visible;
+                panelFaculty.Visibility = Visibility.Visible;
+                panelSpeciality.Visibility = Visibility.Visible;
+            }
         }
     }
 }
