@@ -409,9 +409,7 @@ namespace hydrogen.PersonalDataPages
             try
             {
                 dlg.ShowDialog();
-                var employer = dbContext.employee.SingleOrDefault(j => j.ID == selectedPersonID);
-                employer.isfired = true;
-                dbContext.SaveChanges();
+               
             }
             catch (Exception ex)
             {
@@ -434,9 +432,13 @@ namespace hydrogen.PersonalDataPages
                 var employer = dbContext.employee.SingleOrDefault(j => j.ID == selectedPersonID);
                 employer.isdeleted = true;
                 dbContext.SaveChanges();
+             //   string url = "/Pages/Home.xaml";
+             //   NavigationCommands.PreviousPage.Execute(url,this);
 
-                selectedPersonID = 0;
-                fillBasicControls();
+
+                
+                // selectedPersonID = 0;
+                //fillBasicControls();
             }
         }
 

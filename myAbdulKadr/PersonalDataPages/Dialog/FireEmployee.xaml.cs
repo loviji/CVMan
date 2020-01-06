@@ -45,6 +45,10 @@ namespace PersonMotion.PersonalDataPages.Dialog
                         {
                             f.endDate = fireDate;
                         }
+
+                        var employer = dbContext.employee.SingleOrDefault(j => j.ID == selectedEmp);
+                        employer.isfired = true;
+                      
                         dbContext.SaveChanges();
                     }
                     catch (DbUpdateException ex)

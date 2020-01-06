@@ -13,14 +13,14 @@ namespace myAbdulKadr.ViewModel
     public class EmployeeViewModel : INotifyPropertyChanged
     {
         MyRepository mr = new MyRepository();
-       
+
         public ObservableCollection<employee> Employees
         {
             get { return mr.Employees; }
-          
+
         }
 
-        
+
 
         public EmployeeViewModel()
         {
@@ -33,10 +33,10 @@ namespace myAbdulKadr.ViewModel
         {
             mr.ReadEmployees();
             InternalPropertyChanged("Employees");
-      
+
         }
 
-  
+
 
         private void InternalPropertyChanged(string v)
         {
@@ -44,7 +44,7 @@ namespace myAbdulKadr.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(v));
         }
 
-    
+
     }
 
     public class MyRepository
@@ -56,9 +56,9 @@ namespace myAbdulKadr.ViewModel
         {
             // db is the Entity Framework Context
             // In the real word I would use a separate DAL object
-            Employees = new ObservableCollection<employee>(from m in dbContext.employee orderby m.isfired select m );
+            Employees = new ObservableCollection<employee>(from m in dbContext.employee where m.isdeleted != true orderby m.isfired select m);
         }
     }
 
-   
+
 }
