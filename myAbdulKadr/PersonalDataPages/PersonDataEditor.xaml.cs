@@ -5,9 +5,7 @@ using PersonMotion.Common;
 using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 
 namespace hydrogen

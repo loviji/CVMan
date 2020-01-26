@@ -165,6 +165,9 @@ warning 6002: The table/view 'people.dbo.EMP_LIST' does not have a primary key d
           <Property Name="secondname" Type="nvarchar" MaxLength="50" />
           <Property Name="birthdate" Type="date" Nullable="false" />
           <Property Name="birthplace" Type="nvarchar" MaxLength="150" />
+          <Property Name="orgID" Type="int" />
+          <Property Name="deptID" Type="int" />
+          <Property Name="sectID" Type="int" />
           <Property Name="position" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -318,6 +321,9 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
     [EMP_LIST].[secondname] AS [secondname], 
     [EMP_LIST].[birthdate] AS [birthdate], 
     [EMP_LIST].[birthplace] AS [birthplace], 
+    [EMP_LIST].[orgID] AS [orgID], 
+    [EMP_LIST].[deptID] AS [deptID], 
+    [EMP_LIST].[sectID] AS [sectID], 
     [EMP_LIST].[position] AS [position]
     FROM [dbo].[EMP_LIST] AS [EMP_LIST]</DefiningQuery>
           </EntitySet>
@@ -728,6 +734,9 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="position" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="birthplace" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="orgID" Type="Int32" />
+          <Property Name="deptID" Type="Int32" />
+          <Property Name="sectID" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -906,6 +915,9 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySetMapping Name="EMP_LIST">
             <EntityTypeMapping TypeName="peopleModel.EMP_LIST">
               <MappingFragment StoreEntitySet="EMP_LIST">
+                <ScalarProperty Name="sectID" ColumnName="sectID" />
+                <ScalarProperty Name="deptID" ColumnName="deptID" />
+                <ScalarProperty Name="orgID" ColumnName="orgID" />
                 <ScalarProperty Name="birthplace" ColumnName="birthplace" />
                 <ScalarProperty Name="position" ColumnName="position" />
                 <ScalarProperty Name="birthdate" ColumnName="birthdate" />

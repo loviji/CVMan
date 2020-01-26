@@ -22,5 +22,8 @@ namespace PersonMotion.Model
         public System.DateTime birthdate { get; set; }
         public string position { get; set; }
         public string birthplace { get; set; }
+        public Nullable<int> orgID { get; set; }
+        public Nullable<int> deptID { get; set; }
+        public Nullable<int> sectID { get; set; }
     }
 }

@@ -6,7 +6,6 @@ using PersonMotion.Common;
 using PersonMotion.Model;
 using PersonMotion.PersonalDataPages.Dialog;
 using System;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
@@ -416,7 +415,7 @@ namespace hydrogen.PersonalDataPages
                 dlg.ShowDialog();
 
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Çox güman ki, tarix düzgün təyin olunmayıb");
             }

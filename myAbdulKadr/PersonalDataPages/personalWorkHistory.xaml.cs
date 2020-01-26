@@ -4,7 +4,6 @@ using PersonMotion.Model;
 using System;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
