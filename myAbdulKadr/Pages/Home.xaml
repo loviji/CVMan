@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1100">
     <Grid>
-        <DockPanel   VerticalAlignment="Top">
+        <DockPanel VerticalAlignment="Top">
             <Grid Margin="4">
                 <Grid.Resources>
                     <Style TargetType="{x:Type TextBox}">
@@ -29,15 +29,14 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Content="Ad"  />
                 <TextBox Grid.Column="1" Grid.Row="0" x:Name="pName"/>
 
-
                 <Label HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Column="2" Grid.Row="0" Content="Soyad"  />
                 <TextBox  Grid.Column="3" Grid.Row="0" x:Name="pSurname"/>
-
 
                 <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4" Grid.Row="0" Content="Ata adı" />
                 <TextBox Grid.Column="5" Grid.Row="0" x:Name="pMidName"/>
@@ -48,11 +47,10 @@
                 <Label HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Column="2" Grid.Row="1" Content="Alt təşkilat"  />
                 <ComboBox Grid.Column="3" Grid.Row="1" x:Name="cmbDepartment"  SelectionChanged="CmbDepartment_SelectionChanged"/>
 
-
                 <Label HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="4" Grid.Row="1" Content="Seksiya"  />
                 <ComboBox Grid.Column="5" Grid.Row="1" x:Name="cmbSection"  SelectionChanged="CmbSection_SelectionChanged"/>
 
-                <StackPanel Grid.Column="6" Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal" Height="35" Width="40" VerticalAlignment="Bottom" Margin="0,0,4,-9" >
+                <StackPanel Grid.Column="6" Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Height="35" Width="40" VerticalAlignment="Top" Margin="0,0,4,-8" >
                     <StackPanel.Resources>
                         <PathGeometry x:Key="HomeIconData">F1 M 20,17L 43.25,17L 56,29.75L 56,40L 52,37.5L 52,34L 39,34L 39,21L 24,21L 24,55L 36,55L 32,59L 20,59L 20,17 Z M 43,22.25L 43,30L 50.75,30L 43,22.25 Z M 48,38C 53.5228,38 58,42.4772 58,48C 58,53.5229 53.5228,58 48,58C 46.1455,58 44.4089,57.4952 42.9201,56.6155L 36.1213,63.4142C 35.3403,64.1953 34.0739,64.1953 33.2929,63.4142L 32.5858,62.7071C 31.8047,61.9261 31.8047,60.6597 32.5858,59.8787L 39.3845,53.0799C 38.5048,51.5911 38,49.8545 38,48C 38,42.4772 42.4771,38 48,38 Z M 48,42C 44.6863,42 42,44.6863 42,48C 42,51.3137 44.6863,54 48,54C 51.3137,54 54,51.3137 54,48C 54,44.6863 51.3137,42 48,42 Z</PathGeometry>
                         <Style TargetType="mui:ModernButton">
@@ -63,54 +61,31 @@
                     </StackPanel.Resources>
                     <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="SearchButton_Click" Foreground="#FF373BA0" Height="35" VerticalAlignment="Bottom" RenderTransformOrigin="0.647,0.086" />
                 </StackPanel>
-            </Grid>
-            <!--<StackPanel x:Name="Form" Orientation="Horizontal" Margin="10,12,10,22" Height="30">
-                -->
-            <!-- create viewmodel -->
-            <!--
-                <StackPanel.Resources>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="Orientation" Value="Horizontal" />
-                        
-
-                    </Style>
-                    <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                        <Setter Property="Margin" Value="10,0,0,0"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                        <Setter Property="HorizontalAlignment" Value="Left"/>
-                    </Style>
-                    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-                        <Setter Property="Margin" Value="3"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                        <Setter Property="Width" Value="125" />
-                    </Style>
-                </StackPanel.Resources>
-               
-               
-               
-                <StackPanel>
-                    <Label Content="Müəssisə, İdarə" Target="{Binding ElementName=pMidName}" Width="41"/>
-                    <ComboBox x:Name="cmbOrg"/>
+                <StackPanel Grid.Column="7" Grid.Row="0" HorizontalAlignment="Left" Orientation="Horizontal" Height="35" Width="40" VerticalAlignment="Top" Margin="0,0,4,-8" >
+                    <StackPanel.Resources>
+                        <PathGeometry x:Key="RefreshIconData">M19,8L15,12H18A6,6 0 0,1 12,18C11,18 10.03,17.75 9.2,17.3L7.74,18.76C8.97,19.54 10.43,20 12,20A8,8 0 0,0 20,12H23M6,12A6,6 0 0,1 12,6C13,6 13.97,6.25 14.8,6.7L16.26,5.24C15.03,4.46 13.57,4 12,4A8,8 0 0,0 4,12H1L5,16L9,12</PathGeometry>
+                        <Style TargetType="mui:ModernButton">
+                            <Setter Property="IconData" Value="{StaticResource RefreshIconData}" />
+                            <Setter Property="Margin" Value="0,0,0,0" />
+                            <Setter Property="BorderThickness" Value="2" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="ClearFilter_Click" Foreground="#FF373BA0" Height="35" VerticalAlignment="Bottom" RenderTransformOrigin="0.647,0.086" />
                 </StackPanel>
-              
-              
-            </StackPanel>-->
+            </Grid>
         </DockPanel>
-        <ScrollViewer Name="educationEditor" Margin="0,65,0,25" Width="1200"  HorizontalAlignment="Left" VerticalAlignment="Top">
+        <ScrollViewer Name="personEditor" Margin="0,65,0,25" Width="1200"  HorizontalAlignment="Left" VerticalAlignment="Top">
             <DataGrid Name="perList" ItemsSource="{Binding Path=Employees, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" IsReadOnly="True"  MouseDoubleClick="PerList_MouseDoubleClick" Height="522" >
                 <DataGrid.RowStyle>
                     <Style TargetType="{x:Type DataGridRow}">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding isfired}" Value="True" >
-
                                 <Setter Property="Background" Value="DarkSalmon" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding name}" Value="Vakant" >
-
                                 <Setter Property="Background" Value="Turquoise" />
                             </DataTrigger>
                         </Style.Triggers>
-
                     </Style>
                 </DataGrid.RowStyle>
 
