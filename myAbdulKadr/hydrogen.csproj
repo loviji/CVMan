@@ -143,6 +143,9 @@
     <Compile Include="Model\reproval.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\salary.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GlobalList\MultiDictionary.xaml.cs">
       <DependentUpon>MultiDictionary.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,9 @@
     </Compile>
     <Compile Include="PersonalDataPages\Dialog\FireEmployee.xaml.cs">
       <DependentUpon>FireEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalDataPages\personaSalary.xaml.cs">
+      <DependentUpon>personaSalary.xaml</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModel\PersonViewModel.cs" />
@@ -333,6 +339,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PersonalDataPages\personalWorkHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PersonalDataPages\personaSalary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

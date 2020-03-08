@@ -39,5 +39,6 @@ namespace PersonMotion.Model
         public virtual DbSet<employee> employee { get; set; }
         public virtual DbSet<reproval> reproval { get; set; }
         public virtual DbSet<EMP_LIST> EMP_LIST { get; set; }
+        public virtual DbSet<salary> salary { get; set; }
     }
 }

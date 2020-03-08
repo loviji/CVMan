@@ -63,5 +63,6 @@ namespace PersonMotion.Model
         public virtual ICollection<workhistory> workhistory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reproval> reproval { get; set; }
+        public virtual salary salary1 { get; set; }
     }
 }

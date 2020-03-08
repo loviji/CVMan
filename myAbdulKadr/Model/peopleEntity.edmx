@@ -129,6 +129,23 @@
           <Property Name="rNotes" Type="nvarchar(max)" />
           <Property Name="rDate" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="salary">
+          <Key>
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="employeeID" Type="int" Nullable="false" />
+          <Property Name="baseSalary" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="dosentBase" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="dosentPercent" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="professorBase" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="professorPercent" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="academicBase" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="academicPercent" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="scientceDoctorBase" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="scientceDoctorPercent" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="scienceCandadateBase" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+          <Property Name="scienceCandadatePercent" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="section">
           <Key>
             <PropertyRef Name="ID" />
@@ -261,6 +278,18 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__salary__employee__503BEA1C">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="salary" Type="Self.salary" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="salary">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__section__departm__3F466844">
           <End Role="department" Type="Self.department" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -310,6 +339,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySet Name="organization" EntityType="Self.organization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="position" EntityType="Self.position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reproval" EntityType="Self.reproval" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salary" EntityType="Self.salary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="section" EntityType="Self.section" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="workhistory" EntityType="Self.workhistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMP_LIST" EntityType="Self.EMP_LIST" store:Type="Views" store:Schema="dbo">
@@ -360,6 +390,10 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <AssociationSet Name="FK__position__sectID__3E52440B" Association="Self.FK__position__sectID__3E52440B">
             <End Role="section" EntitySet="section" />
             <End Role="position" EntitySet="position" />
+          </AssociationSet>
+          <AssociationSet Name="FK__salary__employee__503BEA1C" Association="Self.FK__salary__employee__503BEA1C">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="salary" EntitySet="salary" />
           </AssociationSet>
           <AssociationSet Name="FK__section__departm__3F466844" Association="Self.FK__section__departm__3F466844">
             <End Role="department" EntitySet="department" />
@@ -482,6 +516,11 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             <End Role="reproval" EntitySet="reproval" />
           </AssociationSet>
           <EntitySet Name="EMP_LIST" EntityType="peopleModel.EMP_LIST" />
+          <EntitySet Name="salary" EntityType="peopleModel.salary" />
+          <AssociationSet Name="FK__salary__employee__503BEA1C" Association="peopleModel.FK__salary__employee__503BEA1C">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="salary" EntitySet="salary" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="familia">
           <Key>
@@ -634,6 +673,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="prgdID" Type="Int32" />
           <Property Name="prgdSalary" Type="Decimal" Precision="7" Scale="2" />
           <NavigationProperty Name="reproval" Relationship="peopleModel.FK_reproval_employee" FromRole="employee" ToRole="reproval" />
+          <NavigationProperty Name="salary1" Relationship="peopleModel.FK__salary__employee__503BEA1C" FromRole="employee" ToRole="salary" />
           </EntityType>
         <Association Name="FK_address_employee">
           <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
@@ -738,6 +778,36 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="deptID" Type="Int32" />
           <Property Name="sectID" Type="Int32" />
         </EntityType>
+        <EntityType Name="salary">
+          <Key>
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="employeeID" Type="Int32" Nullable="false" />
+          <Property Name="baseSalary" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="dosentBase" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="dosentPercent" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="professorBase" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="professorPercent" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="academicBase" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="academicPercent" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="scientceDoctorBase" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="scientceDoctorPercent" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="scienceCandadateBase" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <Property Name="scienceCandadatePercent" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK__salary__employee__503BEA1C" FromRole="salary" ToRole="employee" />
+        </EntityType>
+        <Association Name="FK__salary__employee__503BEA1C">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="peopleModel.salary" Role="salary" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="salary">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -926,6 +996,24 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="isfired" ColumnName="isfired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salary">
+            <EntityTypeMapping TypeName="peopleModel.salary">
+              <MappingFragment StoreEntitySet="salary">
+                <ScalarProperty Name="scienceCandadatePercent" ColumnName="scienceCandadatePercent" />
+                <ScalarProperty Name="scienceCandadateBase" ColumnName="scienceCandadateBase" />
+                <ScalarProperty Name="scientceDoctorPercent" ColumnName="scientceDoctorPercent" />
+                <ScalarProperty Name="scientceDoctorBase" ColumnName="scientceDoctorBase" />
+                <ScalarProperty Name="academicPercent" ColumnName="academicPercent" />
+                <ScalarProperty Name="academicBase" ColumnName="academicBase" />
+                <ScalarProperty Name="professorPercent" ColumnName="professorPercent" />
+                <ScalarProperty Name="professorBase" ColumnName="professorBase" />
+                <ScalarProperty Name="dosentPercent" ColumnName="dosentPercent" />
+                <ScalarProperty Name="dosentBase" ColumnName="dosentBase" />
+                <ScalarProperty Name="baseSalary" ColumnName="baseSalary" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
