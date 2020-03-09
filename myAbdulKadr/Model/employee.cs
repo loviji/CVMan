@@ -23,6 +23,7 @@ namespace PersonMotion.Model
             this.position = new HashSet<position>();
             this.workhistory = new HashSet<workhistory>();
             this.reproval = new HashSet<reproval>();
+            this.employeeActivity = new HashSet<employeeActivity>();
         }
     
         public int ID { get; set; }
@@ -64,5 +65,7 @@ namespace PersonMotion.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reproval> reproval { get; set; }
         public virtual salary salary1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<employeeActivity> employeeActivity { get; set; }
     }
 }

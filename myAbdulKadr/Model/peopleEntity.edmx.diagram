@@ -30,6 +30,8 @@
         <EntityTypeShape EntityType="peopleModel.EMP_LIST" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="peopleModel.salary" Width="1.5" PointX="3" PointY="27.75" />
         <AssociationConnector Association="peopleModel.FK__salary__employee__503BEA1C" />
+        <EntityTypeShape EntityType="peopleModel.employeeActivity" Width="1.5" PointX="3" PointY="32.5" />
+        <AssociationConnector Association="peopleModel.FK_employeeActivity_employee" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

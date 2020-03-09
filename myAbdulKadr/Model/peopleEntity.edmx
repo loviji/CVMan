@@ -69,6 +69,16 @@
           <Property Name="isdeleted" Type="bit" />
           <Property Name="isfired" Type="bit" />
         </EntityType>
+        <EntityType Name="employeeActivity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empID" Type="int" Nullable="false" />
+          <Property Name="activityText" Type="nvarchar(max)" />
+          <Property Name="issueDate" Type="smalldatetime" />
+          <Property Name="activityType" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
         <EntityType Name="familia">
           <Key>
             <PropertyRef Name="ID" />
@@ -316,6 +326,20 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_employeeActivity_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employeeActivity" Type="Self.employeeActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="employeeActivity">
+              <PropertyRef Name="empID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_reproval_employee">
           <End Role="employee" Type="Self.employee" Multiplicity="1" />
           <End Role="reproval" Type="Self.reproval" Multiplicity="*" />
@@ -333,6 +357,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="education" EntityType="Self.education" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employeeActivity" EntityType="Self.employeeActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="familia" EntityType="Self.familia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="files" EntityType="Self.files" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="metaData" EntityType="Self.metaData" Schema="dbo" store:Type="Tables" />
@@ -402,6 +427,10 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <AssociationSet Name="FK__workhisto__empID__403A8C7D" Association="Self.FK__workhisto__empID__403A8C7D">
             <End Role="employee" EntitySet="employee" />
             <End Role="workhistory" EntitySet="workhistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employeeActivity_employee" Association="Self.FK_employeeActivity_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="employeeActivity" EntitySet="employeeActivity" />
           </AssociationSet>
           <AssociationSet Name="FK_reproval_employee" Association="Self.FK_reproval_employee">
             <End Role="employee" EntitySet="employee" />
@@ -520,6 +549,11 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <AssociationSet Name="FK__salary__employee__503BEA1C" Association="peopleModel.FK__salary__employee__503BEA1C">
             <End Role="employee" EntitySet="employee" />
             <End Role="salary" EntitySet="salary" />
+          </AssociationSet>
+          <EntitySet Name="employeeActivity" EntityType="peopleModel.employeeActivity" />
+          <AssociationSet Name="FK_employeeActivity_employee" Association="peopleModel.FK_employeeActivity_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="employeeActivity" EntitySet="employeeActivity" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="familia">
@@ -674,6 +708,7 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
           <Property Name="prgdSalary" Type="Decimal" Precision="7" Scale="2" />
           <NavigationProperty Name="reproval" Relationship="peopleModel.FK_reproval_employee" FromRole="employee" ToRole="reproval" />
           <NavigationProperty Name="salary1" Relationship="peopleModel.FK__salary__employee__503BEA1C" FromRole="employee" ToRole="salary" />
+          <NavigationProperty Name="employeeActivity" Relationship="peopleModel.FK_employeeActivity_employee" FromRole="employee" ToRole="employeeActivity" />
           </EntityType>
         <Association Name="FK_address_employee">
           <End Type="peopleModel.employee" Role="employee" Multiplicity="1" />
@@ -805,6 +840,31 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
             </Principal>
             <Dependent Role="salary">
               <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="employeeActivity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empID" Type="Int32" Nullable="false" />
+          <Property Name="activityText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="issueDate" Type="DateTime" Precision="0" />
+          <Property Name="activityType" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="employee" Relationship="peopleModel.FK_employeeActivity_employee" FromRole="employeeActivity" ToRole="employee" />
+        </EntityType>
+        <Association Name="FK_employeeActivity_employee">
+          <End Type="peopleModel.employee" Role="employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="peopleModel.employeeActivity" Role="employeeActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="employeeActivity">
+              <PropertyRef Name="empID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1014,6 +1074,17 @@ warning 6002: The table/view 'people.dbo.VW_Position' does not have a primary ke
                 <ScalarProperty Name="dosentBase" ColumnName="dosentBase" />
                 <ScalarProperty Name="baseSalary" ColumnName="baseSalary" />
                 <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employeeActivity">
+            <EntityTypeMapping TypeName="peopleModel.employeeActivity">
+              <MappingFragment StoreEntitySet="employeeActivity">
+                <ScalarProperty Name="activityType" ColumnName="activityType" />
+                <ScalarProperty Name="issueDate" ColumnName="issueDate" />
+                <ScalarProperty Name="activityText" ColumnName="activityText" />
+                <ScalarProperty Name="empID" ColumnName="empID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

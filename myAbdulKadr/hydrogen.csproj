@@ -137,6 +137,9 @@
     </Compile>
     <Compile Include="Common\DBContextResolver.cs" />
     <Compile Include="Common\GlobalCache.cs" />
+    <Compile Include="Model\employeeActivity.cs">
+      <DependentUpon>peopleEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\EMP_LIST.cs">
       <DependentUpon>peopleEntity.tt</DependentUpon>
     </Compile>
@@ -154,6 +157,9 @@
     </Compile>
     <Compile Include="PersonalDataPages\Dialog\FireEmployee.xaml.cs">
       <DependentUpon>FireEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PersonalDataPages\personalActivity.xaml.cs">
+      <DependentUpon>personalActivity.xaml</DependentUpon>
     </Compile>
     <Compile Include="PersonalDataPages\personaSalary.xaml.cs">
       <DependentUpon>personaSalary.xaml</DependentUpon>
@@ -315,6 +321,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PersonalDataPages\Dialog\FireEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PersonalDataPages\personalActivity.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
