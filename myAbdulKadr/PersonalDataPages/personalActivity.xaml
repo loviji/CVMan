@@ -12,7 +12,7 @@
         <DockPanel VerticalAlignment="Top" Height="300">
             <DataGrid Name="activityList" ItemsSource="{Binding}"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="ActivityList_SelectedChanged">
                 <DataGrid.Columns>
-                    <mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                  
                     <mui:DataGridTextColumn Header="Növü" Binding="{Binding activityType}" />
                     <mui:DataGridTextColumn Header="Tarix" Binding="{Binding issueDate,  StringFormat='dd-MM-yyyy'}" />
                     <mui:DataGridTextColumn Header="Mətn" Binding="{Binding activityText}" Width="300"/>

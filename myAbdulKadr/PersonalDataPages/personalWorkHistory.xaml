@@ -11,7 +11,7 @@
         <DockPanel VerticalAlignment="Top" Height="300">
             <DataGrid Name="workHistoryList" ItemsSource="{Binding}"  AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="WorkHistoryList_SelectedChanged">
                 <DataGrid.Columns>
-                    <mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                    
                     <mui:DataGridTextColumn Header="Müəsisə, struktur" Binding="{Binding structureName}" />
                     <mui:DataGridTextColumn Header="Vəzifəsi" Binding="{Binding positionName}" />
                     <mui:DataGridTextColumn Header="Təyin olunma tarixi" Binding="{Binding beginDate , StringFormat='dd-MM-yyyy'}"/>

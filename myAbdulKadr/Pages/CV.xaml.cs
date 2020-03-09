@@ -40,7 +40,15 @@ namespace myAbdulKadr.Pages
             cmbOrganization.DisplayMemberPath = "organizationName";
             cmbOrganization.SelectedValuePath = "ID";
 
-            perList.DataContext = new EmployeeViewModel();
+         
+            var d = new EmployeeViewModel();
+            perList.DataContext = d;
+
+            var employeeList = d.Employees.ToList();
+            int totalValue = employeeList.Count();
+            int totalNotExists = employeeList.Where(z => z.isfired == true).Count();
+            int totalExists = totalValue - totalNotExists;
+            infoCount.Content = "Ümumi - " + totalValue.ToString() + " (Faktiki - " + totalExists.ToString() + ", Xitam - " + totalNotExists.ToString() + ")";
         }
 
         private ObservableCollection<EMP_LIST> GetData(string name, string surname, string midname, int? orgID, int? deptID, int? sectID)

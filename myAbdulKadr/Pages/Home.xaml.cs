@@ -36,7 +36,7 @@ namespace hydrogen.Pages
         {
             InitializeComponent();
             GlobalCache.showdialog = true;
-            
+
             cmbOrganization.ItemsSource = cd.GetOrganizationList();
             cmbOrganization.DisplayMemberPath = "organizationName";
             cmbOrganization.SelectedValuePath = "ID";
@@ -46,19 +46,20 @@ namespace hydrogen.Pages
         private ObservableCollection<EMP_LIST> GetData(string name, string surname, string midname, int? orgID, int? deptID, int? sectID)
         {
             List<EMP_LIST> employeeList = null;
-            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(surname) && string.IsNullOrEmpty(midname)&&!orgID.HasValue)
+            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(surname) && string.IsNullOrEmpty(midname) && !orgID.HasValue)
             {
                 employeeList = new EmployeeViewModel().Employees.ToList();
             }
             else
             {
-                employeeList = new EmployeeViewModel().Employees.Where(m => m.name.Contains(name) && m.surname.Contains(surname) && m.secondname.Contains(midname)&&(sf.OrgID==null||m.orgID==sf.OrgID)&&(sf.DeptID==null||m.deptID==sf.DeptID)&&(sf.SecID== null||m.sectID==sf.SecID)).ToList();
+                employeeList = new EmployeeViewModel().Employees.Where(m => m.name.Contains(name) && m.surname.Contains(surname) && m.secondname.Contains(midname) && (sf.OrgID == null || m.orgID == sf.OrgID) && (sf.DeptID == null || m.deptID == sf.DeptID) && (sf.SecID == null || m.sectID == sf.SecID)).ToList();
             }
             int totalValue = employeeList.Count();
-            int totalNotExists = employeeList.Where(d=>d.isfired==true).Count();
-            int totalExists = totalValue- totalNotExists;
+            int totalNotExists = employeeList.Where(d => d.isfired == true).Count();
+            int totalExists = totalValue - totalNotExists;
+            infoCount.Content = "Ümumi - " + totalValue.ToString() + " (Faktiki - " + totalExists.ToString() + ", Xitam - " + totalNotExists.ToString() + ")";
             return new ObservableCollection<EMP_LIST>(employeeList);
-           
+
         }
 
 
@@ -70,7 +71,7 @@ namespace hydrogen.Pages
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-             perList.ItemsSource = GetData(pName.Text, pSurname.Text, pMidName.Text,  sf.OrgID, sf.DeptID, sf.OrgID);
+            perList.ItemsSource = GetData(pName.Text, pSurname.Text, pMidName.Text, sf.OrgID, sf.DeptID, sf.OrgID);
         }
 
         private const string mainWindowHeader = "Person motion";
@@ -106,6 +107,17 @@ namespace hydrogen.Pages
         public void OnNavigatedTo(NavigationEventArgs e)
         {
             perList.DataContext = new EmployeeViewModel();
+
+
+            var d = new EmployeeViewModel();
+            perList.DataContext = d;
+
+            var employeeList = d.Employees.ToList();
+            int totalValue = employeeList.Count();
+            int totalNotExists = employeeList.Where(z=>z.isfired == true).Count();
+            int totalExists = totalValue - totalNotExists;
+            infoCount.Content = "Ümumi - " + totalValue.ToString() + " (Faktiki - " + totalExists.ToString() + ", Xitam - " + totalNotExists.ToString() + ")";
+
         }
 
         public void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -115,7 +127,7 @@ namespace hydrogen.Pages
 
         private void CmbOrganization_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
             sf.OrgID = Convert.ToInt32(cmbOrganization.SelectedValue);
             cmbDepartment.ItemsSource = sf.OrgID.HasValue ? cd.GetDepartmentList(sf.OrgID.Value) : null;
             cmbDepartment.DisplayMemberPath = "departmentName";
@@ -124,12 +136,12 @@ namespace hydrogen.Pages
 
         private void CmbDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            sf.DeptID= Convert.ToInt32(cmbDepartment.SelectedValue);
+            sf.DeptID = Convert.ToInt32(cmbDepartment.SelectedValue);
 
             cmbSection.ItemsSource = sf.DeptID.HasValue ? cd.GetSectionList(sf.DeptID.Value) : null;
             cmbSection.DisplayMemberPath = "sectionName";
             cmbSection.SelectedValuePath = "ID";
-            
+
         }
 
         private void CmbSection_SelectionChanged(object sender, SelectionChangedEventArgs e)

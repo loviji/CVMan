@@ -20,6 +20,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" ></ColumnDefinition>
@@ -75,6 +76,7 @@
                     </StackPanel.Resources>
                     <mui:ModernButton EllipseDiameter="32" IconWidth="20" IconHeight="20"  Click="ClearFilter_Click" Foreground="#FF373BA0" Height="35" VerticalAlignment="Bottom" RenderTransformOrigin="0.647,0.086" />
                 </StackPanel>
+                <Label Grid.Column="5" x:Name="infoCount" Grid.Row="3" Grid.ColumnSpan="3"  Content="CALC" Margin="0,5,0,35" FontWeight="Bold" FontSize="16" FontFamily="Arial"  Foreground="#FF8D0F0F"/>
             </Grid>
             <!--<StackPanel x:Name="Form" Orientation="Horizontal" Margin="10,12,10,22" Height="30">
                 -->
@@ -126,7 +128,7 @@
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
-                    <mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"  />
+                    <!--<mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"  />-->
                     <mui:DataGridTextColumn Header="Adı" Binding="{Binding name}" />
                     <mui:DataGridTextColumn Header="Soyadı" Binding="{Binding surname}" />
                     <mui:DataGridTextColumn Header="Ata adı" Binding="{Binding secondname}"/>

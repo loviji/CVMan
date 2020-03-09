@@ -16,7 +16,7 @@
         <DockPanel VerticalAlignment="Top" Height="300">
             <DataGrid Name="positionList" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" SelectedCellsChanged="PositionList_SelectedCellsChanged">
                 <DataGrid.Columns>
-                    <mui:DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                   
                     <mui:DataGridTextColumn Header="Təşkilat" Binding="{Binding structName}" />
                     <mui:DataGridTextColumn Header="Vəzifəsi" Binding="{Binding positionName}" />
                     <mui:DataGridCheckBoxColumn Header="Əsas vəzifəsi" Binding="{Binding ismain}"/>
